@@ -758,4 +758,7 @@ function goFS(){if(fsTried)return;fsTried=true;var d=document.documentElement,f=
 addEventListener('click',goFS);addEventListener('keydown',function(e){if(e.key==='Enter'||e.keyCode===13)goFS()});
 show(0);
 try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){})}catch(e){}
+// Auto-Update: alle 5 Min. prüfen, ob die Seite auf dem Server geändert wurde -> dann neu laden
+(function(){var last=null;function chk(){fetch(location.pathname+'?_='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){var h=t.length+':'+t.slice(0,400)+t.slice(-400);if(last!==null&&h!==last){location.reload();}last=h;}).catch(function(){});}
+chk();setInterval(chk,300000);})();
 </script>
