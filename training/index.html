@@ -1,0 +1,807 @@
+<meta charset="utf-8">
+<title>bonaVITA Info-TV Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: fixed 1920x1080 stage scaled to any screen. Calm dark ground with drifting aurora, lime rhythm slides, one big idea per slide. */
+:root{
+  --ink:#10130e;
+  --panel:#1b1f17;
+  --line:#363b2f;
+  --fg:#f4f6ee;
+  --mute:#aab0a1;
+  --lime:#b0cb00;
+  --lime-ink:#141a00;
+  --teal:#3fc1b0;
+  --f-display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --f-body:"Figtree","Segoe UI",Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--ink);color:var(--fg)}
+body{font-family:var(--f-body);font-weight:600;cursor:none}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center;background:var(--ink);overflow:hidden}
+
+/* aurora */
+.aurora{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora i{position:absolute;border-radius:50%;will-change:transform}
+.aurora i:nth-child(1){width:1300px;height:1300px;background:radial-gradient(circle,rgba(176,203,0,.42),rgba(176,203,0,0) 68%);left:-500px;top:-600px;animation:dr1 22s ease-in-out infinite alternate}
+.aurora i:nth-child(2){width:1200px;height:1200px;background:radial-gradient(circle,rgba(31,138,106,.42),rgba(31,138,106,0) 68%);right:-500px;bottom:-650px;animation:dr2 26s ease-in-out infinite alternate}
+.aurora i:nth-child(3){width:900px;height:900px;background:radial-gradient(circle,rgba(111,143,0,.30),rgba(111,143,0,0) 68%);right:200px;top:-500px;animation:dr3 30s ease-in-out infinite alternate}
+@keyframes dr1{to{transform:translate(700px,420px) scale(1.15)}}
+@keyframes dr2{to{transform:translate(-800px,-260px) scale(1.2)}}
+@keyframes dr3{to{transform:translate(-500px,520px) scale(.9)}}
+#stage.lite .aurora i{animation:none}
+
+/* header + progress */
+.head{position:absolute;left:120px;right:120px;top:50px;height:76px;display:flex;justify-content:space-between;align-items:center;z-index:5;transition:color .5s}
+.brand{display:flex;align-items:center;gap:22px;transition:opacity .4s}
+.spine-dots{display:flex;flex-direction:column;gap:7px;align-items:center}
+.spine-dots i{display:block;border-radius:50%;background:var(--lime);transition:background .5s;animation:dotp 2.4s ease-in-out infinite}
+.spine-dots i:nth-child(1){width:8px;height:8px;animation-delay:0s}
+.spine-dots i:nth-child(2){width:11px;height:11px;animation-delay:.15s}
+.spine-dots i:nth-child(3){width:14px;height:14px;animation-delay:.3s}
+.spine-dots i:nth-child(4){width:14px;height:14px;animation-delay:.45s}
+.spine-dots i:nth-child(5){width:11px;height:11px;animation-delay:.6s}
+.spine-dots i:nth-child(6){width:8px;height:8px;animation-delay:.75s}
+@keyframes dotp{0%,100%{transform:scale(1);opacity:.55}30%{transform:scale(1.55);opacity:1}}
+.wm{font-family:var(--f-display);font-weight:700;font-size:56px;letter-spacing:-.02em}
+.wm b{color:var(--lime);font-weight:800;transition:color .5s}
+.clock{display:flex;align-items:baseline;gap:26px;font-variant-numeric:tabular-nums}
+.clock .t{font-family:var(--f-display);font-weight:700;font-size:56px}
+.clock .d{font-size:38px;color:var(--mute);transition:color .5s}
+.bar{position:absolute;left:0;right:0;bottom:0;height:10px;background:var(--panel);z-index:5;transition:background .5s}
+.bar i{display:block;height:100%;width:0;background:var(--lime);transition:background .5s}
+.bar i.run{animation:fill var(--dur,12s) linear forwards}
+@keyframes fill{to{width:100%}}
+#stage.lime .head{color:var(--lime-ink)}
+#stage.lime .wm b{color:var(--lime-ink)}
+#stage.lime .spine-dots i{background:var(--lime-ink)}
+#stage.lime .clock .d{color:#3b4500}
+#stage.lime .bar{background:#9bb300}
+#stage.lime .bar i{background:var(--lime-ink)}
+#stage.nohead .brand{opacity:0}
+
+/* slides */
+.slide{position:absolute;inset:0;z-index:1;padding:190px 120px 90px;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s .7s;display:flex;flex-direction:column;justify-content:center}
+.slide.active{opacity:1;visibility:visible;transition:opacity .7s ease,visibility 0s}
+.slide.lime{background:var(--lime);color:var(--lime-ink)}
+.slide.active .rv{animation:rv .9s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*.13s + .15s)}
+@keyframes rv{from{opacity:0;transform:translateY(46px)}}
+.kicker{font-size:36px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin:0 0 28px;font-weight:700}
+.lime .kicker{color:#3b4500}
+h1,h2{font-family:var(--f-display);font-weight:800;margin:0;letter-spacing:-.03em;line-height:1;text-wrap:balance}
+h1{font-size:132px}
+h2{font-size:132px}
+p{margin:0}
+.lead{font-size:52px;line-height:1.25;color:var(--mute);max-width:1250px;margin-top:36px;font-weight:500}
+.lime .lead{color:#2d3600}
+.row{display:flex;gap:90px;align-items:center}
+.col{min-width:0}
+.photo{border-radius:44px;object-fit:cover;display:block;background:var(--panel)}
+canvas{display:block}
+
+/* slide shine on lime */
+.slide.lime::after{content:"";position:absolute;top:-10%;bottom:-10%;width:420px;left:-500px;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.28),rgba(255,255,255,0));transform:skewX(-18deg);pointer-events:none}
+.slide.lime.active::after{animation:shine 5.5s ease-in-out 1.2s infinite}
+@keyframes shine{0%{left:-500px}55%,100%{left:2300px}}
+#stage.lite .slide.lime::after{animation:none}
+
+/* title / closing */
+.title .col{flex:1}
+.title .logo{width:560px;display:block;margin-bottom:60px}
+.title h1{font-size:150px}
+.title .photo{width:700px;height:660px;object-position:50% 40%;flex:none;box-shadow:0 0 0 14px rgba(176,203,0,.18),0 30px 90px rgba(0,0,0,.5);animation:float 7s ease-in-out infinite alternate}
+@keyframes float{to{transform:translateY(-16px) rotate(.6deg)}}
+.motto{font-size:54px;line-height:1.2;color:var(--mute);margin-top:34px;font-weight:500;max-width:900px}
+.end{align-items:center;text-align:center}
+.end .logo{width:600px;margin:0 auto 54px;display:block}
+#confetti{position:absolute;inset:0;z-index:3;pointer-events:none}
+
+/* heute: tagesverlauf */
+.tl{position:relative;margin-top:56px}
+.tl-axis{position:relative;height:40px;margin-left:360px;width:910px}
+.tl-axis span{position:absolute;top:0;transform:translateX(-50%);font-size:30px;color:var(--mute);font-variant-numeric:tabular-nums;font-weight:500}
+.tl-row{display:grid;grid-template-columns:330px 910px 1fr;gap:30px;align-items:center;height:128px;border-top:1px solid var(--line)}
+.tl-name{font-family:var(--f-display);font-weight:700;font-size:46px;line-height:1.05}
+.tl-name small{display:block;font-family:var(--f-body);font-size:32px;color:var(--mute);margin-top:8px;font-weight:500;font-variant-numeric:tabular-nums}
+.tl-track{position:relative;height:46px;border-radius:23px;background:#23271e}
+.tl-seg{position:absolute;top:0;bottom:0;border-radius:23px;background:var(--lime)}
+.slide.active .tl-seg{animation:grow 1.2s cubic-bezier(.2,.8,.2,1) .5s backwards;transform-origin:0 50%}
+@keyframes grow{from{transform:scaleX(0)}}
+.tl-over{position:absolute;left:360px;width:910px;top:0;bottom:0;pointer-events:none}
+.tl-now{position:absolute;top:34px;bottom:0;width:4px;margin-left:-2px;background:var(--fg);border-radius:2px}
+.tl-now::before{content:attr(data-t);position:absolute;top:-6px;left:50%;transform:translate(-50%,-100%);background:var(--fg);color:var(--ink);font-size:30px;padding:2px 14px;border-radius:14px;font-variant-numeric:tabular-nums;font-weight:700}
+.tl-now::after{content:"";position:absolute;bottom:-9px;left:50%;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:var(--fg);animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{50%{opacity:.35;transform:scale(.7)}}
+.pill{justify-self:start;display:inline-flex;align-items:center;gap:14px;font-size:33px;white-space:nowrap;padding:12px 26px;border-radius:99px;background:#2a2e24;color:var(--mute)}
+.pill::before{content:"";width:20px;height:20px;border-radius:50%;background:#6c7262}
+.pill.on{background:var(--lime);color:var(--lime-ink)}
+.pill.on::before{background:var(--lime-ink);animation:blink 1.4s ease-in-out infinite}
+.count{font-size:46px;color:var(--fg);margin-top:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.count b{color:var(--lime);font-weight:700}
+
+/* team */
+.big3{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;margin-top:56px}
+.big3 figure{margin:0;display:flex;flex-direction:column;gap:22px}
+.big3 img{width:100%;height:520px;object-position:50% 25%}
+.big3 figcaption{font-family:var(--f-display);font-weight:700;font-size:60px;letter-spacing:-.01em}
+.grp{display:flex;flex-direction:column;gap:18px}
+.grp h4{margin:0;font-size:30px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);font-weight:700}
+.faces{display:flex;gap:18px}
+.faces figure{margin:0;width:172px;flex:none}
+.faces img{width:172px;height:250px;border-radius:26px;object-position:50% 28%}
+.faces figcaption{overflow-wrap:anywhere;hyphens:auto;font-size:28px;line-height:1.15;margin-top:12px;font-weight:600}
+.teamrows{display:flex;flex-direction:column;gap:44px;margin-top:20px}
+.teamrow{display:flex;gap:64px}
+
+/* week table */
+table{border-collapse:separate;border-spacing:0;width:100%;font-variant-numeric:tabular-nums;margin-top:20px}
+th{font-size:34px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);text-align:left;padding:0 28px 18px;font-weight:700}
+td{font-size:42px;line-height:1.14;padding:16px 28px;border-top:1px solid var(--line);vertical-align:middle}
+td:first-child{font-family:var(--f-display);font-weight:700;font-size:46px;width:300px}
+tr.today td{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}
+tr.today td:first-child{border-radius:26px 0 0 26px}
+tr.today td:last-child{border-radius:0 26px 26px 0}
+td.closed{color:var(--mute)}
+tr.today td.closed{color:#3b4500}
+.fine{font-size:32px;color:var(--mute);margin-top:22px;font-weight:500}
+
+/* massage */
+.mass{display:flex;gap:90px;align-items:center;margin-top:50px}
+.mass .times{display:flex;flex-direction:column;gap:18px;font-size:56px;font-variant-numeric:tabular-nums}
+.mass .times div{display:grid;grid-template-columns:400px auto;gap:30px;white-space:nowrap}
+.mass .times b{font-family:var(--f-display);font-weight:700}
+.mass .sub{font-size:50px;margin-top:40px}
+.mass .sub small{display:block;font-size:38px;color:var(--mute);margin-top:10px;font-weight:500}
+.avatar{position:relative;width:420px;height:420px;flex:none;margin-left:auto}
+.avatar img{position:absolute;inset:26px;width:calc(100% - 52px);height:calc(100% - 52px);border-radius:50%;object-fit:cover}
+.avatar::before{content:"";position:absolute;inset:0;border-radius:50%;border:8px dashed var(--lime);animation:spin 24s linear infinite}
+.avatar span{position:absolute;left:0;right:0;bottom:-70px;text-align:center;font-size:42px;font-weight:700}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* hausregeln */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:64px}
+.rule{background:var(--lime);color:var(--lime-ink);border-radius:44px;padding:52px 48px 56px;min-height:560px;display:flex;flex-direction:column;gap:24px}
+.rule svg{width:150px;height:150px;stroke:var(--lime-ink);fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;transform-origin:50% 60%}
+.slide.active .rule svg{animation:pop .9s cubic-bezier(.3,1.6,.4,1) backwards,wob 3.2s ease-in-out 1.4s infinite;animation-delay:calc(var(--i)*.25s + .5s),calc(var(--i)*.4s + 1.6s)}
+@keyframes pop{from{transform:scale(0) rotate(-40deg)}}
+@keyframes wob{0%,100%{transform:rotate(0)}15%{transform:rotate(-7deg)}30%{transform:rotate(6deg)}45%{transform:rotate(0)}}
+.rule h3{font-family:var(--f-display);font-size:78px;margin:12px 0 0;font-weight:800;letter-spacing:-.02em;line-height:1}
+.rule p{font-size:46px;line-height:1.2;font-weight:600}
+
+/* atmen */
+.breath{position:relative;width:620px;height:620px;flex:none}
+.breath i{position:absolute;inset:0;border-radius:50%;transform:scale(.5)}
+.breath .core{background:radial-gradient(circle at 50% 38%,#dff25a,#b0cb00 55%,#6f8f00)}
+.breath .h1,.breath .h2{border:3px solid rgba(176,203,0,.55)}
+.slide.active .breath .core{animation:br 8s ease-in-out infinite}
+.slide.active .breath .h1{animation:br 8s ease-in-out .18s infinite}
+.slide.active .breath .h2{animation:br 8s ease-in-out .36s infinite}
+@keyframes br{0%,100%{transform:scale(.5)}44%{transform:scale(1)}}
+.blabel{position:relative;height:86px;margin-top:40px;text-align:center;font-family:var(--f-display);font-weight:800;font-size:76px}
+.blabel span{position:absolute;left:0;right:0;opacity:0}
+.slide.active .blabel .in{animation:lin 8s infinite}
+.slide.active .blabel .out{animation:lout 8s infinite}
+@keyframes lin{0%,38%{opacity:1}44%,94%{opacity:0}100%{opacity:1}}
+@keyframes lout{0%,38%{opacity:0}44%,94%{opacity:1}100%{opacity:0}}
+.bwrap{display:flex;flex-direction:column;align-items:center;flex:none;width:700px}
+
+/* wasser */
+.glass{position:relative;width:380px;height:580px;border:10px solid rgba(244,246,238,.9);border-top:none;border-radius:0 0 100px 100px;overflow:hidden;flex:none;background:rgba(244,246,238,.04)}
+.water{position:absolute;left:0;right:0;bottom:0;height:80%;background:linear-gradient(180deg,#53cdd0,#1f8a6a)}
+.slide.active .water{animation:fillw 9s cubic-bezier(.3,.6,.3,1) backwards}
+@keyframes fillw{from{height:6%}}
+.wave{position:absolute;left:0;top:-30px;width:760px;height:40px}
+.slide.active .wave{animation:wv 2.6s linear infinite}
+.wave.b{top:-36px;opacity:.5}
+.slide.active .wave.b{animation-duration:3.8s;animation-direction:reverse}
+@keyframes wv{to{transform:translateX(-380px)}}
+.bub{position:absolute;bottom:-20px;border-radius:50%;background:rgba(255,255,255,.55)}
+.slide.active .bub{animation:bub 4s ease-in infinite}
+@keyframes bub{from{transform:translateY(0);opacity:.9}to{transform:translateY(-480px);opacity:0}}
+
+/* haltung */
+.spinecol{position:relative;width:240px;height:700px;flex:none}
+.spinecol i{position:absolute;left:50%;border-radius:50%;background:var(--lime)}
+.slide.active .spinecol i{animation:straight 2.4s cubic-bezier(.5,0,.2,1) backwards,ripple 2.6s ease-out infinite;animation-delay:calc(var(--k)*.07s + .7s),calc(var(--k)*.09s + 4s)}
+@keyframes straight{from{transform:translateX(var(--x));background:#767c6a}}
+@keyframes ripple{0%{box-shadow:0 0 0 0 rgba(176,203,0,.6)}70%,100%{box-shadow:0 0 0 30px rgba(176,203,0,0)}}
+
+/* dein weg */
+.way{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:80px}
+.way::before{content:"";position:absolute;left:12.5%;right:12.5%;top:47px;height:8px;border-radius:4px;background:#2a2e24}
+.way::after{content:"";position:absolute;left:12.5%;right:12.5%;top:47px;height:8px;border-radius:4px;background:var(--lime);transform-origin:0 50%}
+.slide.active .way::after{animation:wayf 8.4s linear .6s backwards}
+@keyframes wayf{from{transform:scaleX(0)}}
+.step{position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px}
+.step .nd{width:102px;height:102px;border-radius:50%;background:var(--lime);color:var(--lime-ink);display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:56px;position:relative;z-index:2}
+.slide.active .step .nd{animation:lit .7s cubic-bezier(.3,1.6,.4,1) backwards;animation-delay:calc(var(--s)*2.8s + .3s)}
+@keyframes lit{from{transform:scale(.6);background:#2a2e24;color:var(--mute)}}
+.step b{font-family:var(--f-display);font-size:50px;font-weight:700;letter-spacing:-.01em;line-height:1.05}
+.step span{font-size:36px;line-height:1.25;color:var(--mute);font-weight:500;max-width:360px}
+
+/* app */
+.app .qr{background:#fff;padding:30px;border-radius:36px;width:440px;flex:none;position:relative}
+.app .qr::after{content:"";position:absolute;left:30px;right:30px;top:30px;height:6px;border-radius:3px;background:var(--lime);box-shadow:0 0 30px 8px rgba(176,203,0,.7);animation:scan 3s ease-in-out infinite alternate}
+@keyframes scan{from{transform:translateY(0)}to{transform:translateY(380px)}}
+.app .qr img{width:100%;display:block;image-rendering:pixelated}
+.app .qr span{display:block;text-align:center;color:#141a00;font-size:34px;margin-top:14px;font-weight:700}
+.list{list-style:none;margin:56px 0 0;padding:0;display:flex;flex-direction:column;gap:30px}
+.list li{font-size:52px;line-height:1.15;display:flex;gap:30px;align-items:baseline;font-weight:600}
+.list li::before{content:"";width:22px;height:22px;border-radius:50%;background:var(--lime);flex:none;transform:translateY(-6px)}
+
+/* studie ringe */
+.rings{display:flex;justify-content:center;gap:170px;margin-top:20px}
+.ringbox{display:flex;flex-direction:column;align-items:center;gap:36px;width:640px}
+.ringbox svg{width:470px;height:470px;transform:rotate(-90deg)}
+.ringbox .trk{fill:none;stroke:#262a21;stroke-width:42}
+.ringbox .fg{fill:none;stroke:var(--lime);stroke-width:42;stroke-linecap:round;stroke-dasharray:1194;stroke-dashoffset:calc(1194 * (1 - var(--p)))}
+.slide.active .ringbox .fg{animation:ringf 2.4s cubic-bezier(.3,.7,.2,1) .5s backwards}
+@keyframes ringf{from{stroke-dashoffset:1194}}
+.ringwrap{position:relative}
+.ringnum{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:150px;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.ringnum sup{font-size:.45em;color:var(--lime);vertical-align:top;margin-left:6px}
+.ringbox p{font-size:44px;line-height:1.22;text-align:center;font-weight:500;color:var(--fg)}
+
+/* gemessen + zahlen */
+.steps{display:flex;gap:56px;margin-top:70px}
+.steps div{flex:1;border-top:6px solid var(--lime);padding-top:28px}
+.steps b{display:block;font-family:var(--f-display);font-size:150px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.steps > div > span{font-size:44px;color:var(--mute);font-weight:500;line-height:1.2;display:block;margin-top:12px}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:70px;margin-top:70px}
+.nums div{border-top:6px solid var(--lime);padding-top:30px}
+.nums b{display:block;font-family:var(--f-display);font-size:230px;font-weight:800;letter-spacing:-.05em;line-height:.95;font-variant-numeric:tabular-nums}
+.nums > div > span{display:block;font-size:46px;line-height:1.2;color:var(--mute);font-weight:500;margin-top:18px}
+
+/* warm werden */
+.warm{display:grid;grid-template-columns:repeat(3,1fr);gap:70px;margin-top:70px}
+.wi{display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px}
+.wic{width:250px;height:250px;border-radius:50%;border:6px solid var(--lime);display:grid;place-items:center;background:rgba(176,203,0,.07);margin-bottom:16px}
+.wic svg{width:150px;height:150px;fill:none;stroke:var(--lime);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.wi b{font-family:var(--f-display);font-size:58px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.wi span{font-size:38px;line-height:1.25;color:var(--mute);font-weight:500;max-width:480px}
+.slide.active .spin{animation:rot 4.5s linear infinite;transform-origin:50px 50px}
+.slide.active .swing{animation:swg 2.6s ease-in-out infinite alternate;transform-origin:50px 14px}
+.slide.active .orbit{animation:rot 3.2s linear infinite;transform-origin:50px 50px}
+@keyframes rot{to{transform:rotate(360deg)}}
+@keyframes swg{from{transform:rotate(-30deg)}to{transform:rotate(30deg)}}
+/* alltag */
+.daily{display:flex;flex-direction:column;margin-top:40px}
+.dr{display:flex;align-items:center;gap:56px;padding:18px 0;border-top:1px solid var(--line)}
+.dic{width:150px;height:150px;border-radius:50%;background:rgba(176,203,0,.1);border:4px solid var(--lime);display:grid;place-items:center;flex:none}
+.dic svg{width:108px;height:108px;fill:none;stroke:var(--lime);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+.dr b{font-family:var(--f-display);font-size:78px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.slide.active .climb{animation:climb 3.2s ease-in-out infinite}
+@keyframes climb{0%,10%{transform:translate(0,0)}30%{transform:translate(0,-20px)}40%,50%{transform:translate(22px,-20px)}60%{transform:translate(22px,-40px)}70%,80%{transform:translate(44px,-40px)}90%,100%{transform:translate(44px,-60px)}}
+.slide.active .f1{animation:foot 1.6s ease-in-out infinite}
+.slide.active .f2{animation:foot 1.6s ease-in-out .8s infinite}
+@keyframes foot{0%,100%{opacity:.2}40%,60%{opacity:1}}
+.slide.active .bob{animation:bob 2.2s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(8px)}to{transform:translateY(-6px)}}
+/* kinder */
+.kids .ghost12{position:absolute;right:-20px;top:40px;z-index:-1;font-family:var(--f-display);font-weight:800;font-size:1120px;line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:4px rgba(176,203,0,.34);pointer-events:none}
+.slide.active.kids .ghost12{animation:gf 9s ease-in-out infinite alternate}
+@keyframes gf{to{transform:translateY(-28px) rotate(-2deg)}}
+.benefits{width:790px;display:flex;flex-direction:column;gap:26px;flex:none}
+.ben{display:flex;gap:30px;align-items:center;background:var(--lime);color:var(--lime-ink);border-radius:40px;padding:32px 40px}
+.ben .bi{width:100px;height:100px;border-radius:50%;background:var(--lime-ink);display:grid;place-items:center;flex:none}
+.ben .bi svg{width:54px;height:54px;stroke:var(--lime);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.slide.active .ben .bi{animation:bpul 3s ease-in-out infinite;animation-delay:calc(var(--b)*.5s + 1.6s)}
+@keyframes bpul{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+.ben b{display:block;font-family:var(--f-display);font-size:54px;line-height:1.05;font-weight:800;letter-spacing:-.02em}
+.ben span{display:block;font-size:34px;line-height:1.2;margin-top:8px;font-weight:600;color:#2d3600}
+/* feedback */
+.chat{display:flex;flex-direction:column;gap:30px;margin-top:10px}
+.bubble{align-self:flex-start;background:var(--lime);color:var(--lime-ink);border-radius:64px 64px 64px 14px;padding:56px 84px;font-family:var(--f-display);font-weight:800;font-size:104px;letter-spacing:-.03em;line-height:1.05;transform-origin:0 100%}
+.bubble2{align-self:flex-end;display:flex;gap:16px;align-items:center;background:#262a21;border-radius:64px 64px 14px 64px;padding:40px 54px;margin-right:140px;transform-origin:100% 100%}
+.bubble2 i{width:24px;height:24px;border-radius:50%;background:var(--mute)}
+.slide.active .bubble2 i{animation:typing 1.2s ease-in-out infinite}
+.bubble2 i:nth-child(2){animation-delay:.18s!important}
+.bubble2 i:nth-child(3){animation-delay:.36s!important}
+@keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-14px);opacity:1}}
+/* beratung */
+.ripple{position:relative;width:480px;height:480px;flex:none;display:grid;place-items:center}
+.ripple i{position:absolute;inset:60px;border-radius:50%;border:6px solid rgba(20,26,0,.55);opacity:0}
+.slide.active .ripple i{animation:rip 3.6s ease-out infinite}
+.ripple i:nth-child(2){animation-delay:1.2s!important}
+.ripple i:nth-child(3){animation-delay:2.4s!important}
+@keyframes rip{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+.ripple svg{position:relative;width:300px;height:300px;fill:none;stroke:var(--lime-ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.slide.active .ripple svg{animation:bobs 3s ease-in-out infinite alternate}
+@keyframes bobs{from{transform:translateY(10px) rotate(-3deg)}to{transform:translateY(-10px) rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.aurora i,.spine-dots i,.title .photo,.avatar::before,.breath i,.wave,.bub,.spinecol i,.spin,.swing,.orbit,.climb,.f1,.f2,.bob,.ghost12,.ben .bi,.bubble2 i,.ripple i,.ripple svg{animation:none!important}.slide.active .rv{animation:none}}
+
+.tight2 .faces figcaption{font-size:21px;hyphens:none;overflow-wrap:normal}
+.tight2 .faces img{height:205px}
+.tight2 .teamrows{gap:30px;margin-top:6px}
+</style>
+
+<div id="stage">
+  <div class="aurora"><i></i><i></i><i></i></div>
+  <div class="head">
+    <div class="brand"><div class="spine-dots"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="wm">bona<b>VITA</b></div></div>
+    <div class="clock"><span class="d" id="date"></span><span class="t" id="time"></span></div>
+  </div>
+  <div class="bar"><i id="barfill"></i></div>
+  <canvas id="confetti" width="1920" height="1080"></canvas>
+
+  <!-- 1 Titel mit Tageszeit-Gruss und Wochentags-Motto -->
+  <section class="slide title" data-sec="12" data-nohead="1">
+    <div class="row">
+      <div class="col">
+        <img class="logo rv" src="img/logo-light.png" alt="bonaVITA Physio &amp; Training">
+        <p class="kicker rv" id="monthKicker">Info-Update</p>
+        <h1 class="rv" id="greet">Willkommen.</h1>
+        <p class="motto rv" id="motto"></p>
+      </div>
+      <img class="photo rv" src="img/team.jpg" alt="Das bonaVITA-Team vor dem Eingang">
+    </div>
+  </section>
+
+  <!-- 2 Heute: Tagesverlauf mit Jetzt-Marker und Countdown -->
+  <section class="slide" data-sec="14" id="s-heute">
+    <p class="kicker rv">Heute geöffnet</p>
+    <h2 class="rv" id="heuteTitel" style="font-size:112px">Heute</h2>
+    <p class="count rv" id="countdown"></p>
+    <div class="tl rv" id="tl">
+      <div class="tl-axis" id="tlAxis"></div>
+      <div class="tl-row" data-area="physio"><div class="tl-name">Physiotherapie<small></small></div><div class="tl-track"></div><span class="pill"></span></div>
+      <div class="tl-row" data-area="training"><div class="tl-name">Trainingsbereich<small></small></div><div class="tl-track"></div><span class="pill"></span></div>
+      <div class="tl-row" data-area="reception"><div class="tl-name">Rezeption<small></small></div><div class="tl-track"></div><span class="pill"></span></div>
+      <div class="tl-over"><div class="tl-now" id="tlNow" data-t=""></div></div>
+    </div>
+  </section>
+
+  <!-- 3 Trainingsteam -->
+  <section class="slide" data-sec="10">
+    <p class="kicker rv">Ihr Trainingsteam</p>
+    <h2 class="rv">Wir begleiten Ihr Training.</h2>
+    <div class="big3">
+      <figure class="rv"><img class="photo" src="img/alex.jpg" alt="Alex Braig"><figcaption>Alex Braig</figcaption></figure>
+      <figure class="rv"><img class="photo" src="img/elijah.jpg" alt="Elijah Braig"><figcaption>Elijah Braig</figcaption></figure>
+      <figure class="rv"><img class="photo" src="img/kilian.jpg" alt="Kilian Braig"><figcaption>Kilian Braig</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 4 Ganzes Team -->
+  <section class="slide tight2" data-sec="12">
+    <p class="kicker rv">Das ganze Team</p>
+    <div class="teamrows">
+      <div class="grp rv"><h4>Physiotherapie</h4>
+        <div class="faces">
+          <figure><img class="photo" src="img/angelika.jpg" alt=""><figcaption>Angelika Fuchs</figcaption></figure>
+          <figure><img class="photo" src="img/dominic.jpg" alt=""><figcaption>Dominic Sauter</figcaption></figure>
+          <figure><img class="photo" src="img/elena.jpg" alt=""><figcaption>Elena Gavryuschenko</figcaption></figure>
+          <figure><img class="photo" src="img/jovana.jpg" alt=""><figcaption>Jovana Jankovic</figcaption></figure>
+          <figure><img class="photo" src="img/kathleen.jpg" alt=""><figcaption>Kathleen Gieseler</figcaption></figure>
+          <figure><img class="photo" src="img/nadja.jpg" alt=""><figcaption>Nadja Kasler</figcaption></figure>
+          <figure><img class="photo" src="img/siggi.jpg" alt=""><figcaption>Siggi Braig</figcaption></figure>
+          <figure><img class="photo" src="img/tatjana.jpg" alt=""><figcaption>Tatjana Beilmann</figcaption></figure>
+          <figure><img class="photo" src="img/verena.jpg" alt=""><figcaption>Verena Weider</figcaption></figure>
+        </div></div>
+      <div class="teamrow">
+        <div class="grp rv"><h4>Training</h4>
+          <div class="faces">
+            <figure><img class="photo" src="img/alex.jpg" alt=""><figcaption>Alex Braig</figcaption></figure>
+            <figure><img class="photo" src="img/elijah.jpg" alt=""><figcaption>Elijah Braig</figcaption></figure>
+            <figure><img class="photo" src="img/kilian.jpg" alt=""><figcaption>Kilian Braig</figcaption></figure>
+          </div></div>
+        <div class="grp rv"><h4>Rezeption</h4>
+          <div class="faces">
+            <figure><img class="photo" src="img/senta.jpg" alt=""><figcaption>Senta Martin</figcaption></figure>
+            <figure><img class="photo" src="img/vincenza.jpg" alt=""><figcaption>Vincenza Azzato</figcaption></figure>
+          </div></div>
+        <div class="grp rv"><h4>Massage</h4>
+          <div class="faces">
+            <figure><img class="photo" src="img/illia.jpg" alt=""><figcaption>Illia Didovych</figcaption></figure>
+          </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Oeffnungszeiten Woche -->
+  <section class="slide" data-sec="14">
+    <p class="kicker rv">Unsere Öffnungszeiten</p>
+    <table id="week" class="rv"><thead><tr><th></th><th>Physiotherapie</th><th>Trainingsbereich</th><th>Rezeption</th></tr></thead><tbody></tbody></table>
+    <p class="fine rv">Kurzfristige Änderungen aufgrund von Urlaub oder Krankheit vorbehalten.</p>
+  </section>
+
+  <!-- 6 Hinweis Teamsitzung -->
+  <section class="slide lime" data-sec="11">
+    <p class="kicker rv">Hinweis</p>
+    <h2 class="rv">Dienstags von 09:20 bis 10:00 Uhr ist Teamsitzung.</h2>
+    <p class="lead rv">Wir sind in dieser Zeit nicht persönlich anzutreffen. Notfalls finden Sie uns im „Privatbereich“.</p>
+  </section>
+
+  <!-- 7 Massage -->
+  <section class="slide" data-sec="12" id="s-massage">
+    <p class="kicker rv">Angebot</p>
+    <h2 class="rv">Massage</h2>
+    <div class="mass">
+      <div class="col">
+        <div class="times rv" id="massTimes"></div>
+        <p class="sub rv" id="massSub"></p>
+      </div>
+      <div class="avatar rv"><img src="img/illia.jpg" alt=""><span id="massName"></span></div>
+    </div>
+  </section>
+
+  <!-- 8 Hausregeln -->
+  <section class="slide" data-sec="14">
+    <p class="kicker rv">Gut zu wissen</p>
+    <h2 class="rv">Hausregeln</h2>
+    <div class="rules">
+      <div class="rule rv" style="--i:0">
+        <svg viewBox="0 0 100 100" style="--i:0"><rect x="14" y="26" width="72" height="48" rx="6"/><path d="M30 26v48M70 26v48M14 40h16M70 40h16M14 60h16M70 60h16"/></svg>
+        <h3>Handtuch</h3><p>Bringen Sie ein großes Handtuch mit.</p></div>
+      <div class="rule rv" style="--i:1">
+        <svg viewBox="0 0 100 100" style="--i:1"><path d="M36 20 22 30 10 48l14 8 6-8v38h40V48l6 8 14-8-12-18-14-10c-3 8-8 12-14 12s-11-4-14-12Z"/></svg>
+        <h3>Sportkleidung</h3><p>Ziehen Sie bequeme &amp; saubere Sportsachen an.</p></div>
+      <div class="rule rv" style="--i:2">
+        <svg viewBox="0 0 100 100" style="--i:2"><path d="M10 68V40l16 4c6 8 14 10 24 10l8-8 8 10c10 2 24 6 24 14v8H10Z"/><path d="M10 78h80M52 54l-6 8M62 56l-6 8"/></svg>
+        <h3>Sportschuhe</h3><p>Bringen Sie saubere Sportschuhe mit.</p></div>
+    </div>
+  </section>
+
+  <!-- 9 Re-Check -->
+  <section class="slide lime" data-sec="11">
+    <p class="kicker rv">Re-Check</p>
+    <h2 class="rv" style="font-size:116px">Interesse an einem Re-Check-Termin, einem Wechsel in die nächste Stufe oder weiteren Übungen?</h2>
+    <p class="lead rv">Sprechen Sie uns einfach an. Wir beraten Sie gerne.</p>
+  </section>
+
+  <!-- 10 Atmen -->
+  <section class="slide" data-sec="16">
+    <div class="row" style="justify-content:space-between">
+      <div class="col">
+        <p class="kicker rv">Kurz durchatmen</p>
+        <h2 class="rv">Einatmen.<br>Ausatmen.</h2>
+        <p class="lead rv">Eine ruhige Atmung hilft bei jeder Übung. Folgen Sie dem Kreis.</p>
+      </div>
+      <div class="bwrap rv">
+        <div class="breath"><i class="h2"></i><i class="h1"></i><i class="core"></i></div>
+        <div class="blabel"><span class="in">Einatmen</span><span class="out">Ausatmen</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 Wasser -->
+  <section class="slide" data-sec="14">
+    <div class="row" style="justify-content:space-between">
+      <div class="col">
+        <p class="kicker rv">Zwischendurch</p>
+        <h2 class="rv">Trinken nicht vergessen.</h2>
+        <p class="lead rv">Eine Flasche Wasser dabeihaben und zwischen den Geräten einen Schluck nehmen.</p>
+      </div>
+      <div class="glass rv">
+        <div class="water">
+          <svg class="wave b" viewBox="0 0 760 40" preserveAspectRatio="none"><path d="M0 20 Q47.5 0 95 20 T190 20 T285 20 T380 20 T475 20 T570 20 T665 20 T760 20 V40 H0Z" fill="#53cdd0"/></svg>
+          <svg class="wave" viewBox="0 0 760 40" preserveAspectRatio="none"><path d="M0 20 Q47.5 0 95 20 T190 20 T285 20 T380 20 T475 20 T570 20 T665 20 T760 20 V40 H0Z" fill="#53cdd0"/></svg>
+          <i class="bub" style="left:20%;width:16px;height:16px;animation-delay:.2s"></i>
+          <i class="bub" style="left:46%;width:22px;height:22px;animation-delay:1.4s"></i>
+          <i class="bub" style="left:68%;width:12px;height:12px;animation-delay:2.6s"></i>
+          <i class="bub" style="left:34%;width:10px;height:10px;animation-delay:3.3s"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ernaehrungsberatung -->
+  <section class="slide lime" data-sec="12">
+    <div class="row" style="justify-content:space-between;gap:80px">
+      <div class="col">
+        <p class="kicker rv">Ernährung</p>
+        <h2 class="rv" style="font-size:100px;max-width:1000px">Interesse an einer Ernährungsempfehlung?</h2>
+        <p class="lead rv">Sprechen Sie uns bei Interesse einfach an.</p>
+      </div>
+      <div class="ripple rv">
+        <i></i><i></i><i></i>
+        <svg viewBox="0 0 100 100"><path d="M18 22h64a8 8 0 0 1 8 8v30a8 8 0 0 1-8 8H48L28 86V68h-10a8 8 0 0 1-8-8V30a8 8 0 0 1 8-8z"/><path d="M30 40h40M30 52h26"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 Haltung -->
+  <section class="slide" data-sec="14">
+    <div class="row" style="justify-content:space-between;gap:120px">
+      <div class="col">
+        <p class="kicker rv">Haltung</p>
+        <h2 class="rv">Aufrecht trainieren.</h2>
+        <p class="lead rv">Schultern locker, Brust offen, Blick nach vorn. Fragen Sie uns, wenn Sie unsicher sind.</p>
+      </div>
+      <div class="spinecol rv" id="spinecol"></div>
+    </div>
+  </section>
+
+  <!-- 13 Dein Weg -->
+  <section class="slide" data-sec="15">
+    <p class="kicker rv">So läuft Ihr Training</p>
+    <h2 class="rv" style="font-size:112px">Schritt für Schritt zum Ziel.</h2>
+    <div class="way rv">
+      <div class="step" style="--s:0"><div class="nd">1</div><b>Einweisung &amp; Anamnese</b><span>Wir lernen Sie und Ihre Ziele kennen.</span></div>
+      <div class="step" style="--s:1"><div class="nd">2</div><b>Gezieltes Training</b><span>Mit Ihrem digitalen Trainingsplan.</span></div>
+      <div class="step" style="--s:2"><div class="nd">3</div><b>Re-Check</b><span>Wir prüfen gemeinsam Ihren Fortschritt.</span></div>
+      <div class="step" style="--s:3"><div class="nd">4</div><b>Nächste Stufe</b><span>Neue Übungen und ein Wechsel in die nächste Stufe.</span></div>
+    </div>
+  </section>
+
+  <!-- 14 Technogym App -->
+  <section class="slide app" data-sec="14">
+    <div class="row">
+      <div class="col">
+        <p class="kicker rv">Digital trainieren</p>
+        <h2 class="rv">Bessere Ergebnisse. Schneller.</h2>
+        <ul class="list">
+          <li class="rv">Trainingsfortschritt live im Blick</li>
+          <li class="rv">Smartwatch verbinden &amp; Herzfrequenz überwachen</li>
+          <li class="rv">Individuelle Trainingspläne digital abrufen</li>
+        </ul>
+      </div>
+      <div class="qr rv"><img src="img/qr.png" alt="QR-Code zur Technogym App"><span>Technogym App laden</span></div>
+    </div>
+  </section>
+
+  <!-- 15 Rückenstudie: zwei Ringe -->
+  <section class="slide" data-sec="14" data-count="1">
+    <p class="kicker rv" style="text-align:center">Rückenstudie</p>
+    <div class="rings">
+      <div class="ringbox rv">
+        <div class="ringwrap"><svg viewBox="0 0 440 440"><circle class="trk" cx="220" cy="220" r="190"/><circle class="fg" cx="220" cy="220" r="190" style="--p:.70"/></svg><div class="ringnum"><span><span data-to="70">70</span><sup>%</sup></span></div></div>
+        <p>der Teilnehmer:innen konnten ihre Rückenschmerzen deutlich reduzieren.</p>
+      </div>
+      <div class="ringbox rv">
+        <div class="ringwrap"><svg viewBox="0 0 440 440"><circle class="trk" cx="220" cy="220" r="190"/><circle class="fg" cx="220" cy="220" r="190" style="--p:.65"/></svg><div class="ringnum"><span><span data-to="65">65</span><sup>%</sup></span></div></div>
+        <p>gaben eine spürbar verbesserte Beweglichkeit im Alltag an.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 So gemessen -->
+  <section class="slide" data-sec="13" data-count="1">
+    <p class="kicker rv">So haben wir gemessen</p>
+    <h2 class="rv">Alle litten zu Beginn unter Rückenbeschwerden.</h2>
+    <div class="steps">
+      <div class="rv"><b><span data-to="5">5</span></b><span>Monate gezieltes bonaVITA-Training</span></div>
+      <div class="rv"><b><span data-to="50">50</span></b><span>Teilnehmer:innen ohne regelmäßiges Training zuvor</span></div>
+    </div>
+  </section>
+
+  <!-- Alltag -->
+  <section class="slide" data-sec="14">
+    <p class="kicker rv">In Bewegung bleiben</p>
+    <h2 class="rv" style="font-size:100px">Auch außerhalb des Studios.</h2>
+    <div class="daily">
+      <div class="dr rv"><div class="dic"><svg viewBox="0 0 100 100"><path d="M12 84h22V64h22V44h22V24h10"/><circle class="climb" cx="22" cy="74" r="7" fill="#b0cb00"/></svg></div><b>Treppe statt Aufzug.</b></div>
+      <div class="dr rv"><div class="dic"><svg viewBox="0 0 100 100"><ellipse class="f1" cx="38" cy="64" rx="11" ry="17"/><ellipse class="f2" cx="64" cy="38" rx="11" ry="17"/></svg></div><b>Beim Telefonieren gehen.</b></div>
+      <div class="dr rv"><div class="dic"><svg viewBox="0 0 100 100"><g class="bob"><circle cx="50" cy="24" r="10"/><path d="M50 36v30M34 50h32M50 66l-12 22M50 66l12 22"/></g></svg></div><b>Zwischendurch aufstehen und strecken.</b></div>
+    </div>
+  </section>
+
+  <!-- 17 Zahlen -->
+  <section class="slide" data-sec="13" data-count="1">
+    <p class="kicker rv">In Zahlen</p>
+    <h2 class="rv" style="font-size:112px">Wir sind für Sie da.</h2>
+    <div class="nums">
+      <div class="rv"><b><span data-to="15">15</span></b><span>Menschen im Team</span></div>
+      <div class="rv"><b><span id="numHours" data-to="63.5" data-dec="1">63,5</span></b><span>Stunden pro Woche geöffnet (Trainingsbereich)</span></div>
+      <div class="rv"><b><span id="numDays" data-to="6">6</span></b><span>Tage pro Woche zum Training</span></div>
+    </div>
+  </section>
+
+  <!-- Kinder -->
+  <section class="slide kids" data-sec="16">
+    <div class="ghost12">12</div>
+    <div class="row" style="justify-content:space-between;gap:80px">
+      <div class="col" style="flex:1">
+        <p class="kicker rv">Für Eltern</p>
+        <h2 class="rv">Bringen Sie Ihr Kind mit.</h2>
+        <p class="lead rv">Schon mit 12 Jahren kann Ihr Kind bei uns trainieren. Sprechen Sie uns einfach an.</p>
+      </div>
+      <div class="benefits">
+        <div class="ben rv" style="--b:0"><div class="bi"><svg viewBox="0 0 24 24"><path d="M3 10v4M6 8v8M18 8v8M21 10v4M6 12h12"/></svg></div><div><b>Muskeln aufbauen</b><span>Kraft und Stabilität, Schritt für Schritt.</span></div></div>
+        <div class="ben rv" style="--b:1"><div class="bi"><svg viewBox="0 0 24 24"><path d="M4 20v-4M9 20v-8M14 20V8M19 20V4"/></svg></div><div><b>Grundlagen setzen</b><span>Saubere Technik von Anfang an.</span></div></div>
+        <div class="ben rv" style="--b:2"><div class="bi"><svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></div><div><b>Spezielle Übungen</b><span>Passend für Kinder, begleitet von unserem Team.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feedback -->
+  <section class="slide" data-sec="11">
+    <p class="kicker rv">Ihre Meinung zählt</p>
+    <div class="chat">
+      <div class="bubble rv">Lob, Wünsche oder Ideen?</div>
+      <div class="bubble2 rv"><i></i><i></i><i></i></div>
+    </div>
+    <p class="lead rv">Sprechen Sie uns jederzeit an. Wir freuen uns über Ihre Rückmeldung.</p>
+  </section>
+
+  <!-- 18 Weiterempfehlen -->
+  <section class="slide lime" data-sec="13" id="s-weiter">
+    <p class="kicker rv">Gemeinsam stärker</p>
+    <h2 class="rv">Gezieltes Training kann Rückenbeschwerden deutlich verbessern.</h2>
+    <p class="lead rv">Empfehlen Sie bonaVITA gerne weiter. Freunde &amp; Bekannte trainieren beim Probetraining kostenlos mit.</p>
+  </section>
+
+  <!-- 19 Abschluss -->
+  <section class="slide end" data-sec="12" data-nohead="1" data-confetti="1">
+    <img class="logo rv" src="img/logo-light.png" alt="bonaVITA Physio &amp; Training">
+    <h2 class="rv">Viel Erfolg beim Training!</h2>
+    <p class="lead rv" style="margin-left:auto;margin-right:auto">Wir freuen uns auf Sie. Ihr bonaVITA-Team</p>
+  </section>
+</div>
+
+<script>
+/* ===== Einstellungen: hier anpassen ===== */
+var CONFIG = {
+  // Zeiten je Wochentag: 0 = Sonntag ... 6 = Samstag. Leer = geschlossen. Format [von, bis] in "HH:MM"
+  hours: {
+    physio:    {1:[["07:00","19:30"]],2:[["07:00","19:30"]],3:[["07:00","19:30"]],4:[["07:00","19:30"]],5:[["07:00","15:00"]],6:[],0:[]},
+    training:  {1:[["07:00","19:30"]],2:[["07:00","19:30"]],3:[["07:00","19:30"]],4:[["07:00","19:30"]],5:[["07:00","17:30"]],6:[["08:00","11:00"]],0:[]},
+    reception: {1:[["08:00","12:30"],["13:00","17:30"]],2:[["08:00","12:30"],["13:00","17:30"]],3:[["08:00","12:30"],["13:00","17:30"]],4:[["08:00","12:30"],["13:00","17:30"]],5:[["08:00","13:30"]],6:[],0:[]}
+  },
+  // Massage-Angebot: enabled:false blendet die Folie aus
+  massage: { enabled:true, tage:[["Dienstag","16:30 – 19:30 Uhr"],["Donnerstag","16:30 – 19:30 Uhr"]], art:"Sportmassage & Wellnessmassage", dauer:"Nach Wunsch 25 oder 50 Minuten", name:"Illia Didovych" },
+  // Spruch je Wochentag auf der Titelfolie (0 = Sonntag)
+  motto: {0:"Schön, dass Sie da sind.",1:"Starke Woche, starker Rücken.",2:"Dranbleiben lohnt sich.",3:"Halbzeit. Weiter so!",4:"Noch einmal Kraft tanken vor dem Wochenende.",5:"Zum Wochenende noch einmal Gas geben.",6:"Samstagstraining. Respekt!"},
+  // Aktionsfolien: werden automatisch vor "Gemeinsam stärker" eingefügt. Leer lassen = keine Aktion.
+  // Beispiel: { kicker:"Aktion", title:"50% Rabatt für Ihre Freunde.", text:"Gültig bis 31.10. Infos an der Rezeption.", sec:14 }
+  aktionen: []
+};
+/* ======================================== */
+
+var DAYS=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+var stage=document.getElementById('stage');
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
+addEventListener('resize',fit);fit();
+
+function mins(t){var p=t.split(':');return +p[0]*60+ +p[1]}
+function fmt(r){return r[0]+" – "+r[1]}
+function p2(x){return(x<10?'0':'')+x}
+function areaStatus(area,now){
+  var d=now.getDay(),m=now.getHours()*60+now.getMinutes(),rs=CONFIG.hours[area][d]||[];
+  if(!rs.length)return{on:false,txt:"Heute geschlossen"};
+  for(var i=0;i<rs.length;i++){var a=mins(rs[i][0]),b=mins(rs[i][1]);
+    if(m>=a&&m<b)return{on:true,txt:"Jetzt geöffnet",left:b-m};
+    if(m<a)return{on:false,txt:"Öffnet um "+rs[i][0]+" Uhr",opens:a-m}}
+  return{on:false,txt:"Für heute geschlossen"};
+}
+function durTxt(m){var h=Math.floor(m/60),mm=m%60;return(h?h+" Std ":"")+mm+" Min"}
+function buildWeek(){
+  var tb=document.querySelector('#week tbody'),h='';
+  [1,2,3,4,5,6].forEach(function(d){
+    h+='<tr data-d="'+d+'"><td>'+DAYS[d]+'</td>';
+    ['physio','training','reception'].forEach(function(a){
+      var rs=CONFIG.hours[a][d]||[];
+      h+= rs.length?'<td>'+rs.map(function(r){return fmt(r)+' Uhr'}).join('<br>')+'</td>':'<td class="closed">geschlossen</td>';
+    });
+    h+='</tr>';
+  });
+  tb.innerHTML=h;
+}
+/* Achse 06 bis 20 Uhr */
+var T0=360,T1=1200;
+(function(){var h='';for(var t=6;t<=20;t+=2)h+='<span style="left:'+((t*60-T0)/(T1-T0)*100)+'%">'+p2(t)+'</span>';document.getElementById('tlAxis').innerHTML=h})();
+function tick(){
+  var n=new Date();
+  document.getElementById('time').textContent=p2(n.getHours())+':'+p2(n.getMinutes());
+  document.getElementById('date').textContent=n.toLocaleDateString('de-DE',{weekday:'long',day:'numeric',month:'long'});
+  document.getElementById('monthKicker').textContent='Info-Update · '+n.toLocaleDateString('de-DE',{month:'long',year:'numeric'});
+  var hr=n.getHours();
+  document.getElementById('greet').textContent=hr<11?'Guten Morgen.':(hr<17?'Guten Tag.':'Guten Abend.');
+  document.getElementById('motto').textContent=CONFIG.motto[n.getDay()]||'';
+  document.getElementById('heuteTitel').textContent='Heute, '+DAYS[n.getDay()]+'.';
+  var d=n.getDay(),m=hr*60+n.getMinutes();
+  document.querySelectorAll('#tl .tl-row').forEach(function(row){
+    var a=row.dataset.area,rs=CONFIG.hours[a][d]||[],st=areaStatus(a,n);
+    row.querySelector('small').textContent=rs.length?rs.map(function(r){return r[0]+'–'+r[1]}).join(' · '):'geschlossen';
+    var tr=row.querySelector('.tl-track'),h='';
+    rs.forEach(function(r){var l=(Math.max(mins(r[0]),T0)-T0)/(T1-T0)*100,w=(Math.min(mins(r[1]),T1)-Math.max(mins(r[0]),T0))/(T1-T0)*100;h+='<i class="tl-seg" style="left:'+l+'%;width:'+w+'%"></i>'});
+    if(tr.dataset.k!==h){tr.innerHTML=h;tr.dataset.k=h}
+    var pl=row.querySelector('.pill');pl.textContent=st.txt;pl.className='pill'+(st.on?' on':'');
+  });
+  var now=document.getElementById('tlNow');
+  if(m>=T0&&m<=T1){now.style.display='';now.style.left=((m-T0)/(T1-T0)*100)+'%';now.dataset.t=p2(hr)+':'+p2(n.getMinutes())}else now.style.display='none';
+  var st=areaStatus('training',n),cd=document.getElementById('countdown');
+  cd.innerHTML=st.on?'Trainingsbereich: noch <b>'+durTxt(st.left)+'</b> geöffnet':(st.opens?'Trainingsbereich: öffnet in <b>'+durTxt(st.opens)+'</b>':'Trainingsbereich: '+st.txt.toLowerCase());
+  document.querySelectorAll('#week tbody tr').forEach(function(tr){tr.classList.toggle('today',+tr.dataset.d===d)});
+}
+
+/* Massage, Zahlen, Haltung, Aktionsfolien */
+(function(){
+  var m=CONFIG.massage,ms=document.getElementById('s-massage');
+  if(!m.enabled){ms.parentNode.removeChild(ms)}
+  else{
+    document.getElementById('massTimes').innerHTML=m.tage.map(function(t){return'<div><b>'+t[0]+'</b><span>'+t[1]+'</span></div>'}).join('');
+    document.getElementById('massSub').innerHTML=m.art+'<small>'+m.dauer+'</small>';
+    document.getElementById('massName').textContent=m.name;
+  }
+  /* Wochenstunden Trainingsbereich aus den Zeiten */
+  var tot=0,days=0;for(var d=0;d<7;d++){var rs=CONFIG.hours.training[d]||[];if(rs.length)days++;rs.forEach(function(r){tot+=mins(r[1])-mins(r[0])})}
+  var hh=document.getElementById('numHours');hh.dataset.to=tot/60;hh.textContent=String(tot/60).replace('.',',');
+  var dd=document.getElementById('numDays');dd.dataset.to=days;dd.textContent=days;
+  /* Wirbelsaeule aus Punkten */
+  var sc=document.getElementById('spinecol'),h='',N=18;
+  for(var i=0;i<N;i++){
+    var t=i/(N-1),sz=16+22*Math.sin(Math.PI*t),x=Math.round(84*Math.sin(t*Math.PI*1.7+.5)-0),y=Math.round(t*(700-sz));
+    h+='<i style="--x:'+x+'px;--k:'+i+';width:'+sz+'px;height:'+sz+'px;top:'+y+'px;margin-left:'+(-sz/2)+'px"></i>';
+  }
+  sc.innerHTML=h;
+  var before=document.getElementById('s-weiter');
+  CONFIG.aktionen.forEach(function(a){
+    if(a.bis&&new Date()>new Date(a.bis+'T23:59:59'))return;
+    var s=document.createElement('section');s.className='slide'+(a.lime?' lime':'');s.dataset.sec=a.sec||14;
+    var k=document.createElement('p');k.className='kicker rv';k.textContent=a.kicker||'Aktion';
+    var h2=document.createElement('h2');h2.className='rv';h2.textContent=a.title;
+    var t=document.createElement('p');t.className='lead rv';t.textContent=a.text||'';
+    s.appendChild(k);s.appendChild(h2);s.appendChild(t);before.parentNode.insertBefore(s,before);
+  });
+})();
+buildWeek();tick();setInterval(tick,15000);
+
+var slides=Array.prototype.slice.call(document.querySelectorAll('.slide')),idx=0;
+/* Staffel-Einblendung: --i je Folie */
+slides.forEach(function(s){
+  var i=0;Array.prototype.forEach.call(s.querySelectorAll('.rv'),function(el){if(!el.style.getPropertyValue('--i')||!el.classList.contains('rule'))el.style.setProperty('--i',i);i++});
+});
+
+/* Konfetti */
+var cf=document.getElementById('confetti'),cx=cf.getContext('2d'),parts=[],cfOn=0;
+function confettiBurst(){
+  parts=[];var cols=['#b0cb00','#e5f26a','#ffffff','#1f8a6a','#f4f6ee'];
+  for(var i=0;i<170;i++)parts.push({x:960+(Math.random()-.5)*300,y:620,vx:(Math.random()-.5)*34,vy:-18-Math.random()*26,r:8+Math.random()*10,a:Math.random()*6.28,va:(Math.random()-.5)*.4,c:cols[i%cols.length],w:1+Math.random()});
+  cfOn=7;
+}
+function drawConfetti(dt){
+  cx.clearRect(0,0,1920,1080);if(cfOn<=0)return;cfOn-=dt;
+  parts.forEach(function(q){q.vy+=48*dt;q.vx*=.992;q.x+=q.vx*dt*60;q.y+=q.vy*dt*60;q.a+=q.va;
+    cx.save();cx.translate(q.x,q.y);cx.rotate(q.a);cx.fillStyle=q.c;cx.globalAlpha=Math.max(0,Math.min(1,cfOn/1.5));cx.fillRect(-q.r,-q.r/2*q.w,q.r*2,q.r*q.w);cx.restore()});
+}
+/* Bildraten-Waechter: bei langsamer Darstellung Hintergrundanimation abschalten */
+var last=performance.now(),fpsN=0,fpsT=0,lowN=0;
+function loop(now){
+  var dt=Math.min((now-last)/1000,.4);last=now;fpsN++;fpsT+=dt;
+  if(fpsT>=2){var fps=fpsN/fpsT;fpsN=0;fpsT=0;if(fps<22&&!stage.classList.contains('lite')){lowN++;if(lowN>=2)stage.classList.add('lite')}else lowN=0}
+  if(cfOn>0)drawConfetti(dt);else if(parts.length){parts=[];cx.clearRect(0,0,1920,1080)}
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+/* Ablauf */
+var timer=null,paused=false,fill=document.getElementById('barfill');
+function countUp(s){
+  s.querySelectorAll('[data-to]').forEach(function(el){
+    var to=+el.dataset.to,dec=+el.dataset.dec||0,t0=null;
+    function out(v){var t=dec?v.toFixed(dec):String(Math.round(v));el.textContent=t.replace('.',',')}
+    if(reduce){out(to);return}
+    out(0);
+    (function step(ts){t0=t0||ts;var k=Math.min((ts-t0)/1700,1);out(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)})(performance.now());
+  });
+}
+function show(i){
+  idx=(i+slides.length)%slides.length;var s=slides[idx];
+  slides.forEach(function(x){x.classList.remove('active')});s.classList.add('active');
+  stage.classList.toggle('lime',s.classList.contains('lime'));
+  stage.classList.toggle('nohead',!!s.dataset.nohead);
+  if(s.dataset.count)countUp(s);
+  if(s.dataset.confetti&&!reduce)confettiBurst();
+  var sec=+s.dataset.sec||12;
+  fill.className='';fill.style.setProperty('--dur',sec+'s');void fill.offsetWidth;if(!paused)fill.className='run';
+  clearTimeout(timer);if(!paused)timer=setTimeout(function(){show(idx+1)},sec*1000);
+}
+addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight')show(idx+1);
+  else if(e.key==='ArrowLeft')show(idx-1);
+  else if(e.key===' '||e.key==='p'){paused=!paused;show(idx)}
+  else if(e.key==='f'){try{(document.documentElement.requestFullscreen||function(){}).call(document.documentElement)}catch(x){}}
+});
+addEventListener('click',function(){show(idx+1)});
+/* Vollbild beim ersten Druck auf OK / Klick (Fernbedienung) */
+var fsTried=false;
+function goFS(){if(fsTried)return;fsTried=true;var d=document.documentElement,f=d.requestFullscreen||d.webkitRequestFullscreen;try{if(f){var r=f.call(d);if(r&&r.catch)r.catch(function(){})}}catch(x){}}
+addEventListener('click',goFS);addEventListener('keydown',function(e){if(e.key==='Enter'||e.keyCode===13)goFS()});
+show(0);
+try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){})}catch(e){}
+</script>
