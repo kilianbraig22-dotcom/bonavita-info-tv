@@ -887,7 +887,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   function pick(){var n=[];Object.keys(FX).forEach(function(k){if(k===last||(lite()&&k==='drip'))return;for(var i=0;i<(W[k]||1);i++)n.push(k)});return n[Math.floor(Math.random()*n.length)]}
   function go(n){window.hwBusy=true;var d=FX[n]();setTimeout(function(){window.hwBusy=false},d)}
   function loop(){setTimeout(function(){if(on()&&!window.hwBusy){last=pick();go(last)}loop()},R(22000,55000))}
-  var m=location.search.match(/[?&]fx=(\w+)/);if(m&&FX[m[1]])setTimeout(function(){go(m[1])},1200);
+  var m=location.search.match(/[?&]fx=(\w+)/);if(m&&FX[m[1]])setTimeout(function(){go(m[1])},1200);if(m&&m[1]==='all'){var q=Object.keys(FX),qi=0;(function nx(){if(qi>=q.length)return;var d=FX[q[qi++]]();setTimeout(nx,Math.min(d,7000)+800)})()}
   loop();
 })();
 
