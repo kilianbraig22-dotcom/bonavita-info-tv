@@ -996,7 +996,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   var W={eyes:3,spider:3,cauldron:3,witch:2,fog:2,shake:2,xray:2,boo:2,rain:window.hwFin?3:0};
   function pick(){var n=[];Object.keys(FX).forEach(function(k){if(k===last||NOPICK[k]||(COND[k]&&!COND[k]())||(lite()&&k==='drip'))return;for(var i=0;i<(W[k]===undefined?1:W[k]);i++)n.push(k)});return n[Math.floor(Math.random()*n.length)]}
   function go(n){window.hwBusy=true;var d=FX[n]();setTimeout(function(){window.hwBusy=false},d)}
-  function loop(){setTimeout(function(){if(on()&&!window.hwBusy){last=pick();go(last)}loop()},window.hwFin?R(9000,22000):R(22000,55000))}
+  function loop(){setTimeout(function(){if(on()&&!window.hwBusy){last=pick();go(last)}loop()},window.hwFin?R(9000,22000):R(15000,30000))}
   
   (function(){var wb=box.querySelector('.web'),f=window.hwFrac,sz=Math.round(250*(.72+.5*f));
     if(wb){wb.style.width=wb.style.height=sz+'px';wb.style.opacity=(.38+.3*f).toFixed(2);
