@@ -743,6 +743,7 @@ tr.today td.closed{color:var(--d1)}
 var CONFIG = {
   halloween: "auto",   // "auto" = 15.10.–01.11. automatisch, false = nie
   hwMotto: "Happy Halloween!",
+  sparmodus: false,  // false = Sparmodus aus (alle Effekte immer an, kann ruckeln); true = automatisch bei zu wenig FPS
   effects: true,     // false = keine Halloween-Zusatzeffekte (Spinne, Gewitter ...)
   jumpscare: true,   // false = kein zufälliger Jumpscare
   // Zeiten je Wochentag: 0 = Sonntag ... 6 = Samstag. Leer = geschlossen. Format [von, bis] in "HH:MM"
@@ -878,7 +879,7 @@ function drawConfetti(dt){
 var last=performance.now(),fpsN=0,fpsT=0,lowN=0;
 function loop(now){
   var dt=Math.min((now-last)/1000,.4);last=now;fpsN++;fpsT+=dt;
-  if(fpsT>=2){var fps=fpsN/fpsT;fpsN=0;fpsT=0;if(fps<22&&!stage.classList.contains('lite')){lowN++;if(lowN>=2)stage.classList.add('lite')}else lowN=0}
+  if(fpsT>=2){var fps=fpsN/fpsT;fpsN=0;fpsT=0;if(fps<22&&CONFIG.sparmodus!==false&&!stage.classList.contains('lite')){lowN++;if(lowN>=2)stage.classList.add('lite')}else lowN=0}
   if(cfOn>0)drawConfetti(dt);else if(parts.length){parts=[];cx.clearRect(0,0,1920,1080)}
   requestAnimationFrame(loop);
 }
