@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halloween-Effekte Test</title>
+<style>
+:root{--bg:#0e0914;--panel:#1a1226;--line:#3a2853;--fg:#f6f0ff;--mute:#bbaed0;--or:#ff7a1a;--vi:#a77bff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px;padding:20px;max-width:1700px;margin:0 auto}
+@media(max-width:1000px){.wrap{grid-template-columns:1fr}}
+.left{position:sticky;top:20px;align-self:start;display:flex;flex-direction:column;gap:12px}
+@media(max-width:1000px){.left{position:static}}
+.stage{background:#000;border:1px solid var(--line);border-radius:14px;overflow:hidden;aspect-ratio:16/9}
+.stage iframe{width:100%;height:100%;border:0;display:block}
+h1{font-size:22px;margin:0 0 2px}
+.sub{color:var(--mute);margin:0 0 6px;font-size:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,select,a.btn{font:inherit;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;text-decoration:none}
+button:hover,a.btn:hover{border-color:var(--or)}
+button.pri{background:var(--or);color:#1c0a00;border-color:var(--or);font-weight:700}
+button.stop{border-color:#c0392b}
+.now{min-height:28px;color:var(--or);font-weight:700}
+.grp{margin:18px 0 6px;color:var(--vi);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.row{display:grid;grid-template-columns:1fr auto;gap:4px 12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.row.act{border-color:var(--or);box-shadow:0 0 0 1px var(--or)}
+.row b{display:block}
+.row span{color:var(--mute);font-size:14px}
+.row code{grid-column:1/-1;color:var(--mute);font-size:12px;word-break:break-all}
+.row .go{align-self:center}
+.note{color:var(--mute);font-size:13px}
+</style></head><body>
+<div class="wrap">
+ <div class="left">
+  <div><h1>Halloween-Effekte</h1><p class="sub">Jeden Effekt einzeln abspielen oder alles nacheinander ansehen.</p></div>
+  <div class="stage"><iframe id="f" title="Vorschau"></iframe></div>
+  <div class="bar">
+   <button class="pri" id="all">▶ Alles nacheinander</button>
+   <button class="stop" id="stop">■ Stopp</button>
+   <button id="prev">◀ Folie</button><button id="next">Folie ▶</button>
+   <select id="page"><option value="training">Training</option><option value="physio">Physio</option></select>
+   <select id="day"><option value="">Heute</option><option value="22">Stand 22.10.</option><option value="27">Stand 27.10.</option><option value="31">Finale 31.10.</option></select>
+  </div>
+  <div class="now" id="now"></div>
+  <p class="note">Die Folie bleibt hier stehen und die Zufallseffekte sind aus. Bei „Alles nacheinander“ springt die Vorschau von selbst zur passenden Folie (Foto-Folie, Folie mit Kopfzeile).</p>
+ </div>
+ <div id="list"></div>
+</div>
+<script>
+// [id, Titel, Beschreibung, Folie die passt (0=Titel mit Foto, 1=Folie mit Kopfzeile), Gruppe]
+var L=[
+["Zufallseffekte (alle 15–30 s einer, immer nur einer gleichzeitig)"],
+["lightning","Gewitter-Blitz","Weißer Blitz über den ganzen Bildschirm"],
+["flicker","Flackern","Logo und Uhr flackern wie eine kaputte Neonröhre"],
+["bats","Fledermaus-Schwarm","14 Fledermäuse fliegen quer durchs Bild"],
+["eyes","Leuchtende Augen","Zwei Augenpaare blinzeln am Seitenrand"],
+["spider","Spinne am Faden","Seilt sich von oben ab und klettert wieder hoch"],
+["drip","Slime","Grüner Schleim tropft vom oberen Rand"],
+["cauldron","Hexenkessel","Brodelnder Kessel am unteren Rand"],
+["hand","Zombie-Hand","Greift am unteren Rand ins Bild und winkt"],
+["witch","Hexe auf dem Besen","Fliegt mit Funken quer über den Bildschirm"],
+["moon","Blutmond","Roter Mond steigt am Seitenrand auf"],
+["fog","Nebel","Nebelschwaden ziehen unten durchs Bild"],
+["shake","Geist stößt gegen die Folie","Geist am Rand, die Folie wackelt"],
+["clock","Uhr 13:13","Uhr zeigt rot flackernd 13:13",1],
+["xray","Röntgen-Scan","Scanner-Balken, das Teamfoto wird zum Röntgenbild",0],
+["spine","Wirbelsäule","Logo-Punkte oben links werden zu Knochen",1],
+["glitch","VHS-Glitch","Folie zuckt mit Farbversatz und Streifen"],
+["boo","„Boo!“ an der Scheibe","Schriftzug wird wie auf eine beschlagene Scheibe geschrieben"],
+["skel","Laufendes Skelett","Läuft unten durchs Bild und verliert einen Knochen"],
+["garland","Kürbis-Girlande","Schwingt oben von links nach rechts ins Bild"],
+["moonwolf","Vollmond","Mond mit Fledermäusen und kahlem Baum hinter dem Inhalt"],
+["graves","Grabsteine","Wachsen unten hoch, ein Geist schwebt dazwischen"],
+["sparkle","Funkenspur","Gelbe und lila Funken ziehen in einer Welle über die Folie"],
+["fireflies","Glühwürmchen","Kleine Lichter schweben langsam durchs Bild"],
+["bigeye","Großes Auge","Öffnet sich am Rand, schaut hin und her, blinzelt"],
+["upside","Kopfstand","Die Folie dreht sich 3 Sekunden um 180°"],
+["flashlight","Taschenlampe","Bildschirm dunkel, nur ein Lichtkegel wandert über die Folie"],
+["photobomb","Geister-Fotobomb","Durchsichtiger Geist taucht im Teamfoto auf",0],
+["hammer","Reflexhammer","Hammer klopft aufs Knie, das Knochenbein tritt aus"],
+["Folienwechsel (bei etwa der Hälfte aller Wechsel eins davon)"],
+["tear","Krallen zerfetzen die Folie","Drei Schnitte, die alte Folie reißt in Streifen und fällt weg"],
+["crumble","Folie zerbröselt","Alte Folie löst sich von unten nach oben in Asche und Glut auf"],
+["roll","Rollender Kürbis","Kürbis rollt unten durchs Bild"],
+["bleed","Blut tropft von der Überschrift","Zähe Tropfen, einer reißt ab und fällt",0],
+["smoke","Rauch","Violette Rauchwolke blendet über"],
+["Jumpscare (alle 1–3,5 Minuten)"],
+["jumpscare","Jumpscare","Riesiger Geist mit roten Augen springt ins Bild"],
+["Nur am Finale (31.10.)"],
+["rain","Kürbisregen","18 Kürbisse fallen über die Folie"]
+];
+var f=document.getElementById('f'),page=document.getElementById('page'),day=document.getElementById('day'),now=document.getElementById('now'),list=document.getElementById('list'),run=0;
+function url(){return '../'+page.value+'/show.html?hw=1&hold=1&manual=1'+(day.value?'&hwday='+day.value:'')}
+function load(){f.src=url()}
+page.onchange=day.onchange=load;load();
+var rows={};
+L.forEach(function(x){if(x.length===1){var h=document.createElement('div');h.className='grp';h.textContent=x[0];list.appendChild(h);return}
+ var r=document.createElement('div');r.className='row';rows[x[0]]=r;
+ var fxp=x[0]==='tear'?'claws':x[0]==='crumble'?'dust':x[0];
+ r.innerHTML='<div><b></b><span></span></div><button class="go">▶ Abspielen</button><code></code>';
+ r.querySelector('b').textContent=x[1];r.querySelector('span').textContent=x[2];
+ r.querySelector('code').textContent=x[0]==='jumpscare'?'?hw=1&scare=1':'?hw=1&fx='+fxp+(x[0]==='rain'?'&hwday=31':'');
+ r.querySelector('.go').onclick=function(){run++;play(x)};list.appendChild(r)});
+var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
+function W(){return f.contentWindow}
+async function prep(x){var w=W();if(!w||!w.show)return;var want=x[3];if(want===undefined)return;if(want===0&&w.idx!==0){w.show(0);await sleep(1400)}else if(want===1&&w.idx!==1){w.show(1);await sleep(1400)}}
+async function play(x){var w=W();if(!w||!w.hwPlay){now.textContent='Vorschau lädt noch …';return 0}
+ await prep(x);now.textContent='Läuft: '+x[1];Object.values(rows).forEach(function(r){r.classList.remove('act')});rows[x[0]].classList.add('act');
+ var d=w.hwPlay(x[0])||1500;return d}
+document.getElementById('all').onclick=async function(){var my=++run;f.src=url();await sleep(2500);
+ for(var i=0;i<L.length;i++){var x=L[i];if(x.length===1)continue;if(my!==run)return;var d=await play(x);await sleep(Math.min(d,14000)+1300)}
+ if(my===run){now.textContent='Fertig.';Object.values(rows).forEach(function(r){r.classList.remove('act')})}};
+document.getElementById('stop').onclick=function(){run++;now.textContent='Gestoppt.';load()};
+document.getElementById('next').onclick=function(){var w=W();if(w&&w.show)w.show(w.idx+1)};
+document.getElementById('prev').onclick=function(){var w=W();if(w&&w.show)w.show(w.idx-1)};
+</script></body></html>
