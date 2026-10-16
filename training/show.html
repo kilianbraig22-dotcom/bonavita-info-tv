@@ -985,7 +985,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
     smoke:function(){el('<div class="smoke"></div>',1600);return 1600}
   };
   var NOPICK={roll:1,bleed:1,smoke:1};
-  (function(){var _s=show;show=function(){_s.apply(this,arguments);if(!on()||window.hwBusy||lite())return;var r=Math.random();if(r<.12)FX.roll();else if(r<.26)FX.bleed();else if(r<.40)FX.smoke()}})();
+  (function(){var _s=show;show=function(){_s.apply(this,arguments);if(!on()||window.hwBusy||lite())return;var r=Math.random();if(r<.12)FX.roll();else if(r<.26){var cs=document.querySelector('.slide.active');setTimeout(function(){if(!window.hwBusy&&cs===document.querySelector('.slide.active')){window.hwBusy=true;setTimeout(function(){window.hwBusy=false},12000);FX.bleed()}},1500)}else if(r<.40)FX.smoke()}})();
   function on(){return document.documentElement.classList.contains('hw')&&CONFIG.effects!==false}
   var last='';
   var W={eyes:3,spider:3,cauldron:3,witch:2,fog:2,shake:2};
