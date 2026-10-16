@@ -929,9 +929,10 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   };
   function on(){return document.documentElement.classList.contains('hw')&&CONFIG.effects!==false}
   var last='';
-  function pick(){var n=Object.keys(FX).filter(function(k){return k!==last&&!(lite()&&k==='drip')});return n[Math.floor(Math.random()*n.length)]}
+  var W={eyes:3,spider:3,cauldron:3};
+  function pick(){var n=[];Object.keys(FX).forEach(function(k){if(k===last||(lite()&&k==='drip'))return;for(var i=0;i<(W[k]||1);i++)n.push(k)});return n[Math.floor(Math.random()*n.length)]}
   function go(n){window.hwBusy=true;var d=FX[n]();setTimeout(function(){window.hwBusy=false},d)}
-  function loop(){setTimeout(function(){if(on()&&!window.hwBusy){last=pick();go(last)}loop()},R(40000,95000))}
+  function loop(){setTimeout(function(){if(on()&&!window.hwBusy){last=pick();go(last)}loop()},R(22000,55000))}
   var m=location.search.match(/[?&]fx=(\w+)/);if(m&&FX[m[1]])setTimeout(function(){go(m[1])},1200);
   loop();
 })();
