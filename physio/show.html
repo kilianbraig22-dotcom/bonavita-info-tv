@@ -380,6 +380,33 @@ tr.today td.closed{color:var(--d1)}
 @keyframes hwgl{from{transform:translateX(2200px)}to{transform:translateX(-260px)}}
 @keyframes hwgb{from{transform:translateY(-60px) rotate(-8deg)}to{transform:translateY(60px) rotate(8deg)}}
 #stage.lite div.hwg:nth-of-type(n+8){display:none}
+#hwl{position:absolute;inset:0;background:#ebe4ff;opacity:0;animation:hwlight 1.3s linear forwards}
+@keyframes hwlight{0%{opacity:0}3%{opacity:.8}7%{opacity:.05}12%{opacity:.55}20%,100%{opacity:0}}
+.hwfl{animation:hwfl 1.8s steps(1) 1}
+@keyframes hwfl{0%{opacity:1}10%{opacity:.15}18%{opacity:1}30%{opacity:.3}38%{opacity:.05}48%{opacity:1}60%{opacity:.4}68%,100%{opacity:1}}
+.hwdeco svg.sb{left:0;transform:translateX(2000px);animation:hwfly var(--t,5s) linear var(--dl,0s) 1 forwards}
+.sb path{fill:#7a52c0}.sb .w{transform-origin:30px 14px;animation:hwflap .3s ease-in-out infinite alternate}
+.hwdeco svg.eyes{width:74px;height:30px;opacity:0;animation:hweyes 5s ease-in-out var(--dl,0s) forwards}
+.eyes g{transform-origin:37px 15px;animation:hwblink 5s linear var(--dl,0s) forwards}
+@keyframes hweyes{0%{opacity:0}16%,84%{opacity:1}100%{opacity:0}}
+@keyframes hwblink{0%,46%{transform:scaleY(1)}50%{transform:scaleY(.08)}54%,70%{transform:scaleY(1)}74%{transform:scaleY(.08)}78%,100%{transform:scaleY(1)}}
+.spd{position:absolute;top:0;width:60px;height:960px;transform:translateY(-980px);animation:hwspd 10s ease-in-out forwards}
+.spd i{position:absolute;left:29px;top:0;width:2px;height:900px;background:rgba(235,228,255,.55)}
+.hwdeco .spd svg{left:0;top:890px;width:60px;height:60px;transform-origin:30px 0;animation:hwsw 1.6s ease-in-out infinite alternate}
+@keyframes hwspd{0%{transform:translateY(-980px)}22%{transform:translateY(calc(var(--d)*1px - 980px))}36%{transform:translateY(calc(var(--d)*1px - 955px))}50%{transform:translateY(calc(var(--d)*1px - 985px))}64%{transform:translateY(calc(var(--d)*1px - 960px))}74%{transform:translateY(calc(var(--d)*1px - 980px))}100%{transform:translateY(-980px)}}
+@keyframes hwsw{from{transform:rotate(-9deg)}to{transform:rotate(9deg)}}
+.dr{position:absolute;top:-6px;background:#7ddc3a;border-radius:0 0 50% 50%/0 0 30px 30px;transform-origin:50% 0;transform:scaleY(0);animation:hwdr 5s ease-in forwards;box-shadow:0 0 18px rgba(125,220,58,.45)}
+@keyframes hwdr{0%{transform:scaleY(0);opacity:.95}35%{transform:scaleY(1)}62%{transform:scaleY(1) translateY(0);opacity:.95}100%{transform:scaleY(1) translateY(1250px);opacity:0}}
+.cauldron{position:absolute;left:760px;bottom:20px;width:160px;height:140px;transform:translateY(200px);animation:hwcld 16s ease-in-out forwards}
+.cauldron svg{position:absolute;inset:0;width:160px;height:140px}
+.cb{position:absolute;left:var(--x);bottom:84px;width:var(--s);height:var(--s);border-radius:50%;background:#a5f05e;opacity:0;animation:hwcb 2.4s ease-out var(--dl) infinite}
+@keyframes hwcld{0%{transform:translateY(200px)}10%,90%{transform:translateY(0)}100%{transform:translateY(200px)}}
+@keyframes hwcb{0%{transform:translateY(0) scale(.4);opacity:0}20%{opacity:.9}100%{transform:translateY(-80px) scale(1);opacity:0}}
+.pump .eyeL{transform-box:fill-box;transform-origin:center;animation:hwwink 7s infinite}
+@keyframes hwwink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.hwcount{display:none;position:absolute;right:130px;bottom:46px;padding:12px 30px;border:2px solid rgba(var(--lime-rgb),.55);border-radius:999px;background:rgba(0,0,0,.28);color:var(--lime);font-weight:700;font-size:34px;letter-spacing:.01em}
+.hw .hwcount.on{display:block}
+
 #jump{display:none;position:absolute;inset:0;z-index:60;pointer-events:none;background:radial-gradient(circle at 50% 50%,#2a0000 0%,#000 70%);align-items:center;justify-content:center;overflow:hidden}
 #jump.go{display:flex;animation:jflash 1.1s steps(1) forwards}
 #jump svg{width:900px;height:auto;animation:jzoom 1.1s cubic-bezier(.1,.9,.2,1) forwards;filter:drop-shadow(0 0 60px rgba(255,255,255,.7))}
@@ -396,7 +423,7 @@ tr.today td.closed{color:var(--d1)}
     <svg class="bat b2" viewBox="0 0 60 30"><g class="w"><path d="M30 9C26 2 20 5 13 2C16 8 9 12 0 12C8 14 10 20 14 25C18 19 22 19 24 25L30 17L36 25C38 19 42 19 46 25C50 20 52 14 60 12C51 12 44 8 47 2C40 5 34 2 30 9Z"/></g></svg>
     <svg class="bat b3" viewBox="0 0 60 30"><g class="w"><path d="M30 9C26 2 20 5 13 2C16 8 9 12 0 12C8 14 10 20 14 25C18 19 22 19 24 25L30 17L36 25C38 19 42 19 46 25C50 20 52 14 60 12C51 12 44 8 47 2C40 5 34 2 30 9Z"/></g></svg>
     <svg class="ghost" viewBox="0 0 84 104"><path d="M42 4C20 4 8 22 8 44V98L20 86L31 98L42 86L53 98L64 86L76 98V44C76 22 64 4 42 4Z" fill="#f4efff"/><ellipse cx="30" cy="42" rx="7" ry="10" fill="#1b1030"/><ellipse cx="54" cy="42" rx="7" ry="10" fill="#1b1030"/><ellipse cx="42" cy="66" rx="8" ry="10" fill="#1b1030"/></svg>
-    <svg class="pump" viewBox="0 0 108 96"><path d="M54 14C54 6 58 2 66 0" stroke="#3b7a1c" stroke-width="7" fill="none" stroke-linecap="round"/><ellipse cx="32" cy="56" rx="28" ry="36" fill="#e65f00"/><ellipse cx="76" cy="56" rx="28" ry="36" fill="#e65f00"/><ellipse cx="54" cy="56" rx="30" ry="38" fill="#ff7a1a"/><g class="glow"><path d="M32 46L42 34L50 48ZM76 46L66 34L58 48Z" fill="#ffd24a"/><path d="M28 66Q54 90 80 66L72 62L64 72L54 64L44 72L36 62Z" fill="#ffd24a"/></g></svg>
+    <svg class="pump" viewBox="0 0 108 96"><path d="M54 14C54 6 58 2 66 0" stroke="#3b7a1c" stroke-width="7" fill="none" stroke-linecap="round"/><ellipse cx="32" cy="56" rx="28" ry="36" fill="#e65f00"/><ellipse cx="76" cy="56" rx="28" ry="36" fill="#e65f00"/><ellipse cx="54" cy="56" rx="30" ry="38" fill="#ff7a1a"/><g class="glow"><path class="eyeL" d="M32 46L42 34L50 48Z" fill="#ffd24a"/><path d="M76 46L66 34L58 48Z" fill="#ffd24a"/><path d="M28 66Q54 90 80 66L72 62L64 72L54 64L44 72L36 62Z" fill="#ffd24a"/></g></svg>
   </div>
 
   <div class="head">
@@ -417,6 +444,7 @@ tr.today td.closed{color:var(--d1)}
       </div>
       <img class="photo rv" src="img/team.jpg" alt="Das bonaVITA-Team vor dem Eingang">
     </div>
+    <div class="hwcount rv" id="hwcount"></div>
   </section>
 
   <!-- 2 Heute -->
@@ -648,6 +676,7 @@ tr.today td.closed{color:var(--d1)}
 var CONFIG = {
   halloween: "auto",   // "auto" = 15.10.–01.11. automatisch, false = nie
   hwMotto: "Happy Halloween!",
+  effects: true,     // false = keine Halloween-Zusatzeffekte (Spinne, Gewitter ...)
   jumpscare: true,   // false = kein zufälliger Jumpscare
   // Zeiten je Wochentag: 0 = Sonntag ... 6 = Samstag. Leer = geschlossen. Format [von, bis] in "HH:MM"
   hours: {
@@ -710,6 +739,7 @@ function tick(){
   else hwOn=CONFIG.halloween!==false&&((n.getMonth()===9&&n.getDate()>=15)||(n.getMonth()===10&&n.getDate()<=1));
   document.documentElement.classList.toggle('hw',hwOn);
   document.getElementById('motto').textContent=hwOn?CONFIG.hwMotto:(CONFIG.motto[n.getDay()]||'');
+  var hc=document.getElementById('hwcount');if(hc){var dd=Math.round((new Date(n.getFullYear(),9,31)-new Date(n.getFullYear(),n.getMonth(),n.getDate()))/864e5);hc.textContent=dd>1?'Noch '+dd+' Tage bis Halloween':dd===1?'Morgen ist Halloween!':dd===0?'Heute ist Halloween!':'';hc.classList.toggle('on',dd>=0)}
   document.getElementById('heuteTitel').textContent='Heute, '+DAYS[n.getDay()]+'.';
   var d=n.getDay(),m=hr*60+n.getMinutes();
   document.querySelectorAll('#tl .tl-row').forEach(function(row){
@@ -828,9 +858,36 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
     g.innerHTML=G;g.firstChild.style.animationDuration=(2.4+Math.random()*2.6).toFixed(1)+'s';g.firstChild.style.animationDelay=(-Math.random()*3).toFixed(1)+'s';box.appendChild(g);}
   var j=document.createElement('div');j.id='jump';j.innerHTML=S;stg.appendChild(j);
   function boo(){j.classList.remove('go');void j.offsetWidth;j.classList.add('go');setTimeout(function(){j.classList.remove('go')},1150);}
-  function plan(){setTimeout(function(){if(document.documentElement.classList.contains('hw')&&CONFIG.jumpscare!==false)boo();plan();},60000+Math.random()*150000);}
+  function plan(){setTimeout(function(){if(document.documentElement.classList.contains('hw')&&CONFIG.jumpscare!==false&&!window.hwBusy){window.hwBusy=true;setTimeout(function(){window.hwBusy=false},1500);boo();}plan();},60000+Math.random()*150000);}
   if(/[?&]scare=1/.test(location.search))setTimeout(boo,1500);
   plan();
+})();
+
+
+// Halloween-Effekte: immer nur einer, mit Pausen, am Rand/kurz -> Inhalt bleibt im Fokus (CONFIG.effects:false = aus; ?fx=spider|lightning|bats|eyes|flicker|drip|cauldron zum Testen)
+(function(){
+  var box=document.querySelector('.hwdeco'),stg=document.getElementById('stage');
+  if(!box||!stg)return;
+  var BATP='<g class="w"><path d="M30 9C26 2 20 5 13 2C16 8 9 12 0 12C8 14 10 20 14 25C18 19 22 19 24 25L30 17L36 25C38 19 42 19 46 25C50 20 52 14 60 12C51 12 44 8 47 2C40 5 34 2 30 9Z"/></g>';
+  function el(h,life){var d=document.createElement('div');d.innerHTML=h;var n=d.firstChild;box.appendChild(n);setTimeout(function(){if(n.parentNode)n.parentNode.removeChild(n)},life);return n}
+  function R(a,b){return a+Math.random()*(b-a)}
+  var lite=function(){return stg.classList.contains('lite')};
+  var FX={
+    lightning:function(){el('<div id="hwl"></div>',1400);return 1500},
+    flicker:function(){[document.querySelector('.head'),document.querySelector('.title .logo')].forEach(function(x){if(x){x.classList.remove('hwfl');void x.offsetWidth;x.classList.add('hwfl');setTimeout(function(){x.classList.remove('hwfl')},1900)}});return 2000},
+    bats:function(){var c=lite()?8:14,y=R(120,760);for(var i=0;i<c;i++){var w=R(26,56);el('<svg class="sb" viewBox="0 0 60 30" style="top:'+Math.round(y+R(-110,110))+'px;width:'+Math.round(w)+'px;height:'+Math.round(w/2)+'px;--t:'+R(3.6,6).toFixed(1)+'s;--dl:'+R(0,2.2).toFixed(1)+'s">'+BATP+'</svg>',9500)}return 9500},
+    eyes:function(){[0,1].forEach(function(k){var x=k?1836:10;el('<svg class="eyes" viewBox="0 0 74 30" style="left:'+x+'px;top:'+Math.round(R(240,820))+'px;--dl:'+(k*1.6).toFixed(1)+'s"><g><ellipse cx="17" cy="15" rx="11" ry="6.5" fill="#ffd24a"/><ellipse cx="57" cy="15" rx="11" ry="6.5" fill="#ffd24a"/><ellipse cx="17" cy="15" rx="3" ry="6" fill="#1b1030"/><ellipse cx="57" cy="15" rx="3" ry="6" fill="#1b1030"/></g></svg>',7000)});return 7000},
+    spider:function(){el('<div class="spd" style="left:'+Math.round(R(160,1700))+'px;--d:'+Math.round(R(300,520))+'"><i></i><svg viewBox="0 0 60 60"><g fill="none" stroke="#b79bff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 30L8 22L2 32M21 34L6 36L4 48M22 38L10 48L8 58M25 41L19 55M38 30L52 22L58 32M39 34L54 36L56 48M38 38L50 48L52 58M35 41L41 55"/><circle cx="30" cy="36" r="10" fill="#2b1a45"/><circle cx="30" cy="23" r="6.5" fill="#2b1a45"/></g><circle cx="27.5" cy="22" r="1.6" fill="#ff3b3b"/><circle cx="32.5" cy="22" r="1.6" fill="#ff3b3b"/></svg></div>',10200);return 10200},
+    drip:function(){for(var i=0;i<6;i++){var w=Math.round(R(22,40));el('<div class="dr" style="left:'+Math.round(130+i*290+R(-70,70))+'px;width:'+w+'px;height:'+Math.round(R(90,250))+'px;animation-delay:'+R(0,1.8).toFixed(1)+'s"></div>',7500)}return 7500},
+    cauldron:function(){var b='';for(var i=0;i<6;i++)b+='<i class="cb" style="--x:'+Math.round(R(38,100))+'px;--s:'+Math.round(R(10,20))+'px;--dl:'+R(0,2.4).toFixed(1)+'s"></i>';el('<div class="cauldron"><svg viewBox="0 0 160 140"><rect x="30" y="118" width="12" height="20" rx="4" fill="#2b1d45"/><rect x="118" y="118" width="12" height="20" rx="4" fill="#2b1d45"/><path d="M20 52C8 92 30 128 80 128C130 128 152 92 140 52Z" fill="#1d1430" stroke="#6a4aa0" stroke-width="3"/><ellipse cx="80" cy="52" rx="64" ry="14" fill="#2b1d45" stroke="#8a66cc" stroke-width="3"/><ellipse cx="80" cy="53" rx="54" ry="9" fill="#7ddc3a"/></svg>'+b+'</div>',16500);return 16500}
+  };
+  function on(){return document.documentElement.classList.contains('hw')&&CONFIG.effects!==false}
+  var last='';
+  function pick(){var n=Object.keys(FX).filter(function(k){return k!==last&&!(lite()&&k==='drip')});return n[Math.floor(Math.random()*n.length)]}
+  function go(n){window.hwBusy=true;var d=FX[n]();setTimeout(function(){window.hwBusy=false},d)}
+  function loop(){setTimeout(function(){if(on()&&!window.hwBusy){last=pick();go(last)}loop()},R(40000,95000))}
+  var m=location.search.match(/[?&]fx=(\w+)/);if(m&&FX[m[1]])setTimeout(function(){go(m[1])},1200);
+  loop();
 })();
 
 // Auto-Update: alle 5 Min. prüfen, ob die Seite auf dem Server geändert wurde -> dann neu laden
