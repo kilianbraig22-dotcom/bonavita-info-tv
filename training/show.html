@@ -821,7 +821,7 @@ tr.today td.closed{color:var(--d1)}
 <script>
 /* ===== Einstellungen: hier anpassen ===== */
 var CONFIG = {
-  halloween: "auto",   // "auto" = 15.10.–01.11. automatisch, false = nie
+  halloween: true,   // true = immer an (bis nach Halloween), "auto" = 15.10.–01.11. nach Datum, false = nie
   hwMotto: "Happy Halloween!",
   sparmodus: false,  // false = Sparmodus aus (alle Effekte immer an, kann ruckeln); true = automatisch bei zu wenig FPS
   effects: true,     // false = keine Halloween-Zusatzeffekte (Spinne, Gewitter ...)
@@ -884,7 +884,7 @@ function tick(){
   document.getElementById('greet').textContent=hr<11?'Guten Morgen.':(hr<17?'Guten Tag.':'Guten Abend.');
   var hwq=location.search,hwOn;
   if(/[?&]hw=1/.test(hwq))hwOn=true;else if(/[?&]hw=0/.test(hwq))hwOn=false;
-  else hwOn=CONFIG.halloween!==false&&((n.getMonth()===9&&n.getDate()>=15)||(n.getMonth()===10&&n.getDate()<=1));
+  else hwOn=CONFIG.halloween===true||CONFIG.halloween!==false&&((n.getMonth()===9&&n.getDate()>=15)||(n.getMonth()===10&&n.getDate()<=1));
   document.documentElement.classList.toggle('hw',hwOn);
   document.getElementById('motto').textContent=hwOn?CONFIG.hwMotto:(CONFIG.motto[n.getDay()]||'');
   var hc=document.getElementById('hwcount');if(hc){var dd=Math.round((new Date(n.getFullYear(),9,31)-new Date(n.getFullYear(),n.getMonth(),n.getDate()))/864e5);hc.textContent=dd>1?'Noch '+dd+' Tage bis Halloween':dd===1?'Morgen ist Halloween!':dd===0?'Heute ist Halloween!':'';hc.classList.toggle('on',dd>=0)}
