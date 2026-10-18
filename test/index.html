@@ -79,8 +79,18 @@ var L=[
 ["roll","Rollender Kürbis","Kürbis rollt unten durchs Bild"],
 ["bleed","Blut tropft von der Überschrift","Zähe Tropfen, einer reißt ab und fällt",0],
 ["smoke","Rauch","Violette Rauchwolke blendet über"],
-["Jumpscare (alle 1–3,5 Minuten)"],
-["jumpscare","Jumpscare","Riesiger Geist mit roten Augen springt ins Bild"],
+["Jumpscares (alle 45–120 s zufällig einer von 11)"],
+["sc_ghost","Riesiger Geist","Weißer Blitz, der Geist mit roten Augen springt ins Bild"],
+["sc_blackout","Blackout mit Augen","Bildschirm schwarz, zwei riesige rote Augen öffnen sich"],
+["sc_glass","Gesicht an der Scheibe","Totenkopf knallt von innen gegen den Bildschirm, die Scheibe reißt"],
+["sc_trap","Klappe auf","Die Folie klappt weg, dahinter ein riesiger Geist"],
+["sc_hand","Hand schlägt zu","Zombie-Hand haut von rechts auf den Bildschirm"],
+["sc_stare","Augen überall","Bild wird dunkel, 16 Augenpaare starren dich an"],
+["sc_mouth","Maul","Riesiges Maul mit Zähnen schnappt über den Bildschirm zu"],
+["sc_bats","Fledermaus-Explosion","46 Fledermäuse platzen aus der Mitte nach außen"],
+["sc_spider","Spinne fällt herab","Riesige Spinne lässt sich in die Bildmitte fallen und klettert wieder hoch"],
+["sc_crash","Falscher Absturz","Bunte Pixelbalken wie bei einem defekten Fernseher"],
+["sc_peek","Geist späht rein","Geist schaut vom Rand, dann springt er vor"],
 ["Nur am Finale (31.10.)"],
 ["rain","Kürbisregen","18 Kürbisse fallen über die Folie"]
 ];
@@ -94,7 +104,7 @@ L.forEach(function(x){if(x.length===1){var h=document.createElement('div');h.cla
  var fxp=x[0]==='tear'?'claws':x[0]==='crumble'?'dust':x[0];
  r.innerHTML='<div><b></b><span></span></div><button class="go">▶ Abspielen</button><code></code>';
  r.querySelector('b').textContent=x[1];r.querySelector('span').textContent=x[2];
- r.querySelector('code').textContent=x[0]==='jumpscare'?'?hw=1&scare=1':'?hw=1&fx='+fxp+(x[0]==='rain'?'&hwday=31':'');
+ r.querySelector('code').textContent=x[0].indexOf('sc_')===0?'?hw=1&scare='+x[0].slice(3):'?hw=1&fx='+fxp+(x[0]==='rain'?'&hwday=31':'');
  r.querySelector('.go').onclick=function(){run++;play(x)};list.appendChild(r)});
 var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
 function W(){return f.contentWindow}
