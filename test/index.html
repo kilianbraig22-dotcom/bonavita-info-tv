@@ -37,7 +37,7 @@ button.stop{border-color:#c0392b}
    <button class="stop" id="stop">■ Stopp</button>
    <button id="prev">◀ Folie</button><button id="next">Folie ▶</button>
    <select id="page"><option value="training">Training</option><option value="physio">Physio</option></select>
-   <select id="day"><option value="">Heute</option><option value="22">Stand 22.10.</option><option value="27">Stand 27.10.</option><option value="31">Finale 31.10.</option></select>
+   <select id="day"><option value="">Heute</option><option value="22">Stand 22.10.</option><option value="27">Stand 27.10.</option><option value="28">Stand 28.10. (Countdown rot)</option><option value="31">Finale 31.10.</option></select>
   </div>
   <div class="now" id="now"></div>
   <p class="note">Die Folie bleibt hier stehen und die Zufallseffekte sind aus. Bei „Alles nacheinander“ springt die Vorschau von selbst zur passenden Folie (Foto-Folie, Folie mit Kopfzeile).</p>
@@ -73,6 +73,10 @@ var L=[
 ["upside","Kopfstand","Die Folie dreht sich 3 Sekunden um 180°"],
 ["flashlight","Taschenlampe","Bildschirm dunkel, nur ein Lichtkegel wandert über die Folie"],
 ["photobomb","Geister-Fotobomb","Durchsichtiger Geist taucht im Teamfoto auf",0],
+["wallblood","Blut läuft die Wand herunter","Dicke Blutstreifen laufen am linken und rechten Rand herunter"],
+["reach","Skeletthände greifen","Zwei Skeletthände tasten aus den unteren Ecken ins Bild"],
+["cursedbar","Verfluchter Fortschrittsbalken","Der Balken unten zuckt, springt und färbt sich verflucht"],
+["neg","Negativ-Blitz","Die Folie blitzt mehrfach als Negativ auf"],
 ["Folienwechsel (bei etwa der Hälfte aller Wechsel eins davon)"],
 ["tear","Krallen zerfetzen die Folie","Drei Schnitte, die alte Folie reißt in Streifen und fällt weg"],
 ["crumble","Folie zerbröselt","Alte Folie löst sich von unten nach oben in Asche und Glut auf"],
@@ -90,7 +94,17 @@ var L=[
 ["sc_bats","Fledermaus-Explosion","46 Fledermäuse platzen aus der Mitte nach außen"],
 ["sc_spider","Spinne fällt herab","Riesige Spinne lässt sich in die Bildmitte fallen und klettert wieder hoch"],
 ["sc_crash","Falscher Absturz","Bunte Pixelbalken wie bei einem defekten Fernseher"],
+["sc_photo","Besessene Gesichter","Alle Fotos werden grau, zoomen heran, schwarze Augenhöhlen glühen auf",0],
+["sc_mirror","Folie spiegelt sich","Folie wird zum dunklen Spiegel, eine Gestalt tritt aus dem Hintergrund vor"],
+["sc_clock","Uhr 3:33","Uhr springt auf 3:33, ein riesiger Schatten rast über den Bildschirm"],
+["sc_headdrop","Kopf von oben","Ein Kopf klappt kopfüber von oben ins Bild und schreit"],
+["sc_shadow","Riesiger Schatten","Schwarze Gestalt mit Klauen läuft in einem Satz über den Bildschirm"],
+["sc_power","Stromausfall","Bild bricht zur Linie zusammen, im Schwarz taucht eine Spiegelung auf"],
 ["sc_peek","Geist späht rein","Geist schaut vom Rand, dann springt er vor"],
+["Täglich mehr Grusel (wächst bis 31.10., nichts zum Abspielen)"],
+["info1","Mehr Geister","9 Geister am Anfang, am 31.10. sind es 22 – siehe ?hw=1&hwday=31"],
+["info2","Mehr Spinnweben","Ecken verspinnen: ab 15.10. oben rechts, später unten links, unten rechts, Fäden am Oberrand – ?hw=1&hwday=31"],
+["info3","Countdown pulsiert rot","Ab 28.10. pulsiert „Noch 3 Tage“ rot auf der Titelfolie – ?hw=1&hwday=28"],
 ["Nur am Finale (31.10.)"],
 ["rain","Kürbisregen","18 Kürbisse fallen über die Folie"]
 ];
@@ -105,7 +119,7 @@ L.forEach(function(x){if(x.length===1){var h=document.createElement('div');h.cla
  r.innerHTML='<div><b></b><span></span></div><button class="go">▶ Abspielen</button><code></code>';
  r.querySelector('b').textContent=x[1];r.querySelector('span').textContent=x[2];
  r.querySelector('code').textContent=x[0].indexOf('sc_')===0?'?hw=1&scare='+x[0].slice(3):'?hw=1&fx='+fxp+(x[0]==='rain'?'&hwday=31':'');
- r.querySelector('.go').onclick=function(){run++;play(x)};list.appendChild(r)});
+ if(x[0].indexOf('info')===0){r.querySelector('.go').remove();r.querySelector('code').textContent=''}else r.querySelector('.go').onclick=function(){run++;play(x)};list.appendChild(r)});
 var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
 function W(){return f.contentWindow}
 async function prep(x){var w=W();if(!w||!w.show)return;var want=x[3];if(want===undefined)return;if(want===0&&w.idx!==0){w.show(0);await sleep(1400)}else if(want===1&&w.idx!==1){w.show(1);await sleep(1400)}}
@@ -113,7 +127,7 @@ async function play(x){var w=W();if(!w||!w.hwPlay){now.textContent='Vorschau lä
  await prep(x);now.textContent='Läuft: '+x[1];Object.values(rows).forEach(function(r){r.classList.remove('act')});rows[x[0]].classList.add('act');
  var d=w.hwPlay(x[0])||1500;return d}
 document.getElementById('all').onclick=async function(){var my=++run;f.src=url();await sleep(2500);
- for(var i=0;i<L.length;i++){var x=L[i];if(x.length===1)continue;if(my!==run)return;var d=await play(x);await sleep(Math.min(d,14000)+1300)}
+ for(var i=0;i<L.length;i++){var x=L[i];if(x.length===1||x[0].indexOf('info')===0)continue;if(my!==run)return;var d=await play(x);await sleep(Math.min(d,14000)+1300)}
  if(my===run){now.textContent='Fertig.';Object.values(rows).forEach(function(r){r.classList.remove('act')})}};
 document.getElementById('stop').onclick=function(){run++;now.textContent='Gestoppt.';load()};
 document.getElementById('next').onclick=function(){var w=W();if(w&&w.show)w.show(w.idx+1)};
