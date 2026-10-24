@@ -1439,9 +1439,9 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   window.sePlay=function(k){if(FXS[k])FXS[k]()};
 })();
 
-// Wach-Video (aus mit ?wach=0): winziges, unsichtbares Video in Dauerschleife, damit der Fire TV nicht in den Ruhemodus geht
+// Wach-Video (NUR mit ?wach=1, hängt den Fire TV auf): winziges, unsichtbares Video in Dauerschleife, damit der Fire TV nicht in den Ruhemodus geht
 (function(){
-  if(/[?&]wach=0/.test(location.search)||window.hwManual)return;
+  if(!/[?&]wach=1/.test(location.search))return;
   try{
     var v=document.createElement('video');v.muted=true;v.defaultMuted=true;v.loop=true;v.autoplay=true;v.setAttribute('muted','');v.setAttribute('playsinline','');v.setAttribute('aria-hidden','true');
     v.style.cssText='position:fixed;left:0;bottom:0;width:8px;height:8px;opacity:.03;pointer-events:none;z-index:0';
