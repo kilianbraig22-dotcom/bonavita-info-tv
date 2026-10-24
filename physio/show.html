@@ -1021,7 +1021,7 @@ function loop(now){
 requestAnimationFrame(loop);
 
 /* Ablauf */
-var timer=null,paused=false,fill=document.getElementById('barfill');if(/[?&]hold=1/.test(location.search))paused=true;window.hwManual=/[?&]manual=1/.test(location.search);window.hwTV=/Tizen|SMART-?TV|Web0S|NetCast|HbbTV/i.test(navigator.userAgent)||/[?&]tv=1/.test(location.search);window.hwLvl=(function(){var m=location.search.match(/[?&]lvl=(\d)/);return m?+m[1]:(window.hwTV?(new Date()>=new Date(2026,9,23,20,0)?1:0):3)})();if(window.hwTV&&window.hwLvl<3)stage.classList.add('lite');
+var timer=null,paused=false,fill=document.getElementById('barfill');if(/[?&]hold=1/.test(location.search))paused=true;window.hwManual=/[?&]manual=1/.test(location.search);window.hwTV=/Tizen|SMART-?TV|Web0S|NetCast|HbbTV/i.test(navigator.userAgent)||/[?&]tv=1/.test(location.search);window.hwLvl=(function(){var m=location.search.match(/[?&]lvl=(\d)/);return m?+m[1]:(/Silk|AFT[A-Z]/.test(navigator.userAgent)?2:window.hwTV?(new Date()>=new Date(2026,9,23,20,0)?1:0):3)})();if(window.hwTV&&window.hwLvl<3)stage.classList.add('lite');
 function countUp(s){
   s.querySelectorAll('[data-to]').forEach(function(el){
     var to=+el.dataset.to,dec=+el.dataset.dec||0,t0=null;
