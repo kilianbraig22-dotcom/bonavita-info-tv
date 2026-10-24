@@ -1069,7 +1069,7 @@ function loop(now){
 requestAnimationFrame(loop);
 
 /* Ablauf */
-var timer=null,paused=false,fill=document.getElementById('barfill');if(/[?&]hold=1/.test(location.search))paused=true;window.hwManual=/[?&]manual=1/.test(location.search);window.hwTV=/Tizen|SMART-?TV|Web0S|NetCast|HbbTV|Silk|AFT[A-Z]|Android|Television|Fire ?TV/i.test(navigator.userAgent)||/[?&]tv=1/.test(location.search);window.hwLvl=(function(){var m=location.search.match(/[?&]lvl=(\d)/);return m?+m[1]:(/Silk|AFT[A-Z]|Android|Television|Fire ?TV/i.test(navigator.userAgent)?0:window.hwTV?(new Date()>=new Date(2026,9,23,20,0)?1:0):3)})();if(window.hwTV&&window.hwLvl<3)stage.classList.add('lite');
+var timer=null,paused=false,fill=document.getElementById('barfill');if(/[?&]hold=1/.test(location.search))paused=true;window.hwManual=/[?&]manual=1/.test(location.search);window.hwTV=/Tizen|SMART-?TV|Web0S|NetCast|HbbTV|Silk|AFT[A-Z]|Android|Television|Fire ?TV/i.test(navigator.userAgent)||/[?&]tv=1/.test(location.search);window.hwLvl=(function(){var m=location.search.match(/[?&]lvl=(\d)/);return m?+m[1]:(/Silk|AFT[A-Z]|Android|Television|Fire ?TV/i.test(navigator.userAgent)?2:window.hwTV?(new Date()>=new Date(2026,9,23,20,0)?1:0):3)})();if(window.hwTV&&window.hwLvl<3)stage.classList.add('lite');
 function countUp(s){
   s.querySelectorAll('[data-to]').forEach(function(el){
     var to=+el.dataset.to,dec=+el.dataset.dec||0,t0=null;
@@ -1439,9 +1439,9 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   window.sePlay=function(k){if(FXS[k])FXS[k]()};
 })();
 
-// Wach-Option (nur mit ?wach=1): winziges, unsichtbares Video in Dauerschleife, damit der Fire TV nicht in den Ruhemodus geht
+// Wach-Video (aus mit ?wach=0): winziges, unsichtbares Video in Dauerschleife, damit der Fire TV nicht in den Ruhemodus geht
 (function(){
-  if(!/[?&]wach=1/.test(location.search))return;
+  if(/[?&]wach=0/.test(location.search)||window.hwManual)return;
   try{
     var v=document.createElement('video');v.muted=true;v.defaultMuted=true;v.loop=true;v.autoplay=true;v.setAttribute('muted','');v.setAttribute('playsinline','');v.setAttribute('aria-hidden','true');
     v.style.cssText='position:fixed;left:0;bottom:0;width:8px;height:8px;opacity:.03;pointer-events:none;z-index:0';
