@@ -1210,7 +1210,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   var G='<svg viewBox="0 0 84 104"><path d="M42 4C20 4 8 22 8 44V98L20 86L31 98L42 86L53 98L64 86L76 98V44C76 22 64 4 42 4Z" fill="#f4efff"/><ellipse cx="30" cy="42" rx="7" ry="10" fill="#1b1030"/><ellipse cx="54" cy="42" rx="7" ry="10" fill="#1b1030"/><ellipse cx="42" cy="66" rx="8" ry="10" fill="#1b1030"/></svg>',S='<svg viewBox="0 0 84 104"><path d="M42 4C20 4 8 22 8 44V98L20 86L31 98L42 86L53 98L64 86L76 98V44C76 22 64 4 42 4Z" fill="#f4efff"/><ellipse cx="28" cy="38" rx="9" ry="13" fill="#000"/><ellipse cx="56" cy="38" rx="9" ry="13" fill="#000"/><circle cx="28" cy="36" r="2.6" fill="#ff2a2a"/><circle cx="56" cy="36" r="2.6" fill="#ff2a2a"/><ellipse cx="42" cy="74" rx="13" ry="21" fill="#000"/></svg>',box=document.querySelector('.hwdeco'),stg=document.getElementById('stage');
   if(!box||!stg)return;
   var gh=[];
-  var NG=window.hwLvl<1?0:window.hwLvl===1?4:window.hwTV?Math.round(6+(window.hwFrac||0)*6):Math.round(9+(window.hwFrac||0)*13);
+  var NG=window.hwLvl<1?0:window.hwLvl===1?4:window.hwTV?6:Math.round(9+(window.hwFrac||0)*13);
   for(var i=0;i<NG;i++){var g=document.createElement('div'),w=60+Math.round(Math.random()*110),d=16+Math.random()*26;
     g.className='hwg';g.style.width=w+'px';g.style.top=(70+Math.random()*(900-w))+'px';g.style.opacity=(.45+Math.random()*.45).toFixed(2);
     g.style.animation=(i%2?'hwgl':'hwgr')+' '+d.toFixed(1)+'s linear infinite';g.style.animationDelay=(-Math.random()*d).toFixed(1)+'s';
