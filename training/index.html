@@ -6,7 +6,7 @@
 <!-- Hülle: bleibt im Vollbild, die eigentliche Präsentation (show.html) aktualisiert sich darin selbst -->
 <iframe id="f" allow="fullscreen; autoplay" title="Info-TV"></iframe>
 <script>
-document.getElementById('f').src='show.html'+location.search;
+document.getElementById('f').src='show.html'+(location.search?location.search+'&':'?')+'_='+Date.now();
 function fs(){var d=document.documentElement,f=d.requestFullscreen||d.webkitRequestFullscreen;try{if(f&&!document.fullscreenElement){var r=f.call(d);if(r&&r.catch)r.catch(function(){})}}catch(x){}}
 addEventListener('click',fs);addEventListener('keydown',function(e){if(e.key==='Enter'||e.keyCode===13)fs()});
 // Hülle selbst bei Änderung neu laden (selten nötig)

@@ -1355,7 +1355,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
       window.hwBusy=true;setTimeout(function(){window.hwBusy=false},Math.min(d,3000));
     },1200+i*slot+Math.random()*slot*.7))})(i);
   }
-  (function(){var _s2=show;show=function(){if(!window.hwManual&&!paused&&performance.now()>(window.hwTV?420000:1200000)&&((arguments[0]+slides.length)%slides.length)===0){location.reload();return}var r=_s2.apply(this,arguments);setTimeout(plan,60);return r}})();
+  (function(){var _s2=show;show=function(){if(!window.hwManual&&!paused&&performance.now()>(window.hwTV?420000:1200000)&&((arguments[0]+slides.length)%slides.length)===0){location.replace(location.pathname+(location.search.replace(/[?&]_=\d+/g,'')||'?')+(location.search.replace(/[?&]_=\d+/g,'')?'&':'')+'_='+Date.now());return}var r=_s2.apply(this,arguments);setTimeout(plan,60);return r}})();
   setTimeout(plan,1500);
 })();
 
