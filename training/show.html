@@ -326,7 +326,14 @@ tr.today td.closed{color:var(--d1)}
 @media (prefers-reduced-motion:reduce){.aurora i,.spine-dots i,.title .photo,.avatar::before,.breath i,.wave,.bub,.spinecol i,.spin,.swing,.orbit,.climb,.f1,.f2,.bob,.ghost12,.ben .bi,.bubble2 i,.ripple i,.ripple svg{animation:none!important}.slide.active .rv{animation:none}}
 
 .tight2 .faces figcaption{font-size:21px;hyphens:none;overflow-wrap:normal}
-.tight2 .faces img{height:205px}
+.tight2 .faces{align-items:flex-start;gap:16px}
+.tight2 .faces figure{width:160px}
+.tight2 .faces img{width:160px;height:190px}
+.tight2 .faces figure.big{width:212px}
+.tight2 .faces figure.big img,.tight2 .faces figure.big .skwrap{width:212px}
+.tight2 .faces figure.big img{height:244px}
+.tight2 .faces figure.big figcaption{font-size:26px}
+.faces .skwrap{border-radius:26px}
 .tight2 .teamrows{gap:30px;margin-top:6px}
 
 /* ===== Halloween-Theme (schaltet sich vom 15.10. bis 01.11. selbst ein; Test: ?hw=1, aus: ?hw=0) ===== */
@@ -342,6 +349,7 @@ tr.today td.closed{color:var(--d1)}
 .hwskel .skel,.hwskel .skfl{display:none}
 .hw .hwskel .skel{display:block;position:absolute;inset:0;width:100%;height:100%;object-position:50% 3%;opacity:0;background:#06173a}
 .hw .hwskel .skfl{display:block;position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.hw .hwskel .skel{filter:none}
 .hw .hwskel .skwrap.go .skel.on{animation:skon .62s steps(1,end) both}
 .hw .hwskel .skel.zb{object-position:50% 16%;background:#0c1a0e}
 .hw .hwskel .skel.ef{object-position:50% 0%;background:#02050f}
@@ -729,25 +737,25 @@ tr.today td.closed{color:var(--d1)}
   </section>
 
   <!-- 4 Ganzes Team -->
-  <section class="slide tight2" data-sec="12">
+  <section class="slide tight2" data-sec="12" data-nofx="1">
     <p class="kicker rv">Das ganze Team</p>
     <div class="teamrows">
       <div class="grp rv"><h4>Physiotherapie</h4>
         <div class="faces">
-          <figure><img class="photo" src="img/angelika.jpg" alt=""><figcaption>Angelika Fuchs</figcaption></figure>
+          <figure class="big hwskel"><div class="skwrap" data-t="3200,8200"><img class="photo" src="img/siggi.jpg" alt=""><img class="photo skel" src="img/siggi-reaper.jpg" alt="" aria-hidden="true"><img class="photo skel" src="img/siggi-wolf.jpg" alt="" aria-hidden="true"><img class="photo skel" src="img/siggi-kuerbis.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Siggi Braig</figcaption></figure>
           <figure><img class="photo" src="img/dominic.jpg" alt=""><figcaption>Dominic Sauter</figcaption></figure>
           <figure><img class="photo" src="img/elena.jpg" alt=""><figcaption>Elena Gavryuschenko</figcaption></figure>
           <figure><img class="photo" src="img/jovana.jpg" alt=""><figcaption>Jovana Jankovic</figcaption></figure>
           <figure><img class="photo" src="img/kathleen.jpg" alt=""><figcaption>Kathleen Gieseler</figcaption></figure>
           <figure><img class="photo" src="img/nadja.jpg" alt=""><figcaption>Nadja Kasler</figcaption></figure>
-          <figure><img class="photo" src="img/siggi.jpg" alt=""><figcaption>Siggi Braig</figcaption></figure>
+          <figure><img class="photo" src="img/angelika.jpg" alt=""><figcaption>Angelika Fuchs</figcaption></figure>
           <figure><img class="photo" src="img/tatjana.jpg" alt=""><figcaption>Tatjana Beilmann</figcaption></figure>
           <figure><img class="photo" src="img/verena.jpg" alt=""><figcaption>Verena Weider</figcaption></figure>
         </div></div>
       <div class="teamrow">
         <div class="grp rv"><h4>Training</h4>
           <div class="faces">
-            <figure><img class="photo" src="img/alex.jpg" alt=""><figcaption>Alex Braig</figcaption></figure>
+            <figure class="big"><img class="photo" src="img/alex.jpg" alt=""><figcaption>Alex Braig</figcaption></figure>
             <figure><img class="photo" src="img/elijah.jpg" alt=""><figcaption>Elijah Braig</figcaption></figure>
             <figure><img class="photo" src="img/kilian.jpg" alt=""><figcaption>Kilian Braig</figcaption></figure>
           </div></div>
@@ -1527,8 +1535,9 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
 })();
 // Halloween: Foto -> Blitz -> Verwandlung -> Blitz -> Foto (je Person eigene Zeiten, nie gleichzeitig)
 (function(){
-  var figs=[].slice.call(document.querySelectorAll('.hwskel .skwrap'));if(!figs.length)return;
-  var sl=figs[0].closest('.slide'),ts=[],last={};
+  var all=[].slice.call(document.querySelectorAll('.hwskel .skwrap'));if(!all.length)return;
+  var slides2=[];all.forEach(function(w){var s=w.closest('.slide');if(slides2.indexOf(s)<0)slides2.push(s)});
+  var ts=[],last={},cnt=0;
   function clear(){while(ts.length)clearTimeout(ts.pop())}
   function go(fig,n){
     if(!document.documentElement.classList.contains('hw')||window.hwManual)return;
@@ -1537,13 +1546,15 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
     fig.classList.remove('go');void fig.offsetWidth;fig.classList.add('go');
     ts.push(setTimeout(function(){fig.classList.remove('go')},700));
   }
-  new MutationObserver(function(){
-    document.documentElement.classList.toggle('nofx',sl.classList.contains('active'));
-    clear();figs.forEach(function(f){f.classList.remove('go')});
-    if(sl.classList.contains('active'))figs.forEach(function(f,n){
+  function upd(){
+    document.documentElement.classList.toggle('nofx',!!document.querySelector('.slide.active[data-nofx]'));
+    clear();all.forEach(function(f){f.classList.remove('go')});
+    var s=document.querySelector('.slide.active');if(!s)return;
+    all.forEach(function(f,n){if(f.closest('.slide')!==s)return;
       (f.getAttribute('data-t')||'3000,7000').split(',').forEach(function(d){ts.push(setTimeout(function(){go(f,n)},+d))});
     });
-  }).observe(sl,{attributes:true,attributeFilter:['class']});
+  }
+  slides2.forEach(function(s){new MutationObserver(upd).observe(s,{attributes:true,attributeFilter:['class']})});
 })();
 
 // Leistungs-Wächter: misst Bilder/Sekunde. ?perf=1 zeigt Messwerte; bei dauerhaft niedriger Rate wird Effekt-Stufe automatisch gesenkt
