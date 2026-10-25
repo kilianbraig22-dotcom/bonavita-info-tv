@@ -1449,6 +1449,21 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
     setTimeout(function(){document.body.appendChild(v);try{var p=v.play();if(p&&p.catch)p.catch(function(){})}catch(e){}},8000);
   }catch(e){}
 })();
+// Bildschirm anlassen (Screen Wake Lock) - ohne Video, ohne Last
+(function(){
+  if(!('wakeLock' in navigator))return;
+  var lock=null;
+  function get(){
+    if(document.visibilityState!=='visible')return;
+    navigator.wakeLock.request('screen').then(function(l){
+      lock=l;l.addEventListener('release',function(){lock=null;setTimeout(get,1000)});
+    }).catch(function(){});
+  }
+  document.addEventListener('visibilitychange',get);
+  document.addEventListener('keydown',function(){if(!lock)get()});
+  get();setInterval(function(){if(!lock)get()},60000);
+})();
+
 // Auto-Update: alle 5 Min. prüfen, ob die Seite auf dem Server geändert wurde -> dann neu laden
 (function(){var last=null;function chk(){fetch(location.pathname+'?_='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){var h=t.length+':'+t.slice(0,400)+t.slice(-400);if(last!==null&&h!==last){location.reload();}last=h;}).catch(function(){});}
 chk();setInterval(chk,60000);})();
