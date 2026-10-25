@@ -342,7 +342,8 @@ tr.today td.closed{color:var(--d1)}
 .hwskel .skel,.hwskel .skfl{display:none}
 .hw .hwskel .skel{display:block;position:absolute;inset:0;width:100%;height:100%;object-position:50% 3%;opacity:0;background:#06173a}
 .hw .hwskel .skfl{display:block;position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
-.hw .hwskel .skwrap.go .skel{animation:skon .62s steps(1,end) both}
+.hw .hwskel .skwrap.go .skel.on{animation:skon .62s steps(1,end) both}
+.hw .hwskel .skel.zb{object-position:50% 16%;background:#0c1a0e}
 .hw .hwskel .skwrap.go .skfl{animation:skfl .62s linear both}
 .hw .hwskel .skwrap.go{animation:skshk .62s linear both}
 @keyframes skon{0%{opacity:0}12%{opacity:1}22%{opacity:.25}28%{opacity:1}44%{opacity:.5}50%,86%{opacity:1}100%{opacity:0}}
@@ -713,7 +714,7 @@ tr.today td.closed{color:var(--d1)}
     <div class="big3">
       <figure class="rv"><img class="photo" src="img/alex.jpg" alt="Alex Braig"><figcaption>Alex Braig</figcaption></figure>
       <figure class="rv"><img class="photo" src="img/elijah.jpg" alt="Elijah Braig"><figcaption>Elijah Braig</figcaption></figure>
-      <figure class="rv hwskel"><div class="skwrap"><img class="photo" src="img/kilian.jpg" alt="Kilian Braig"><img class="photo skel" src="img/kilian-skelett.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Kilian Braig</figcaption></figure>
+      <figure class="rv hwskel"><div class="skwrap"><img class="photo" src="img/kilian.jpg" alt="Kilian Braig"><img class="photo skel" src="img/kilian-skelett.jpg" alt="" aria-hidden="true"><img class="photo skel zb" src="img/kilian-zombie.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Kilian Braig</figcaption></figure>
     </div>
   </section>
 
@@ -1521,6 +1522,8 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   function clear(){while(ts.length)clearTimeout(ts.pop())}
   function go(){
     if(!document.documentElement.classList.contains('hw')||window.hwManual)return;
+    var v=fig.querySelectorAll('.skel'),k;do{k=(Math.random()*v.length)|0}while(v.length>1&&k===go.last);go.last=k;
+    for(var i=0;i<v.length;i++)v[i].classList.toggle('on',i===k);
     fig.classList.remove('go');void fig.offsetWidth;fig.classList.add('go');
     ts.push(setTimeout(function(){fig.classList.remove('go')},700));
   }
