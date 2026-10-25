@@ -100,6 +100,8 @@ canvas{display:block}
 .title .photo{width:960px;height:584px;object-position:50% 40%;flex:none;box-shadow:0 0 0 14px rgba(var(--lime-rgb),.18),0 30px 90px rgba(0,0,0,.5);animation:float 7s ease-in-out infinite alternate}
 @keyframes float{from{transform:rotate(var(--tilt,0deg))}to{transform:translateY(-16px) rotate(calc(.6deg + var(--tilt,0deg)))}}
 .hwt{transform:rotate(var(--tilt,0deg));transform-origin:50% 6%}
+.hwskel .hwt,.hwskel .skel{transform:none!important}
+.hwskel .skel.ps{transform:none}
 .title .photo.hwt{transform-origin:50% 50%}
 .hwcracks{position:absolute;inset:0;width:1920px;height:1080px;pointer-events:none;z-index:3;overflow:visible}
 .hwcracks .cs{fill:rgba(12,6,20,.88);opacity:0;animation:hwcrf .25s ease-out forwards}
@@ -365,7 +367,7 @@ tr.today td.closed{color:var(--d1)}
 @keyframes skpump{0%,40%{transform:scale(1)}60%{transform:scale(1.07)}80%{transform:scale(1.03)}100%{transform:scale(1)}}
 .hw .hwskel .skwrap.go .skfl{animation:skfl .62s linear both}
 .faces .hwskel .skwrap{border-radius:26px;overflow:hidden;isolation:isolate;transform:translateZ(0)}
-.hw .hwskel .skel{border-radius:0!important;margin:0;border:0}
+.hw .hwskel .skel{border-radius:0!important;margin:0;border:0;width:calc(100% + 2px)!important;height:calc(100% + 2px)!important;left:-1px;top:-1px;inset:-1px!important}
 @keyframes skon{0%{opacity:0}12%{opacity:1}22%{opacity:.25}28%{opacity:1}44%{opacity:.5}50%,86%{opacity:1}100%{opacity:0}}
 @keyframes skfl{0%{opacity:0}6%{opacity:1}16%{opacity:.1}26%{opacity:.85}38%{opacity:0}78%{opacity:0}84%{opacity:.95}100%{opacity:0}}
 @keyframes skshk{0%,100%{transform:none}20%{transform:translate(-5px,2px)}40%{transform:translate(6px,-3px)}60%{transform:translate(-4px,0)}80%{transform:translate(3px,2px)}}
