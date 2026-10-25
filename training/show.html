@@ -346,6 +346,11 @@ tr.today td.closed{color:var(--d1)}
 .hw .hwskel .skel.zb{object-position:50% 16%;background:#0c1a0e}
 .hw .hwskel .skel.ef{object-position:50% 0%;background:#02050f}
 .hw .hwskel .skel.ev{object-position:50% 0%;background:#050a18}
+.hw .hwskel .skel.ah{object-position:50% 30%;background:#1a0d28}
+.hw .hwskel .skel.ag{object-position:50% 8%;background:#06141c}
+.hw .hwskel .skel.ad{object-position:50% 6%;background:#000}
+/* Folie ohne weitere Halloween-Effekte (schont den Fernseher) */
+.nofx .hwdeco,.nofx .hwg{display:none!important}
 .hw .hwskel .skel.ps{object-position:50% 0%;background:#1a0a2e}
 .hw .hwskel .skwrap.go .skel.ps.on{animation:skon .62s steps(1,end) both,skpump .62s ease-out both}
 @keyframes skpump{0%,40%{transform:scale(1)}60%{transform:scale(1.07)}80%{transform:scale(1.03)}100%{transform:scale(1)}}
@@ -713,11 +718,11 @@ tr.today td.closed{color:var(--d1)}
   </section>
 
   <!-- 3 Trainingsteam -->
-  <section class="slide" data-sec="13">
+  <section class="slide" data-sec="13" data-nofx="1">
     <p class="kicker rv">Ihr Trainingsteam</p>
     <h2 class="rv">Wir begleiten Ihr Training.</h2>
     <div class="big3">
-      <figure class="rv"><img class="photo" src="img/alex.jpg" alt="Alex Braig"><figcaption>Alex Braig</figcaption></figure>
+      <figure class="rv hwskel"><div class="skwrap" data-t="3600,8000"><img class="photo" src="img/alex.jpg" alt="Alex Braig"><img class="photo skel ah" src="img/alex-hexe.jpg" alt="" aria-hidden="true"><img class="photo skel ag" src="img/alex-geist.jpg" alt="" aria-hidden="true"><img class="photo skel ad" src="img/alex-daemon.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Alex Braig</figcaption></figure>
       <figure class="rv hwskel"><div class="skwrap" data-t="4700,8900"><img class="photo" src="img/elijah.jpg" alt="Elijah Braig"><img class="photo skel ef" src="img/elijah-frank.jpg" alt="" aria-hidden="true"><img class="photo skel ev" src="img/elijah-vampir.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Elijah Braig</figcaption></figure>
       <figure class="rv hwskel"><div class="skwrap" data-t="2600,7000"><img class="photo" src="img/kilian.jpg" alt="Kilian Braig"><img class="photo skel" src="img/kilian-skelett.jpg" alt="" aria-hidden="true"><img class="photo skel zb" src="img/kilian-zombie.jpg" alt="" aria-hidden="true"><img class="photo skel ps" src="img/kilian-pose.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Kilian Braig</figcaption></figure>
     </div>
@@ -1234,7 +1239,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   SC.shadow=function(){ov('<div class="jfill jsd" style="background:rgba(0,0,0,.6);animation:jsbk2 1.5s linear forwards"></div>'+SHD,1500);setTimeout(function(){imp('#000',0,600)},500)};
   SC.power=function(){ov('<div class="jfill jpwb"></div><div class="jpwl"></div>'+WRA.replace('class="jtw"','class="jpwf"')+grain(),1950);setTimeout(function(){imp('#fff',0,800)},1430)};
   window.hwScare=function(name){var k=Object.keys(SC),n=SC[name]?name:null,g=0,pre=0;if(!n){if(!scb.length){scb=k.slice().sort(function(){return Math.random()-.5});if(scb[scb.length-1]===lastSc&&scb.length>1)scb.unshift(scb.pop())}n=scb.pop();if(Math.random()<.35&&!window.hwTV&&n!=='blackout'&&n!=='peek'&&n!=='crash'&&n!=='power'&&n!=='clock'&&n!=='mirror'){var sl=document.querySelector('.slide.active');if(sl){pre=750;sl.classList.add('jfk');setTimeout(function(){sl.classList.remove('jfk')},720)}}}lastSc=n;setTimeout(function(){SC[n]()},pre);return SCD[n]+pre};
-  function plan(){setTimeout(function(){var ok=function(){return document.documentElement.classList.contains('hw')&&CONFIG.jumpscare!==false&&!window.hwManual&&!window.hwBusy};if(ok()){var dd=window.hwScare();window.hwBusy=true;setTimeout(function(){window.hwBusy=false},dd+300);if(Math.random()<.3)setTimeout(function(){if(ok()){var d2=window.hwScare();window.hwBusy=true;setTimeout(function(){window.hwBusy=false},d2+300)}},dd+300+1200+Math.random()*2500)}plan();},(window.hwFin?20000:30000)+Math.random()*10000);}
+  function plan(){setTimeout(function(){var ok=function(){return document.documentElement.classList.contains('hw')&&CONFIG.jumpscare!==false&&!window.hwManual&&!window.hwBusy&&!document.querySelector('.slide.active[data-nofx]')};if(ok()){var dd=window.hwScare();window.hwBusy=true;setTimeout(function(){window.hwBusy=false},dd+300);if(Math.random()<.3)setTimeout(function(){if(ok()){var d2=window.hwScare();window.hwBusy=true;setTimeout(function(){window.hwBusy=false},d2+300)}},dd+300+1200+Math.random()*2500)}plan();},(window.hwFin?20000:30000)+Math.random()*10000);}
   var sm=location.search.match(/[?&]scare=(\w+)/);if(sm)setTimeout(function(){window.hwScare(sm[1]==='1'?null:sm[1])},1500);
   window.hwBoo=boo;
 })();
@@ -1397,7 +1402,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
     var nw=Date.now();if(nw-lastPlan<800)return;lastPlan=nw;
     tms.forEach(clearTimeout);tms=[];
     if(!on())return;
-    var s=document.querySelector('.slide.active');if(!s)return;
+    var s=document.querySelector('.slide.active');if(!s)return;if(s.hasAttribute('data-nofx'))return;
     var sec=(+s.dataset.sec||12)*1000,sc=CONFIG.jumpscare!==false&&window.hwLvl>=2&&(sinceScare+1>=nextScare);
     if(!rb.length)rb=shuf([2,3,3,4,5,4,2,5]);
     var n=rb.pop();if(sc)n=2;if(window.hwFin&&n<3)n=3;
@@ -1533,6 +1538,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
     ts.push(setTimeout(function(){fig.classList.remove('go')},700));
   }
   new MutationObserver(function(){
+    document.documentElement.classList.toggle('nofx',sl.classList.contains('active'));
     clear();figs.forEach(function(f){f.classList.remove('go')});
     if(sl.classList.contains('active'))figs.forEach(function(f,n){
       (f.getAttribute('data-t')||'3000,7000').split(',').forEach(function(d){ts.push(setTimeout(function(){go(f,n)},+d))});
