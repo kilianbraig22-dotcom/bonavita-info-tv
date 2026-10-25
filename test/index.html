@@ -80,6 +80,15 @@ var L=[
 ["roll","Rollender Kürbis","Kürbis rollt unten durchs Bild"],
 ["bleed","Blut tropft von der Überschrift","Zähe Tropfen, einer reißt ab und fällt",0],
 ["smoke","Rauch","Violette Rauchwolke blendet über"],
+["Verwandlungen (nur Seite „Training“, im Betrieb zeitversetzt je Person)"],
+["trans2","Verwandlung Trainingsfolie","Blitz, Alex, Elijah und Kilian werden zu Hexe/Geist/Dämon, Frankenstein/Vampir, Skelett/Zombie/Pose und zurück",2],
+["trans3","Verwandlung Team-Folie","Blitz, Siggi, Alex, Elijah, Kilian und Roland verwandeln sich nacheinander",3],
+["Jumpscares mit den Verwandlungsfiguren (nur Seite „Training“)"],
+["sc_fig_alex","Alex als Figur","Freigestellte Figur (Hexe, Geist oder Dämon) springt groß ins Bild"],
+["sc_fig_elijah","Elijah als Figur","Frankenstein oder Vampir springt ins Bild"],
+["sc_fig_kilian","Kilian als Figur","Skelett oder Zombie springt ins Bild"],
+["sc_fig_siggi","Siggi als Figur","Sensenmann, Werwolf oder Kürbiskönig springt ins Bild"],
+["sc_fig_roland","Roland als Figur","Friedhofswärter, Kettensäge oder Poltergeist springt ins Bild"],
 ["Jumpscares (alle 2–4 Folien einer von 17)"],
 ["sc_ghost","Riesiger Geist","Weißer Blitz, der Geist mit roten Augen springt ins Bild"],
 ["sc_blackout","Blackout mit Augen","Bildschirm schwarz, zwei riesige rote Augen öffnen sich"],
@@ -99,7 +108,7 @@ var L=[
 ["sc_power","Stromausfall","Bild bricht zur Linie zusammen, im Schwarz taucht eine Spiegelung auf"],
 ["sc_peek","Geist späht rein","Geist schaut vom Rand, dann springt er vor"],
 ["Täglich mehr Grusel (wächst bis 31.10., nichts zum Abspielen)"],
-["info1","Mehr Geister","9 Geister am Anfang, am 31.10. sind es 22 – siehe ?hw=1&hwday=31"],
+["info1","Mehr Geister","Am Fernseher immer 6 Geister, am Computer 9 am Anfang und am 31.10. 22 – siehe ?hw=1&hwday=31"],
 ["info2","Mehr Spinnweben","Ecken verspinnen: ab 15.10. oben rechts, später unten links, unten rechts, Fäden am Oberrand – ?hw=1&hwday=31"],
 ["info3","Countdown pulsiert rot","Ab 28.10. pulsiert „Noch 3 Tage“ rot auf der Titelfolie – ?hw=1&hwday=28"],
 ["Nur am Finale (31.10.)"],
@@ -119,9 +128,10 @@ L.forEach(function(x){if(x.length===1){var h=document.createElement('div');h.cla
  if(x[0].indexOf('info')===0){r.querySelector('.go').remove();r.querySelector('code').textContent=''}else r.querySelector('.go').onclick=function(){run++;play(x)};list.appendChild(r)});
 var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
 function W(){return f.contentWindow}
-async function prep(x){var w=W();if(!w||!w.show)return;var want=x[3];if(want===undefined)return;if(want===0&&w.idx!==0){w.show(0);await sleep(1400)}else if(want===1&&w.idx!==1){w.show(1);await sleep(1400)}}
+async function prep(x){var w=W();if(!w||!w.show)return;var want=x[3];if(want===undefined)return;if(w.idx!==want){w.show(want);await sleep(1400)}}
 async function play(x){var w=W();if(!w||!w.hwPlay){now.textContent='Vorschau lädt noch …';return 0}
  await prep(x);now.textContent='Läuft: '+x[1];Object.values(rows).forEach(function(r){r.classList.remove('act')});rows[x[0]].classList.add('act');
+ if(x[0].indexOf('trans')===0){if(!w.hwTrans){now.textContent='Nur auf der Seite Training';return 0}return w.hwTrans()}
  var d=w.hwPlay(x[0])||1500;return d}
 document.getElementById('all').onclick=async function(){var my=++run;f.src=url();await sleep(2500);
  for(var i=0;i<L.length;i++){var x=L[i];if(x.length===1||x[0].indexOf('info')===0)continue;if(my!==run)return;var d=await play(x);await sleep(Math.min(d,14000)+1300)}
