@@ -146,7 +146,7 @@ canvas{display:block}
 .faces img{width:172px;height:250px;border-radius:26px;object-position:50% 28%}
 .faces figcaption{overflow-wrap:anywhere;hyphens:auto;font-size:28px;line-height:1.15;margin-top:12px;font-weight:600}
 .teamrows{display:flex;flex-direction:column;gap:44px;margin-top:20px}
-.teamrow{display:flex;gap:64px}
+.teamrow{display:flex;gap:48px}
 
 /* week table */
 table{border-collapse:separate;border-spacing:0;width:100%;font-variant-numeric:tabular-nums;margin-top:20px}
@@ -350,6 +350,7 @@ tr.today td.closed{color:var(--d1)}
 .hw .hwskel .skel{display:block;position:absolute;inset:0;width:100%;height:100%;object-position:50% 3%;opacity:0;background:#06173a}
 .hw .hwskel .skfl{display:block;position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
 .hw .hwskel .skel{filter:none}
+#stage.lite .hwskel .skel{display:none!important}
 .hw .hwskel .skwrap.go .skel.on{animation:skon .62s steps(1,end) both}
 .hw .hwskel .skel.zb{object-position:50% 16%;background:#0c1a0e}
 .hw .hwskel .skel.ef{object-position:50% 0%;background:#02050f}
@@ -363,7 +364,8 @@ tr.today td.closed{color:var(--d1)}
 .hw .hwskel .skwrap.go .skel.ps.on{animation:skon .62s steps(1,end) both,skpump .62s ease-out both}
 @keyframes skpump{0%,40%{transform:scale(1)}60%{transform:scale(1.07)}80%{transform:scale(1.03)}100%{transform:scale(1)}}
 .hw .hwskel .skwrap.go .skfl{animation:skfl .62s linear both}
-.hw .hwskel .skwrap.go{animation:skshk .62s linear both}
+.faces .hwskel .skwrap{border-radius:26px;overflow:hidden;isolation:isolate;transform:translateZ(0)}
+.hw .hwskel .skel{border-radius:0!important;margin:0;border:0}
 @keyframes skon{0%{opacity:0}12%{opacity:1}22%{opacity:.25}28%{opacity:1}44%{opacity:.5}50%,86%{opacity:1}100%{opacity:0}}
 @keyframes skfl{0%{opacity:0}6%{opacity:1}16%{opacity:.1}26%{opacity:.85}38%{opacity:0}78%{opacity:0}84%{opacity:.95}100%{opacity:0}}
 @keyframes skshk{0%,100%{transform:none}20%{transform:translate(-5px,2px)}40%{transform:translate(6px,-3px)}60%{transform:translate(-4px,0)}80%{transform:translate(3px,2px)}}
@@ -742,7 +744,7 @@ tr.today td.closed{color:var(--d1)}
     <div class="teamrows">
       <div class="grp rv"><h4>Physiotherapie</h4>
         <div class="faces">
-          <figure class="big hwskel"><div class="skwrap" data-t="3200,8200"><img class="photo" src="img/siggi.jpg" alt=""><img class="photo skel" src="img/siggi-reaper.jpg" alt="" aria-hidden="true"><img class="photo skel" src="img/siggi-wolf.jpg" alt="" aria-hidden="true"><img class="photo skel" src="img/siggi-kuerbis.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Siggi Braig</figcaption></figure>
+          <figure class="big hwskel"><div class="skwrap" data-t="3200,7300"><img class="photo" src="img/siggi.jpg" alt=""><img class="photo skel" src="img/siggi-reaper.jpg" alt="" aria-hidden="true"><img class="photo skel" src="img/siggi-wolf.jpg" alt="" aria-hidden="true"><img class="photo skel" src="img/siggi-kuerbis.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Siggi Braig</figcaption></figure>
           <figure><img class="photo" src="img/dominic.jpg" alt=""><figcaption>Dominic Sauter</figcaption></figure>
           <figure><img class="photo" src="img/elena.jpg" alt=""><figcaption>Elena Gavryuschenko</figcaption></figure>
           <figure><img class="photo" src="img/jovana.jpg" alt=""><figcaption>Jovana Jankovic</figcaption></figure>
@@ -755,9 +757,9 @@ tr.today td.closed{color:var(--d1)}
       <div class="teamrow">
         <div class="grp rv"><h4>Training</h4>
           <div class="faces">
-            <figure class="big"><img class="photo" src="img/alex.jpg" alt=""><figcaption>Alex Braig</figcaption></figure>
-            <figure><img class="photo" src="img/elijah.jpg" alt=""><figcaption>Elijah Braig</figcaption></figure>
-            <figure><img class="photo" src="img/kilian.jpg" alt=""><figcaption>Kilian Braig</figcaption></figure>
+            <figure class="big hwskel"><div class="skwrap" data-t="1800,11000"><img class="photo" src="img/alex.jpg" alt=""><img class="photo skel ah" src="img/alex-hexe.jpg" alt="" aria-hidden="true"><img class="photo skel ag" src="img/alex-geist.jpg" alt="" aria-hidden="true"><img class="photo skel ad" src="img/alex-daemon.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Alex Braig</figcaption></figure>
+            <figure class="hwskel"><div class="skwrap" data-t="4600,8600"><img class="photo" src="img/elijah.jpg" alt=""><img class="photo skel ef" src="img/elijah-frank.jpg" alt="" aria-hidden="true"><img class="photo skel ev" src="img/elijah-vampir.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Elijah Braig</figcaption></figure>
+            <figure class="hwskel"><div class="skwrap" data-t="6000,9800"><img class="photo" src="img/kilian.jpg" alt=""><img class="photo skel" src="img/kilian-skelett.jpg" alt="" aria-hidden="true"><img class="photo skel zb" src="img/kilian-zombie.jpg" alt="" aria-hidden="true"><img class="photo skel ps" src="img/kilian-pose.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Kilian Braig</figcaption></figure>
           </div></div>
         <div class="grp rv"><h4>Rezeption</h4>
           <div class="faces">
@@ -767,6 +769,10 @@ tr.today td.closed{color:var(--d1)}
         <div class="grp rv"><h4>Massage</h4>
           <div class="faces">
             <figure><img class="photo" src="img/illia.jpg" alt=""><figcaption>Illia Didovych</figcaption></figure>
+          </div></div>
+        <div class="grp rv"><h4>Hausmeister</h4>
+          <div class="faces">
+            <figure><img class="photo" src="img/roland.jpg" alt=""><figcaption>Roland Braig</figcaption></figure>
           </div></div>
       </div>
     </div>
@@ -1540,7 +1546,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   var ts=[],last={},cnt=0;
   function clear(){while(ts.length)clearTimeout(ts.pop())}
   function go(fig,n){
-    if(!document.documentElement.classList.contains('hw')||window.hwManual)return;
+    if(!document.documentElement.classList.contains('hw')||window.hwManual||window.hwLvl<2||document.getElementById('stage').classList.contains('lite'))return;
     var v=fig.querySelectorAll('.skel'),k;do{k=(Math.random()*v.length)|0}while(v.length>1&&k===last[n]);last[n]=k;
     for(var i=0;i<v.length;i++)v[i].classList.toggle('on',i===k);
     fig.classList.remove('go');void fig.offsetWidth;fig.classList.add('go');
