@@ -337,6 +337,17 @@ tr.today td.closed{color:var(--d1)}
 .hw .aurora i:nth-child(3){background:radial-gradient(circle,rgba(190,50,120,.28),rgba(190,50,120,0) 68%)}
 /* Bilder werden Richtung Halloween immer grauer (--hwg = 0..1 aus dem Datum) */
 .hw .photo,.hw .faces img{filter:grayscale(calc(var(--hwg,0)*.8)) brightness(calc(1 - var(--hwg,0)*.14)) contrast(calc(1 + var(--hwg,0)*.08))}
+/* Halloween: Foto -> Blitz -> Röntgen-Skelett -> Blitz -> Foto (nur in der Halloween-Zeit) */
+.hwskel .skwrap{position:relative;border-radius:44px;overflow:hidden}
+.hwskel .skel,.hwskel .skfl{display:none}
+.hw .hwskel .skel{display:block;position:absolute;inset:0;width:100%;height:100%;object-position:50% 3%;opacity:0;background:#06173a}
+.hw .hwskel .skfl{display:block;position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.hw .hwskel .skwrap.go .skel{animation:skon .62s steps(1,end) both}
+.hw .hwskel .skwrap.go .skfl{animation:skfl .62s linear both}
+.hw .hwskel .skwrap.go{animation:skshk .62s linear both}
+@keyframes skon{0%{opacity:0}12%{opacity:1}22%{opacity:.25}28%{opacity:1}44%{opacity:.5}50%,86%{opacity:1}100%{opacity:0}}
+@keyframes skfl{0%{opacity:0}6%{opacity:1}16%{opacity:.1}26%{opacity:.85}38%{opacity:0}78%{opacity:0}84%{opacity:.95}100%{opacity:0}}
+@keyframes skshk{0%,100%{transform:none}20%{transform:translate(-5px,2px)}40%{transform:translate(6px,-3px)}60%{transform:translate(-4px,0)}80%{transform:translate(3px,2px)}}
 .hw img[src*="logo"]{filter:hue-rotate(-42deg) saturate(1.25)}
 .hw [fill="#b0cb00"]{fill:var(--lime)}
 .hw [fill="#53cdd0"]{fill:#8d63f2}
@@ -702,7 +713,7 @@ tr.today td.closed{color:var(--d1)}
     <div class="big3">
       <figure class="rv"><img class="photo" src="img/alex.jpg" alt="Alex Braig"><figcaption>Alex Braig</figcaption></figure>
       <figure class="rv"><img class="photo" src="img/elijah.jpg" alt="Elijah Braig"><figcaption>Elijah Braig</figcaption></figure>
-      <figure class="rv"><img class="photo" src="img/kilian.jpg" alt="Kilian Braig"><figcaption>Kilian Braig</figcaption></figure>
+      <figure class="rv hwskel"><div class="skwrap"><img class="photo" src="img/kilian.jpg" alt="Kilian Braig"><img class="photo skel" src="img/kilian-skelett.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Kilian Braig</figcaption></figure>
     </div>
   </section>
 
@@ -1503,6 +1514,22 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
     setTimeout(function(){document.body.appendChild(v);try{var p=v.play();if(p&&p.catch)p.catch(function(){})}catch(e){}},8000);
   }catch(e){}
 })();
+// Halloween: Skelett-Blitz auf dem Foto (2x pro Folie, ohne Dauerschleife)
+(function(){
+  var fig=document.querySelector('.hwskel .skwrap');if(!fig)return;
+  var sl=fig.closest('.slide'),ts=[];
+  function clear(){while(ts.length)clearTimeout(ts.pop())}
+  function go(){
+    if(!document.documentElement.classList.contains('hw')||window.hwManual)return;
+    fig.classList.remove('go');void fig.offsetWidth;fig.classList.add('go');
+    ts.push(setTimeout(function(){fig.classList.remove('go')},700));
+  }
+  new MutationObserver(function(){
+    clear();fig.classList.remove('go');
+    if(sl.classList.contains('active')){ts.push(setTimeout(go,2600));ts.push(setTimeout(go,7000))}
+  }).observe(sl,{attributes:true,attributeFilter:['class']});
+})();
+
 // Leistungs-Wächter: misst Bilder/Sekunde. ?perf=1 zeigt Messwerte; bei dauerhaft niedriger Rate wird Effekt-Stufe automatisch gesenkt
 (function(){
   var show=!/[?&]perf=0/.test(location.search),auto=!/[?&]lvl=/.test(location.search)&&document.documentElement.classList.contains('hw');
