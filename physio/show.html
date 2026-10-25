@@ -87,6 +87,11 @@ canvas{display:block}
 .slide.lime.active::after{animation:shine 5.5s ease-in-out 1.2s infinite}
 @keyframes shine{0%{left:-500px}55%,100%{left:2300px}}
 #stage.lite .slide.lime::after{animation:none}
+/* Leichtbau: nur EINE Folie wird beim Wechsel gezeichnet, kurze Blende, schlichtes Einblenden */
+#stage.lite .slide{transition:opacity .3s ease,visibility 0s .3s}
+#stage.lite .slide.active{transition:opacity .3s ease,visibility 0s}
+#stage.lite .slide.active .rv{animation:rvl .35s ease-out backwards;animation-delay:calc(var(--i,0)*.03s)}
+@keyframes rvl{from{opacity:0}}
 
 /* title / closing */
 .title .col{flex:1}
