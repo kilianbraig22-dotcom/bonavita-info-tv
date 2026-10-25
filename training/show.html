@@ -335,6 +335,8 @@ tr.today td.closed{color:var(--d1)}
 .hw .aurora i:nth-child(1){background:radial-gradient(circle,rgba(255,122,26,.38),rgba(255,122,26,0) 68%)}
 .hw .aurora i:nth-child(2){background:radial-gradient(circle,rgba(125,70,230,.5),rgba(125,70,230,0) 68%)}
 .hw .aurora i:nth-child(3){background:radial-gradient(circle,rgba(190,50,120,.28),rgba(190,50,120,0) 68%)}
+/* Bilder werden Richtung Halloween immer grauer (--hwg = 0..1 aus dem Datum) */
+.hw .photo,.hw .faces img{filter:grayscale(calc(var(--hwg,0)*.8)) brightness(calc(1 - var(--hwg,0)*.14)) contrast(calc(1 + var(--hwg,0)*.08))}
 .hw img[src*="logo"]{filter:hue-rotate(-42deg) saturate(1.25)}
 .hw [fill="#b0cb00"]{fill:var(--lime)}
 .hw [fill="#53cdd0"]{fill:#8d63f2}
@@ -1158,6 +1160,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
 
 // Halloween: Datum -> Tage bis 31.10. (?hwday=NN zum Testen, z.B. 31 = Finale)
 (function(){var n=new Date(),dm=n.getMonth()===9?31-n.getDate():(n.getMonth()===10?-1:16),m=location.search.match(/[?&]hwday=(\d+)/);if(m)dm=31-(+m[1]);window.hwLeft=Math.max(0,Math.min(16,dm));window.hwFrac=1-window.hwLeft/16;window.hwFin=window.hwLeft===0})();
+(function(){document.documentElement.style.setProperty('--hwg',(window.hwFrac||0).toFixed(3))})();
 // Halloween: fliegende Geister + gelegentlicher Jumpscare (CONFIG.jumpscare:false schaltet ihn ab; ?scare=1 zum Testen)
 (function(){
   var G='<svg viewBox="0 0 84 104"><path d="M42 4C20 4 8 22 8 44V98L20 86L31 98L42 86L53 98L64 86L76 98V44C76 22 64 4 42 4Z" fill="#f4efff"/><ellipse cx="30" cy="42" rx="7" ry="10" fill="#1b1030"/><ellipse cx="54" cy="42" rx="7" ry="10" fill="#1b1030"/><ellipse cx="42" cy="66" rx="8" ry="10" fill="#1b1030"/></svg>',S='<svg viewBox="0 0 84 104"><path d="M42 4C20 4 8 22 8 44V98L20 86L31 98L42 86L53 98L64 86L76 98V44C76 22 64 4 42 4Z" fill="#f4efff"/><ellipse cx="28" cy="38" rx="9" ry="13" fill="#000"/><ellipse cx="56" cy="38" rx="9" ry="13" fill="#000"/><circle cx="28" cy="36" r="2.6" fill="#ff2a2a"/><circle cx="56" cy="36" r="2.6" fill="#ff2a2a"/><ellipse cx="42" cy="74" rx="13" ry="21" fill="#000"/></svg>',box=document.querySelector('.hwdeco'),stg=document.getElementById('stage');
