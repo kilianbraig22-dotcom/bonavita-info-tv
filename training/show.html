@@ -344,6 +344,8 @@ tr.today td.closed{color:var(--d1)}
 .hw .hwskel .skfl{display:block;position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
 .hw .hwskel .skwrap.go .skel.on{animation:skon .62s steps(1,end) both}
 .hw .hwskel .skel.zb{object-position:50% 16%;background:#0c1a0e}
+.hw .hwskel .skel.ef{object-position:50% 0%;background:#02050f}
+.hw .hwskel .skel.ev{object-position:50% 0%;background:#050a18}
 .hw .hwskel .skel.ps{object-position:50% 0%;background:#1a0a2e}
 .hw .hwskel .skwrap.go .skel.ps.on{animation:skon .62s steps(1,end) both,skpump .62s ease-out both}
 @keyframes skpump{0%,40%{transform:scale(1)}60%{transform:scale(1.07)}80%{transform:scale(1.03)}100%{transform:scale(1)}}
@@ -711,13 +713,13 @@ tr.today td.closed{color:var(--d1)}
   </section>
 
   <!-- 3 Trainingsteam -->
-  <section class="slide" data-sec="10">
+  <section class="slide" data-sec="13">
     <p class="kicker rv">Ihr Trainingsteam</p>
     <h2 class="rv">Wir begleiten Ihr Training.</h2>
     <div class="big3">
       <figure class="rv"><img class="photo" src="img/alex.jpg" alt="Alex Braig"><figcaption>Alex Braig</figcaption></figure>
-      <figure class="rv"><img class="photo" src="img/elijah.jpg" alt="Elijah Braig"><figcaption>Elijah Braig</figcaption></figure>
-      <figure class="rv hwskel"><div class="skwrap"><img class="photo" src="img/kilian.jpg" alt="Kilian Braig"><img class="photo skel" src="img/kilian-skelett.jpg" alt="" aria-hidden="true"><img class="photo skel zb" src="img/kilian-zombie.jpg" alt="" aria-hidden="true"><img class="photo skel ps" src="img/kilian-pose.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Kilian Braig</figcaption></figure>
+      <figure class="rv hwskel"><div class="skwrap" data-t="4700,8900"><img class="photo" src="img/elijah.jpg" alt="Elijah Braig"><img class="photo skel ef" src="img/elijah-frank.jpg" alt="" aria-hidden="true"><img class="photo skel ev" src="img/elijah-vampir.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Elijah Braig</figcaption></figure>
+      <figure class="rv hwskel"><div class="skwrap" data-t="2600,7000"><img class="photo" src="img/kilian.jpg" alt="Kilian Braig"><img class="photo skel" src="img/kilian-skelett.jpg" alt="" aria-hidden="true"><img class="photo skel zb" src="img/kilian-zombie.jpg" alt="" aria-hidden="true"><img class="photo skel ps" src="img/kilian-pose.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Kilian Braig</figcaption></figure>
     </div>
   </section>
 
@@ -1518,21 +1520,23 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
     setTimeout(function(){document.body.appendChild(v);try{var p=v.play();if(p&&p.catch)p.catch(function(){})}catch(e){}},8000);
   }catch(e){}
 })();
-// Halloween: Skelett-Blitz auf dem Foto (2x pro Folie, ohne Dauerschleife)
+// Halloween: Foto -> Blitz -> Verwandlung -> Blitz -> Foto (je Person eigene Zeiten, nie gleichzeitig)
 (function(){
-  var fig=document.querySelector('.hwskel .skwrap');if(!fig)return;
-  var sl=fig.closest('.slide'),ts=[];
+  var figs=[].slice.call(document.querySelectorAll('.hwskel .skwrap'));if(!figs.length)return;
+  var sl=figs[0].closest('.slide'),ts=[],last={};
   function clear(){while(ts.length)clearTimeout(ts.pop())}
-  function go(){
+  function go(fig,n){
     if(!document.documentElement.classList.contains('hw')||window.hwManual)return;
-    var v=fig.querySelectorAll('.skel'),k;do{k=(Math.random()*v.length)|0}while(v.length>1&&k===go.last);go.last=k;
+    var v=fig.querySelectorAll('.skel'),k;do{k=(Math.random()*v.length)|0}while(v.length>1&&k===last[n]);last[n]=k;
     for(var i=0;i<v.length;i++)v[i].classList.toggle('on',i===k);
     fig.classList.remove('go');void fig.offsetWidth;fig.classList.add('go');
     ts.push(setTimeout(function(){fig.classList.remove('go')},700));
   }
   new MutationObserver(function(){
-    clear();fig.classList.remove('go');
-    if(sl.classList.contains('active')){ts.push(setTimeout(go,2600));ts.push(setTimeout(go,7000))}
+    clear();figs.forEach(function(f){f.classList.remove('go')});
+    if(sl.classList.contains('active'))figs.forEach(function(f,n){
+      (f.getAttribute('data-t')||'3000,7000').split(',').forEach(function(d){ts.push(setTimeout(function(){go(f,n)},+d))});
+    });
   }).observe(sl,{attributes:true,attributeFilter:['class']});
 })();
 
