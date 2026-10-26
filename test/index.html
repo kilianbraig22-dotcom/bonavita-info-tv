@@ -119,7 +119,7 @@ var add=[["Einzelne Figuren wählen (nur Seite „Training“) – je Figur Verw
 P.forEach(function(p){p[1].forEach(function(v){add.push(['tv:'+v[0],p[0]+' – '+v[1]+' (Verwandlung)','Blitz, '+v[1]+' auf dem Foto, Blitz, zurück',3]);add.push(['sc_one_'+v[0],p[0]+' – '+v[1]+' (Jumpscare)','Freigestellte Figur springt groß ins Bild'])})});
 L.push.apply(L,add)})();
 var f=document.getElementById('f'),page=document.getElementById('page'),day=document.getElementById('day'),now=document.getElementById('now'),list=document.getElementById('list'),run=0;
-function url(){return '../'+page.value+'/show.html?hw=1&hold=1&manual=1'+(day.value?'&hwday='+day.value:'')}
+function url(){return '../'+page.value+'/show.html?hw=1&hold=1&manual=1'+(day.value?'&hwday='+day.value:'')+'&_='+Date.now()}
 function load(){f.src=url()}
 page.onchange=day.onchange=load;load();
 var rows={};
