@@ -372,6 +372,7 @@ tr.today td.closed{color:var(--d1)}
 .hw .hwskel .skel.rb{object-position:50% 14%;background:#0a0d12}
 .hw .hwskel .skel.vg{object-position:50% 3%;background:#0a0f12}
 .hw .hwskel .skel.vz{object-position:50% 12%;background:#0a0f0a}
+.hw .hwskel .skel.vo{object-position:50% 12%;background:#120a1a}
 .hw .hwskel .skel.ad{object-position:50% 6%;background:#000}
 /* Folie ohne weitere Halloween-Effekte (schont den Fernseher) */
 .nofx .hwdeco,.nofx .hwg{display:none!important}
@@ -782,7 +783,7 @@ tr.today td.closed{color:var(--d1)}
         <div class="grp rv"><h4>Rezeption</h4>
           <div class="faces">
             <figure><img class="photo" src="img/senta.jpg" alt=""><figcaption>Senta Martin</figcaption></figure>
-            <figure class="hwskel"><div class="skwrap" data-t="7600,11200"><img class="photo" src="img/vincenza.jpg" alt=""><img class="photo skel vg" src="img/vincenza-geist.jpg" alt="" aria-hidden="true"><img class="photo skel vz" src="img/vincenza-zombie.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Vincenza Azzato</figcaption></figure>
+            <figure class="hwskel"><div class="skwrap" data-t="7600,11200"><img class="photo" src="img/vincenza.jpg" alt=""><img class="photo skel vg" src="img/vincenza-geist.jpg" alt="" aria-hidden="true"><img class="photo skel vz" src="img/vincenza-zombie.jpg" alt="" aria-hidden="true"><img class="photo skel vo" src="img/vincenza-orakel.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Vincenza Azzato</figcaption></figure>
           </div></div>
         <div class="grp rv"><h4>Massage</h4>
           <div class="faces">
@@ -1271,7 +1272,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   SC.shadow=function(){ov('<div class="jfill jsd" style="background:rgba(0,0,0,.6);animation:jsbk2 1.5s linear forwards"></div>'+SHD,1500);setTimeout(function(){imp('#000',0,600)},500)};
   SC.power=function(){ov('<div class="jfill jpwb"></div><div class="jpwl"></div>'+WRA.replace('class="jtw"','class="jpwf"')+grain(),1950);setTimeout(function(){imp('#fff',0,800)},1430)};
   window.hwScare=function(name){if(name&&name!=='1'&&!SC[name]&&!/^(1)$/.test(name)&&name.indexOf('one_')===0)return 0;var k=Object.keys(SC).filter(function(x){return x.indexOf('fig_')===0}),n=SC[name]?name:null,nm=name&&!SC[name]&&name!=='1',g=0,pre=0;if(!n){if(!scb.length){scb=k.slice().sort(function(){return Math.random()-.5});if(scb[scb.length-1]===lastSc&&scb.length>1)scb.unshift(scb.pop())}n=scb.pop();if(Math.random()<.35&&!window.hwTV&&n!=='blackout'&&n!=='peek'&&n!=='crash'&&n!=='power'&&n!=='clock'&&n!=='mirror'){var sl=document.querySelector('.slide.active');if(sl){pre=750;sl.classList.add('jfk');setTimeout(function(){sl.classList.remove('jfk')},720)}}}lastSc=n;setTimeout(function(){SC[n]()},pre);return SCD[n]+pre};
-  var FIGS={alex:['alex-hexe','alex-geist','alex-daemon','alex-zaehmerin'],elijah:['elijah-frank','elijah-vampir','elijah-mumie','elijah-scientist','elijah-cyber'],kilian:['kilian-golem','kilian-zombie','kilian-pose','kilian-draugr'],siggi:['siggi-reaper','siggi-wolf','siggi-kuerbis','siggi-zaehmer'],vincenza:['vincenza-geist','vincenza-zombie'],roland:['roland-waechter','roland-saege','roland-geist','roland-ritter','roland-rabe']};
+  var FIGS={alex:['alex-hexe','alex-geist','alex-daemon','alex-zaehmerin'],elijah:['elijah-frank','elijah-vampir','elijah-mumie','elijah-scientist','elijah-cyber'],kilian:['kilian-golem','kilian-zombie','kilian-pose','kilian-draugr'],siggi:['siggi-reaper','siggi-wolf','siggi-kuerbis','siggi-zaehmer'],vincenza:['vincenza-geist','vincenza-zombie','vincenza-orakel'],roland:['roland-waechter','roland-saege','roland-geist','roland-ritter','roland-rabe']};
   function figShow(n){ov('<div class="jfill jsb" style="background:rgba(0,0,0,.82);animation:jsbk2 1.9s linear forwards"></div><div class="jfig"><img src="img/cut-'+n+'.webp" alt=""></div>'+grain(),1900);setTimeout(function(){imp('#fff',0,700)},120);setTimeout(function(){imp('#fff',0,400)},1000)}
   Object.keys(FIGS).forEach(function(k){FIGS[k].forEach(function(n){SCD['one_'+n]=1900;SC['one_'+n]=function(){figShow(n)}})});
   Object.keys(FIGS).forEach(function(k){SCD['fig_'+k]=1900;FIGS[k].forEach(function(n){var im=new Image();im.src='img/cut-'+n+'.webp'});
