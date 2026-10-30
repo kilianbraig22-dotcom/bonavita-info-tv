@@ -1119,8 +1119,10 @@ function tick(){
   document.getElementById('monthKicker').textContent='Info-Update · '+n.toLocaleDateString('de-DE',{month:'long',year:'numeric'});
   var hr=n.getHours();
   document.getElementById('greet').textContent=hr<11?'Guten Morgen.':(hr<17?'Guten Tag.':'Guten Abend.');
-  var hwq=location.search,hwOn;
-  if(/[?&]hw=1/.test(hwq))hwOn=true;else if(/[?&]hw=0/.test(hwq))hwOn=false;
+  var hwq=location.search,hwOn,pv=n.getFullYear()===2026&&n.getMonth()===9&&n.getDate()===30&&n.getHours()<20&&!/[?&]hw=1/.test(hwq);
+  window.bvPv=pv;
+  if(window._bvpv===undefined)window._bvpv=pv;else if(window._bvpv&&!pv){location.replace(location.pathname+(location.search.replace(/[?&]_=\d+/g,'')||'?')+(location.search.replace(/[?&]_=\d+/g,'')?'&':'')+'_='+Date.now());return}
+  if(/[?&]hw=1/.test(hwq))hwOn=true;else if(/[?&]hw=0/.test(hwq)||pv)hwOn=false;
   else hwOn=CONFIG.halloween===true||CONFIG.halloween!==false&&((n.getMonth()===9&&n.getDate()>=15)||(n.getMonth()===10&&n.getDate()<=1));
   document.documentElement.classList.toggle('hw',hwOn);
   document.getElementById('motto').textContent=hwOn?CONFIG.hwMotto:(CONFIG.motto[n.getDay()]||'');
@@ -1529,6 +1531,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   var de=document.documentElement;if(de.classList.contains('hw'))return;
   var q=location.search,n=new Date(),sm=q.match(/[?&]sday=(\d+)-(\d+)/);if(sm)n=new Date(n.getFullYear(),+sm[1]-1,+sm[2],12);
   var mo=n.getMonth()+1,dy=n.getDate(),se=(q.match(/[?&]season=(\w+)/)||[])[1];
+  if(!se&&window.bvPv)se='au';
   if(!se)se=(mo===11&&dy>=2)?'au':(mo===12||(mo===1&&dy<=6))?'xm':'';
   if(se!=='au'&&se!=='xm')return;
   de.classList.add(se);
