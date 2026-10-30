@@ -715,6 +715,7 @@ tr.today td.closed{color:var(--d1)}
 @keyframes aufly{0%{opacity:0;transform:translate(0,0) scale(.6)}20%{opacity:1}50%{transform:translate(var(--fx),-70px) scale(1)}80%{opacity:.9}100%{opacity:0;transform:translate(calc(var(--fx)*-.6),-150px) scale(.5)}}
 @keyframes aunut{0%{opacity:0;transform:translateY(-80px) rotate(0)}8%{opacity:1}70%{transform:translateY(1000px) rotate(200deg)}80%{transform:translateY(950px) rotate(230deg)}90%{transform:translateY(1000px) rotate(250deg);opacity:1}100%{transform:translateY(1000px) rotate(250deg);opacity:0}}
 @keyframes aurays{0%{opacity:0}30%{opacity:1}70%{opacity:1}100%{opacity:0}}
+@keyframes aubolt{0%{opacity:.7}15%{opacity:0}30%{opacity:.45}100%{opacity:0}}
 @keyframes sdgust{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(1000px,-60px) rotate(calc(var(--r)*.5))}100%{transform:translate(var(--dx),40px) rotate(var(--r))}}
 </style>
 
@@ -1586,8 +1587,27 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
     sparkle:function(){for(var j=0;j<(lt?8:14);j++)el('<div class="sdspk" style="left:'+Math.round(R(80,1840))+'px;top:'+Math.round(R(140,940))+'px;--dl:'+R(0,2.2).toFixed(1)+'s"></div>',6000)},
     burst:function(){var h='',j,c=lt?14:44;for(j=0;j<c;j++)h+=flake(2).replace('infinite','1').replace(/--dl:-?[0-9.]+s/,'--dl:'+R(0,3).toFixed(1)+'s');var d=document.createElement('div');d.innerHTML=h;var ks=[].slice.call(d.children);ks.forEach(function(k){box.appendChild(k)});setTimeout(function(){ks.forEach(function(k){if(k.parentNode)k.parentNode.removeChild(k)})},21000)}
   };
+  // Live-Wetter (Open-Meteo, Jestetten): Effekte passen sich dem aktuellen Wetter an
+  var WX={k:'clear',wind:0,day:true},wxl=document.createElement('div');wxl.className='wxl';wxl.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden';box.appendChild(wxl);
+  function wxKind(c,cl){if(c>=95)return'storm';if(c>=71&&c<=77||c===85||c===86)return'snow';if(c>=51&&c<=67||c>=80&&c<=82)return'rain';if(c===45||c===48)return'fog';if(c===3||cl>=85)return'cloud';if(c===0||c===1)return'clear';return'part'}
+  function wxApply(){
+    wxl.innerHTML='';var k=WX.k,h='',j,c;
+    if(k==='rain'||k==='storm'){c=Math.round((k==='storm'?110:70)*S);for(j=0;j<c;j++)h+='<i style="position:absolute;left:'+Math.round(R(-100,2000))+'px;top:0;width:2px;height:'+Math.round(R(36,70))+'px;background:linear-gradient(rgba(190,210,230,0),rgba(190,210,230,.65));transform:rotate(8deg);opacity:0;animation:aurain '+R(.7,1.1).toFixed(2)+'s linear '+R(0,1.2).toFixed(2)+'s infinite"></i>';h+='<div style="position:absolute;inset:0;background:rgba(40,55,75,'+(k==='storm'?.28:.16)+')"></div>'}
+    else if(k==='snow'){c=Math.round(60*S);for(j=0;j<c;j++)h+=flake(j%3===0?1:0)}
+    else if(k==='fog'){h='<div style="position:absolute;inset:0;background:linear-gradient(rgba(220,220,225,.22),rgba(220,220,225,.34));animation:sdfogd 30s ease-in-out infinite alternate"></div>'}
+    else if(k==='cloud'||k==='part'){h='<div style="position:absolute;inset:0;background:rgba(60,60,70,'+(k==='cloud'?.16:.07)+')"></div>'}
+    else if(k==='clear'&&WX.day){for(j=0;j<3;j++)h+='<i style="position:absolute;top:-80px;left:'+Math.round(R(200,1500))+'px;width:'+Math.round(R(110,200))+'px;height:1300px;transform:rotate(-18deg);transform-origin:50% 0;background:linear-gradient(rgba(255,214,140,.22),rgba(255,214,140,0) 85%);filter:blur(6px)"></i>'}
+    else if(!WX.day){h='<div style="position:absolute;inset:0;background:rgba(10,15,40,.22)"></div>'}
+    wxl.innerHTML=h;
+  }
+  function wxFetch(){try{var x=new XMLHttpRequest();x.open('GET','https://api.open-meteo.com/v1/forecast?latitude=47.65&longitude=8.57&current=weather_code,wind_speed_10m,cloud_cover,is_day&wind_speed_unit=kmh&timezone=auto');x.timeout=8000;x.onload=function(){try{var d=JSON.parse(x.responseText).current;WX.k=wxKind(d.weather_code,d.cloud_cover);WX.wind=d.wind_speed_10m;WX.day=d.is_day===1;window.bvWx=WX;wxApply()}catch(e){}};x.send()}catch(e){}}
+  var wq=location.search.match(/[?&]wx=(\w+)/);
+  if(wq){WX.k=wq[1];window.bvWx=WX;wxApply()}else{wxFetch();setInterval(wxFetch,600000)}
+  window.wxSet=function(k){WX.k=k;wxApply()};
+  var wxOk={rain:{rays:1,fireflies:1,nuts:1},storm:{rays:1,fireflies:1,nuts:1,rain:1},snow:{rays:1,fireflies:1,nuts:1,rain:1,birds:1},fog:{rays:1,rain:1},cloud:{rays:1},part:{},clear:{rain:1}};
+  if(se==='au')FXS.rain=FXS.rain||function(){};
   var names=Object.keys(FXS),lastN='';
-  (function loop(){setTimeout(function(){if(!window.hwBusy){var k=names[Math.floor(Math.random()*names.length)],g=0;while(k===lastN&&g++<8)k=names[Math.floor(Math.random()*names.length)];lastN=k;try{FXS[k]()}catch(e){}}loop()},R(18000,32000))})();
+  (function loop(){setTimeout(function(){if(!window.hwBusy){var pool=names.filter(function(n){return !(wxOk[WX.k]&&wxOk[WX.k][n])});if(WX.wind>25&&se==='au')pool.push('gust','gust');if(!pool.length)pool=names;if(WX.k==='storm'&&!wxl.querySelector('.bolt')){var bo=document.createElement('div');bo.className='bolt';bo.style.cssText='position:absolute;inset:0;background:#fff;opacity:0;animation:aubolt .6s ease-out';wxl.appendChild(bo);setTimeout(function(){if(bo.parentNode)bo.parentNode.removeChild(bo)},700)}var k=pool[Math.floor(Math.random()*pool.length)],g=0;while(k===lastN&&g++<8&&pool.length>1)k=pool[Math.floor(Math.random()*pool.length)];lastN=k;try{FXS[k]()}catch(e){}}loop()},R(18000,32000))})();
   window.sePlay=function(k){if(FXS[k])FXS[k]()};
 })();
 
