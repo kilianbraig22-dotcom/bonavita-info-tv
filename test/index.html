@@ -119,6 +119,7 @@ var L=[
 var AU=[['alex','Alex','Igel'],['elijah','Elijah','Vogelscheuche'],['kilian','Kilian','Förster'],['siggi','Siggi','Waldgeist'],['roland','Roland','Pilzmann'],['vinci','Vinci','Eichhörnchen']];
 var addAu=[["Herbst-Figuren (oben bei „Design“ den Herbst wählen) – Verwandlung und freundlicher Auftritt"]];
 AU.forEach(function(v){addAu.push(['tv:herbst-'+v[0],v[1]+' – '+v[2]+' (Verwandlung)','Warmer Lichtwirbel, die Herbst-Figur erscheint auf dem Foto und verschwindet wieder',3]);addAu.push(['ap:'+v[0],v[1]+' – '+v[2]+' (Auftritt)','Die Figur schaut von unten ins Bild, winkt kurz und verschwindet wieder'])});
+addAu.push(['se:rain','Herbstregen','Regenschauer'],['se:rays','Sonnenstrahlen','Goldene Lichtstrahlen'],['se:fireflies','Glühwürmchen','Warme Lichtpunkte steigen auf'],['se:nuts','Kastanien','Kastanien fallen herunter']);
 var add=[["Einzelne Figuren wählen (nur Seite „Training“) – je Figur Verwandlung und Jumpscare"]];
 P.forEach(function(p){p[1].forEach(function(v){add.push(['tv:'+v[0],p[0]+' – '+v[1]+' (Verwandlung)','Blitz, '+v[1]+' auf dem Foto, Blitz, zurück',3]);add.push(['sc_one_'+v[0],p[0]+' – '+v[1]+' (Jumpscare)','Freigestellte Figur springt groß ins Bild'])})});
 L.push.apply(L,add);L.push.apply(L,addAu)})();
@@ -139,6 +140,7 @@ function W(){return f.contentWindow}
 async function prep(x){var w=W();if(!w||!w.show)return;var want=x[3];if(want===undefined)return;if(w.idx!==want){w.show(want);await sleep(1400)}}
 async function play(x){var w=W();if(!w||!w.hwPlay){now.textContent='Vorschau lädt noch …';return 0}
  await prep(x);now.textContent='Läuft: '+x[1];Object.values(rows).forEach(function(r){r.classList.remove('act')});rows[x[0]].classList.add('act');
+ if(x[0].indexOf('se:')===0){if(!w.sePlay){now.textContent='Nur im Herbst-Design';return 0}w.sePlay(x[0].slice(3));return 9000}
  if(x[0].indexOf('ap:')===0){if(!w.apPeek){now.textContent='Nur auf der Seite Training';return 0}return w.apPeek(x[0].slice(3))}
  if(x[0].indexOf('tv:')===0){if(!w.hwTransOne){now.textContent='Nur auf der Seite Training';return 0}return w.hwTransOne(x[0].slice(3))||1500}
  if(x[0].indexOf('trans')===0){if(!w.hwTrans){now.textContent='Nur auf der Seite Training';return 0}return w.hwTrans()}
