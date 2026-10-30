@@ -1014,6 +1014,19 @@ tr.today td.closed{color:var(--d1)}
   </section>
 
   <!-- 18 Weiterempfehlen -->
+  <!-- Preisanpassung ab 01.01.2027: sichtbar 05.11.2026 bis 31.01.2027 -->
+  <section class="slide" data-sec="20" data-show-from="2026-11-05" data-hide-from="2027-02-01" id="s-preis">
+    <p class="kicker rv">Preisanpassung zum 01.01.2027</p>
+    <h2 class="rv" style="font-size:84px;line-height:1.06">Gemeinsam gesund bleiben &ndash; auch 2027!</h2>
+    <p class="lead rv" style="font-size:40px;margin-top:24px;max-width:1500px">Zum 01.01.2027 passen wir unsere Mitgliedsbeitr&auml;ge erstmals seit unserer Er&ouml;ffnung an.</p>
+    <p class="rv" style="font-size:38px;font-weight:700;margin:30px 0 14px;color:var(--fg)">Die Beitr&auml;ge ab dem 01.01.2027</p>
+    <div class="rv" style="display:flex;gap:40px">
+      <div style="flex:1;background:var(--panel);border:2px solid var(--line);border-radius:36px;padding:22px 44px"><div style="font-size:40px;font-weight:600;color:var(--mute)">1&times; pro Woche</div><div style="font-size:96px;font-weight:800;line-height:1.1;color:var(--lime)">46,00&nbsp;&euro;</div><div style="font-size:32px;color:var(--mute)">monatlich</div></div>
+      <div style="flex:1;background:var(--panel);border:2px solid var(--line);border-radius:36px;padding:22px 44px"><div style="font-size:40px;font-weight:600;color:var(--mute)">2&times; und mehr pro Woche</div><div style="font-size:96px;font-weight:800;line-height:1.1;color:var(--lime)">69,00&nbsp;&euro;</div><div style="font-size:32px;color:var(--mute)">monatlich</div></div>
+    </div>
+    <p class="rv" style="font-size:32px;line-height:1.35;color:var(--mute);margin-top:24px;max-width:1650px">Nach der dreimonatigen Erstlaufzeit bleibt die Mitgliedschaft weiterhin flexibel zum Ende des Folgemonats k&uuml;ndbar.<br>Bei Fragen sind wir gerne pers&ouml;nlich da: im Training oder unter 07745&nbsp;927&nbsp;00&nbsp;00.</p>
+  </section>
+
   <section class="slide lime" data-sec="13" id="s-weiter">
     <p class="kicker rv">Gemeinsam stärker</p>
     <h2 class="rv">Gezieltes Training kann Rückenbeschwerden deutlich verbessern.</h2>
@@ -1147,7 +1160,7 @@ function tick(){
 })();
 buildWeek();tick();setInterval(tick,15000);
 
-(function(){var n=new Date(),m=location.search.match(/[?&]sday=(\d+)-(\d+)/);if(m)n=new Date(n.getFullYear(),+m[1]-1,+m[2],12);[].forEach.call(document.querySelectorAll('.slide[data-hide-from]'),function(s){var p=s.getAttribute('data-hide-from').split('-');if(n>=new Date(+p[0],+p[1]-1,+p[2],0))s.parentNode.removeChild(s)})})();
+(function(){var n=new Date(),m=location.search.match(/[?&]sday=(\d+)-(\d+)/);if(m)n=new Date(n.getFullYear(),+m[1]-1,+m[2],12);[].forEach.call(document.querySelectorAll('.slide[data-show-from]'),function(s){var p=s.getAttribute('data-show-from').split('-');if(n<new Date(+p[0],+p[1]-1,+p[2],0))s.parentNode.removeChild(s)});[].forEach.call(document.querySelectorAll('.slide[data-hide-from]'),function(s){var p=s.getAttribute('data-hide-from').split('-');if(n>=new Date(+p[0],+p[1]-1,+p[2],0))s.parentNode.removeChild(s)})})();
 var slides=Array.prototype.slice.call(document.querySelectorAll('.slide')),idx=0;
 /* Staffel-Einblendung: --i je Folie */
 slides.forEach(function(s){
