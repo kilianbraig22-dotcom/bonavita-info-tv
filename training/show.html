@@ -373,6 +373,20 @@ tr.today td.closed{color:var(--d1)}
 .hw .hwskel .skel.vg{object-position:50% 3%;background:#0a0f12}
 .hw .hwskel .skel.vz{object-position:50% 12%;background:#0a0f0a}
 .hw .hwskel .skel.vo{object-position:50% 12%;background:#120a1a}
+.hwskel .skel.au-sk{display:none}
+.hw .hwskel .skel.au-sk{display:none}
+.au .hwskel .skel{display:none}
+.au .hwskel .skel.au-sk{display:block;position:absolute;inset:-1px!important;width:calc(100% + 2px)!important;height:calc(100% + 2px)!important;border-radius:0!important;object-position:50% 6%;opacity:0;background:#2a1a08}
+.au .hwskel .skfl{display:block;position:absolute;inset:0;opacity:0;pointer-events:none;background:radial-gradient(circle at 50% 55%,rgba(255,226,160,.95),rgba(232,150,46,.55) 55%,rgba(232,150,46,0) 80%)}
+.au .hwskel .skwrap.go .skel.au-sk.on{animation:auon 2.7s ease both}
+.au .hwskel .skwrap.go .skfl{animation:aufl 2.7s ease-out both}
+@keyframes auon{0%,10%{opacity:0}26%,80%{opacity:1}100%{opacity:0}}
+@keyframes aufl{0%{opacity:0}10%{opacity:.9}26%{opacity:0}78%{opacity:0}88%{opacity:.7}100%{opacity:0}}
+.aupk{position:absolute;bottom:0;width:640px;height:860px;z-index:60;pointer-events:none;animation:aupk 4.4s ease-in-out both}
+.aupk.l{left:70px}.aupk.r{right:70px}
+.aupk i{position:absolute;left:-15%;right:-15%;bottom:0;height:80%;background:radial-gradient(ellipse at 50% 80%,rgba(255,196,110,.5),rgba(255,196,110,0) 65%)}
+.aupk img{position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 0 22px rgba(255,190,90,.55))}
+@keyframes aupk{0%{transform:translateY(105%)}16%{transform:translateY(8%) rotate(0)}26%{transform:translateY(8%) rotate(-3deg)}36%{transform:translateY(8%) rotate(3deg)}46%{transform:translateY(8%) rotate(-3deg)}56%{transform:translateY(8%) rotate(0)}74%{transform:translateY(8%)}100%{transform:translateY(105%)}}
 .hw .hwskel .skel.ad{object-position:50% 6%;background:#000}
 /* Folie ohne weitere Halloween-Effekte (schont den Fernseher) */
 .nofx .hwdeco,.nofx .hwg{display:none!important}
@@ -751,9 +765,9 @@ tr.today td.closed{color:var(--d1)}
     <p class="kicker rv">Ihr Trainingsteam</p>
     <h2 class="rv">Wir begleiten Ihr Training.</h2>
     <div class="big3">
-      <figure class="rv hwskel"><div class="skwrap" data-t="3600,8000"><img class="photo" src="img/alex.jpg" alt="Alex Braig"><img class="photo skel ah" src="img/alex-hexe.jpg" alt="" aria-hidden="true"><img class="photo skel ag" src="img/alex-geist.jpg" alt="" aria-hidden="true"><img class="photo skel ad" src="img/alex-daemon.jpg" alt="" aria-hidden="true"><img class="photo skel az" src="img/alex-zaehmerin.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Alex Braig</figcaption></figure>
-      <figure class="rv hwskel"><div class="skwrap" data-t="4700,8900"><img class="photo" src="img/elijah.jpg" alt="Elijah Braig"><img class="photo skel ef" src="img/elijah-frank.jpg" alt="" aria-hidden="true"><img class="photo skel ev" src="img/elijah-vampir.jpg" alt="" aria-hidden="true"><img class="photo skel em" src="img/elijah-mumie.jpg" alt="" aria-hidden="true"><img class="photo skel es" src="img/elijah-scientist.jpg" alt="" aria-hidden="true"><img class="photo skel ec" src="img/elijah-cyber.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Elijah Braig</figcaption></figure>
-      <figure class="rv hwskel"><div class="skwrap" data-t="2600,7000"><img class="photo" src="img/kilian.jpg" alt="Kilian Braig"><img class="photo skel" src="img/kilian-golem.jpg" alt="" aria-hidden="true"><img class="photo skel zb" src="img/kilian-zombie.jpg" alt="" aria-hidden="true"><img class="photo skel ps" src="img/kilian-pose.jpg" alt="" aria-hidden="true"><img class="photo skel kd" src="img/kilian-draugr.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Kilian Braig</figcaption></figure>
+      <figure class="rv hwskel"><div class="skwrap" data-t="3600,8000"><img class="photo" src="img/alex.jpg" alt="Alex Braig"><img class="photo skel ah" src="img/alex-hexe.jpg" alt="" aria-hidden="true"><img class="photo skel ag" src="img/alex-geist.jpg" alt="" aria-hidden="true"><img class="photo skel ad" src="img/alex-daemon.jpg" alt="" aria-hidden="true"><img class="photo skel az" src="img/alex-zaehmerin.jpg" alt="" aria-hidden="true"><img class="photo skel au-sk" src="img/herbst-alex.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Alex Braig</figcaption></figure>
+      <figure class="rv hwskel"><div class="skwrap" data-t="4700,8900"><img class="photo" src="img/elijah.jpg" alt="Elijah Braig"><img class="photo skel ef" src="img/elijah-frank.jpg" alt="" aria-hidden="true"><img class="photo skel ev" src="img/elijah-vampir.jpg" alt="" aria-hidden="true"><img class="photo skel em" src="img/elijah-mumie.jpg" alt="" aria-hidden="true"><img class="photo skel es" src="img/elijah-scientist.jpg" alt="" aria-hidden="true"><img class="photo skel ec" src="img/elijah-cyber.jpg" alt="" aria-hidden="true"><img class="photo skel au-sk" src="img/herbst-elijah.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Elijah Braig</figcaption></figure>
+      <figure class="rv hwskel"><div class="skwrap" data-t="2600,7000"><img class="photo" src="img/kilian.jpg" alt="Kilian Braig"><img class="photo skel" src="img/kilian-golem.jpg" alt="" aria-hidden="true"><img class="photo skel zb" src="img/kilian-zombie.jpg" alt="" aria-hidden="true"><img class="photo skel ps" src="img/kilian-pose.jpg" alt="" aria-hidden="true"><img class="photo skel kd" src="img/kilian-draugr.jpg" alt="" aria-hidden="true"><img class="photo skel au-sk" src="img/herbst-kilian.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Kilian Braig</figcaption></figure>
     </div>
   </section>
 
@@ -763,7 +777,7 @@ tr.today td.closed{color:var(--d1)}
     <div class="teamrows">
       <div class="grp rv"><h4>Physiotherapie</h4>
         <div class="faces">
-          <figure class="big hwskel"><div class="skwrap" data-t="3200,7300"><img class="photo" src="img/siggi.jpg" alt=""><img class="photo skel" src="img/siggi-reaper.jpg" alt="" aria-hidden="true"><img class="photo skel" src="img/siggi-wolf.jpg" alt="" aria-hidden="true"><img class="photo skel" src="img/siggi-kuerbis.jpg" alt="" aria-hidden="true"><img class="photo skel sz" src="img/siggi-zaehmer.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Siggi Braig</figcaption></figure>
+          <figure class="big hwskel"><div class="skwrap" data-t="3200,7300"><img class="photo" src="img/siggi.jpg" alt=""><img class="photo skel" src="img/siggi-reaper.jpg" alt="" aria-hidden="true"><img class="photo skel" src="img/siggi-wolf.jpg" alt="" aria-hidden="true"><img class="photo skel" src="img/siggi-kuerbis.jpg" alt="" aria-hidden="true"><img class="photo skel sz" src="img/siggi-zaehmer.jpg" alt="" aria-hidden="true"><img class="photo skel au-sk" src="img/herbst-siggi.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Siggi Braig</figcaption></figure>
           <figure><img class="photo" src="img/dominic.jpg" alt=""><figcaption>Dominic Sauter</figcaption></figure>
           <figure><img class="photo" src="img/elena.jpg" alt=""><figcaption>Elena Gavryuschenko</figcaption></figure>
           <figure><img class="photo" src="img/jovana.jpg" alt=""><figcaption>Jovana Jankovic</figcaption></figure>
@@ -776,14 +790,14 @@ tr.today td.closed{color:var(--d1)}
       <div class="teamrow">
         <div class="grp rv"><h4>Training</h4>
           <div class="faces">
-            <figure class="big hwskel"><div class="skwrap" data-t="1800,11000"><img class="photo" src="img/alex.jpg" alt=""><img class="photo skel ah" src="img/alex-hexe.jpg" alt="" aria-hidden="true"><img class="photo skel ag" src="img/alex-geist.jpg" alt="" aria-hidden="true"><img class="photo skel ad" src="img/alex-daemon.jpg" alt="" aria-hidden="true"><img class="photo skel az" src="img/alex-zaehmerin.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Alex Braig</figcaption></figure>
-            <figure class="hwskel"><div class="skwrap" data-t="4600,8600"><img class="photo" src="img/elijah.jpg" alt=""><img class="photo skel ef" src="img/elijah-frank.jpg" alt="" aria-hidden="true"><img class="photo skel ev" src="img/elijah-vampir.jpg" alt="" aria-hidden="true"><img class="photo skel em" src="img/elijah-mumie.jpg" alt="" aria-hidden="true"><img class="photo skel es" src="img/elijah-scientist.jpg" alt="" aria-hidden="true"><img class="photo skel ec" src="img/elijah-cyber.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Elijah Braig</figcaption></figure>
-            <figure class="hwskel"><div class="skwrap" data-t="6000,9800"><img class="photo" src="img/kilian.jpg" alt=""><img class="photo skel" src="img/kilian-golem.jpg" alt="" aria-hidden="true"><img class="photo skel zb" src="img/kilian-zombie.jpg" alt="" aria-hidden="true"><img class="photo skel ps" src="img/kilian-pose.jpg" alt="" aria-hidden="true"><img class="photo skel kd" src="img/kilian-draugr.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Kilian Braig</figcaption></figure>
+            <figure class="big hwskel"><div class="skwrap" data-t="1800,11000"><img class="photo" src="img/alex.jpg" alt=""><img class="photo skel ah" src="img/alex-hexe.jpg" alt="" aria-hidden="true"><img class="photo skel ag" src="img/alex-geist.jpg" alt="" aria-hidden="true"><img class="photo skel ad" src="img/alex-daemon.jpg" alt="" aria-hidden="true"><img class="photo skel az" src="img/alex-zaehmerin.jpg" alt="" aria-hidden="true"><img class="photo skel au-sk" src="img/herbst-alex.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Alex Braig</figcaption></figure>
+            <figure class="hwskel"><div class="skwrap" data-t="4600,8600"><img class="photo" src="img/elijah.jpg" alt=""><img class="photo skel ef" src="img/elijah-frank.jpg" alt="" aria-hidden="true"><img class="photo skel ev" src="img/elijah-vampir.jpg" alt="" aria-hidden="true"><img class="photo skel em" src="img/elijah-mumie.jpg" alt="" aria-hidden="true"><img class="photo skel es" src="img/elijah-scientist.jpg" alt="" aria-hidden="true"><img class="photo skel ec" src="img/elijah-cyber.jpg" alt="" aria-hidden="true"><img class="photo skel au-sk" src="img/herbst-elijah.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Elijah Braig</figcaption></figure>
+            <figure class="hwskel"><div class="skwrap" data-t="6000,9800"><img class="photo" src="img/kilian.jpg" alt=""><img class="photo skel" src="img/kilian-golem.jpg" alt="" aria-hidden="true"><img class="photo skel zb" src="img/kilian-zombie.jpg" alt="" aria-hidden="true"><img class="photo skel ps" src="img/kilian-pose.jpg" alt="" aria-hidden="true"><img class="photo skel kd" src="img/kilian-draugr.jpg" alt="" aria-hidden="true"><img class="photo skel au-sk" src="img/herbst-kilian.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Kilian Braig</figcaption></figure>
           </div></div>
         <div class="grp rv"><h4>Rezeption</h4>
           <div class="faces">
             <figure><img class="photo" src="img/senta.jpg" alt=""><figcaption>Senta Martin</figcaption></figure>
-            <figure class="hwskel"><div class="skwrap" data-t="7600,11200"><img class="photo" src="img/vincenza.jpg" alt=""><img class="photo skel vg" src="img/vincenza-geist.jpg" alt="" aria-hidden="true"><img class="photo skel vz" src="img/vincenza-zombie.jpg" alt="" aria-hidden="true"><img class="photo skel vo" src="img/vincenza-orakel.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Vincenza Azzato</figcaption></figure>
+            <figure class="hwskel"><div class="skwrap" data-t="7600,11200"><img class="photo" src="img/vincenza.jpg" alt=""><img class="photo skel vg" src="img/vincenza-geist.jpg" alt="" aria-hidden="true"><img class="photo skel vz" src="img/vincenza-zombie.jpg" alt="" aria-hidden="true"><img class="photo skel vo" src="img/vincenza-orakel.jpg" alt="" aria-hidden="true"><img class="photo skel au-sk" src="img/herbst-vinci.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Vincenza Azzato</figcaption></figure>
           </div></div>
         <div class="grp rv"><h4>Massage</h4>
           <div class="faces">
@@ -791,7 +805,7 @@ tr.today td.closed{color:var(--d1)}
           </div></div>
         <div class="grp rv"><h4>Hausmeister</h4>
           <div class="faces">
-            <figure class="hwskel"><div class="skwrap" data-t="2800,9400"><img class="photo" src="img/roland.jpg" alt=""><img class="photo skel rw" src="img/roland-waechter.jpg" alt="" aria-hidden="true"><img class="photo skel rs" src="img/roland-saege.jpg" alt="" aria-hidden="true"><img class="photo skel rg" src="img/roland-geist.jpg" alt="" aria-hidden="true"><img class="photo skel rr" src="img/roland-ritter.jpg" alt="" aria-hidden="true"><img class="photo skel rb" src="img/roland-rabe.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Roland Braig</figcaption></figure>
+            <figure class="hwskel"><div class="skwrap" data-t="2800,9400"><img class="photo" src="img/roland.jpg" alt=""><img class="photo skel rw" src="img/roland-waechter.jpg" alt="" aria-hidden="true"><img class="photo skel rs" src="img/roland-saege.jpg" alt="" aria-hidden="true"><img class="photo skel rg" src="img/roland-geist.jpg" alt="" aria-hidden="true"><img class="photo skel rr" src="img/roland-ritter.jpg" alt="" aria-hidden="true"><img class="photo skel rb" src="img/roland-rabe.jpg" alt="" aria-hidden="true"><img class="photo skel au-sk" src="img/herbst-roland.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Roland Braig</figcaption></figure>
           </div></div>
       </div>
     </div>
@@ -1566,6 +1580,17 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   window.sePlay=function(k){if(FXS[k])FXS[k]()};
 })();
 
+// Herbst: freundlicher Auftritt der Team-Figuren statt Jumpscare (reihum, nie dieselbe Person zweimal hintereinander)
+(function(){
+  var de=document.documentElement,stg=document.getElementById('stage');if(!stg)return;
+  var P=['alex','elijah','kilian','siggi','roland','vinci'],bag=[],last=(function(){try{return localStorage.getItem('bvap')||''}catch(e){return ''}})();
+  P.forEach(function(p){var im=new Image();im.src='img/cut-herbst-'+p+'.webp'});
+  function nxt(){if(!bag.length){bag=P.slice().sort(function(){return Math.random()-.5});if(bag[bag.length-1]===last&&bag.length>1)bag.unshift(bag.pop())}last=bag.pop();try{localStorage.setItem('bvap',last)}catch(e){}return last}
+  window.apPeek=function(p){p=p||nxt();var d=document.createElement('div');d.className='aupk '+(Math.random()<.5?'l':'r');d.innerHTML='<i></i><img src="img/cut-herbst-'+p+'.webp" alt="">';stg.appendChild(d);setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d)},4600);return 4600};
+  if(window.hwManual||/[?&]jumpscare=0/.test(location.search))return;
+  (function loop(){setTimeout(function(){var s=document.querySelector('.slide.active');if(de.classList.contains('au')&&window.hwLvl>=2&&!window.hwBusy&&!(s&&s.hasAttribute('data-nofx'))&&!stg.classList.contains('lite')){window.hwBusy=true;var d=window.apPeek();setTimeout(function(){window.hwBusy=false},d)}loop()},(window.hwTV?45000:30000)+Math.random()*25000)})();
+})();
+
 // Wach-Video (NUR mit ?wach=1, hängt den Fire TV auf): winziges, unsichtbares Video in Dauerschleife, damit der Fire TV nicht in den Ruhemodus geht
 (function(){
   if(!/[?&]wach=1/.test(location.search))return;
@@ -1583,11 +1608,11 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   var ts=[],last={},cnt=0;
   function clear(){while(ts.length)clearTimeout(ts.pop())}
   function go(fig,n,force){
-    if(!document.documentElement.classList.contains('hw')||(window.hwManual&&!force)||window.hwLvl<2||document.getElementById('stage').classList.contains('lite'))return;
-    var v=fig.querySelectorAll('.skel'),k;do{k=(Math.random()*v.length)|0}while(v.length>1&&k===last[n]);last[n]=k;
-    for(var i=0;i<v.length;i++)v[i].classList.toggle('on',i===k);
+    if(!(document.documentElement.classList.contains('hw')||document.documentElement.classList.contains('au'))||(window.hwManual&&!force)||window.hwLvl<2||document.getElementById('stage').classList.contains('lite'))return;
+    var v=[].filter.call(fig.querySelectorAll('.skel'),function(e){return getComputedStyle(e).display!=='none'}),k;if(!v.length)return;do{k=(Math.random()*v.length)|0}while(v.length>1&&k===last[n]);last[n]=k;
+    [].forEach.call(fig.querySelectorAll('.skel'),function(e){e.classList.toggle('on',e===v[k])});
     fig.classList.remove('go');void fig.offsetWidth;fig.classList.add('go');
-    ts.push(setTimeout(function(){fig.classList.remove('go')},700));
+    ts.push(setTimeout(function(){fig.classList.remove('go')},document.documentElement.classList.contains('au')?2800:700));
   }
   function upd(){
     document.documentElement.classList.toggle('nofx',!!document.querySelector('.slide.active[data-nofx]'));
@@ -1597,7 +1622,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
       (f.getAttribute('data-t')||'3000,7000').split(',').forEach(function(d){ts.push(setTimeout(function(){go(f,n)},+d))});
     });
   }
-  window.hwTransOne=function(name){var s=document.querySelector('.slide.active');if(!s)return 0;var img=[].filter.call(s.querySelectorAll('.skel'),function(e){return (e.getAttribute('src')||'').indexOf('/'+name+'.jpg')>-1})[0];if(!img)return 0;var fig=img.closest('.skwrap');[].forEach.call(fig.querySelectorAll('.skel'),function(v){v.classList.toggle('on',v===img)});fig.classList.remove('go');void fig.offsetWidth;fig.classList.add('go');setTimeout(function(){fig.classList.remove('go')},700);return 1500};
+  window.hwTransOne=function(name){var s=document.querySelector('.slide.active');if(!s)return 0;var img=[].filter.call(s.querySelectorAll('.skel'),function(e){return (e.getAttribute('src')||'').indexOf('/'+name+'.jpg')>-1})[0];if(!img)return 0;var fig=img.closest('.skwrap');[].forEach.call(fig.querySelectorAll('.skel'),function(v){v.classList.toggle('on',v===img)});fig.classList.remove('go');void fig.offsetWidth;fig.classList.add('go');setTimeout(function(){fig.classList.remove('go')},document.documentElement.classList.contains('au')?2800:700);return 3000};
   window.hwTrans=function(){var s=document.querySelector('.slide.active');var c=0;all.forEach(function(f,n){if(f.closest('.slide')===s){setTimeout(function(){go(f,n,true)},c*900);c++}});return 900*c+1500};
   slides2.forEach(function(s){new MutationObserver(upd).observe(s,{attributes:true,attributeFilter:['class']})});
 })();

@@ -36,6 +36,7 @@ button.stop{border-color:#c0392b}
    <button class="pri" id="all">▶ Alles nacheinander</button>
    <button class="stop" id="stop">■ Stopp</button>
    <button id="prev">◀ Folie</button><button id="next">Folie ▶</button>
+   <select id="mode"><option value="hw">Design: Halloween</option><option value="au">Design: Herbst</option></select>
    <select id="page"><option value="training">Training</option><option value="physio">Physio</option></select>
    <select id="day"><option value="">Heute</option><option value="22">Stand 22.10.</option><option value="27">Stand 27.10.</option><option value="28">Stand 28.10. (Countdown rot)</option><option value="31">Finale 31.10.</option></select>
   </div>
@@ -115,26 +116,30 @@ var L=[
 ["rain","Kürbisregen","18 Kürbisse fallen über die Folie"]
 ];
 (function(){var P=[['Alex',[['alex-hexe','Hexe'],['alex-geist','Geist'],['alex-daemon','Dämonin'],['alex-zaehmerin','Drachenzähmerin']]],['Elijah',[['elijah-frank','Frankenstein'],['elijah-vampir','Vampir'],['elijah-mumie','Mumie'],['elijah-scientist','Mad Scientist'],['elijah-cyber','Cyber-Zombie']]],['Kilian',[['kilian-golem','Golem'],['kilian-zombie','Zombie'],['kilian-pose','Bizeps-Pose'],['kilian-draugr','Wikinger-Draugr']]],['Siggi',[['siggi-reaper','Sensenmann'],['siggi-wolf','Werwolf'],['siggi-kuerbis','Kürbiskönig'],['siggi-zaehmer','Drachenzähmer']]],['Vincenza',[['vincenza-geist','Geister-Empfangsdame'],['vincenza-zombie','Zombie'],['vincenza-orakel','Glückskeks-Orakel']]],['Roland',[['roland-waechter','Friedhofswärter'],['roland-saege','Kettensäge'],['roland-geist','Poltergeist'],['roland-ritter','Untoter Ritter'],['roland-rabe','Rabenlord']]]];
+var AU=[['alex','Alex','Igel'],['elijah','Elijah','Vogelscheuche'],['kilian','Kilian','Förster'],['siggi','Siggi','Waldgeist'],['roland','Roland','Pilzmann'],['vinci','Vinci','Eichhörnchen']];
+var addAu=[["Herbst-Figuren (oben bei „Design“ den Herbst wählen) – Verwandlung und freundlicher Auftritt"]];
+AU.forEach(function(v){addAu.push(['tv:herbst-'+v[0],v[1]+' – '+v[2]+' (Verwandlung)','Warmer Lichtwirbel, die Herbst-Figur erscheint auf dem Foto und verschwindet wieder',3]);addAu.push(['ap:'+v[0],v[1]+' – '+v[2]+' (Auftritt)','Die Figur schaut von unten ins Bild, winkt kurz und verschwindet wieder'])});
 var add=[["Einzelne Figuren wählen (nur Seite „Training“) – je Figur Verwandlung und Jumpscare"]];
 P.forEach(function(p){p[1].forEach(function(v){add.push(['tv:'+v[0],p[0]+' – '+v[1]+' (Verwandlung)','Blitz, '+v[1]+' auf dem Foto, Blitz, zurück',3]);add.push(['sc_one_'+v[0],p[0]+' – '+v[1]+' (Jumpscare)','Freigestellte Figur springt groß ins Bild'])})});
-L.push.apply(L,add)})();
+L.push.apply(L,add);L.push.apply(L,addAu)})();
 var f=document.getElementById('f'),page=document.getElementById('page'),day=document.getElementById('day'),now=document.getElementById('now'),list=document.getElementById('list'),run=0;
-function url(){return '../'+page.value+'/show.html?hw=1&hold=1&manual=1'+(day.value?'&hwday='+day.value:'')+'&_='+Date.now()}
+function url(){return '../'+page.value+'/show.html?'+(mode.value==='au'?'season=au&hw=0':'hw=1')+'&hold=1&manual=1'+(day.value?'&hwday='+day.value:'')+'&_='+Date.now()}
 function load(){f.src=url()}
-page.onchange=day.onchange=load;load();
+var mode=document.getElementById('mode');page.onchange=day.onchange=mode.onchange=load;load();
 var rows={};
 L.forEach(function(x){if(x.length===1){var h=document.createElement('div');h.className='grp';h.textContent=x[0];list.appendChild(h);return}
  var r=document.createElement('div');r.className='row';rows[x[0]]=r;
  var fxp=x[0]==='tear'?'claws':x[0]==='crumble'?'dust':x[0];
  r.innerHTML='<div><b></b><span></span></div><button class="go">▶ Abspielen</button><code></code>';
  r.querySelector('b').textContent=x[1];r.querySelector('span').textContent=x[2];
- r.querySelector('code').textContent=x[0].indexOf('tv:')===0?'(nur auf der Testseite)':x[0].indexOf('sc_')===0?'?hw=1&scare='+x[0].slice(3):'?hw=1&fx='+fxp+(x[0]==='rain'?'&hwday=31':'');
+ r.querySelector('code').textContent=(x[0].indexOf('tv:')===0||x[0].indexOf('ap:')===0)?'(nur auf der Testseite)':x[0].indexOf('sc_')===0?'?hw=1&scare='+x[0].slice(3):'?hw=1&fx='+fxp+(x[0]==='rain'?'&hwday=31':'');
  if(x[0].indexOf('info')===0){r.querySelector('.go').remove();r.querySelector('code').textContent=''}else r.querySelector('.go').onclick=function(){run++;play(x)};list.appendChild(r)});
 var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
 function W(){return f.contentWindow}
 async function prep(x){var w=W();if(!w||!w.show)return;var want=x[3];if(want===undefined)return;if(w.idx!==want){w.show(want);await sleep(1400)}}
 async function play(x){var w=W();if(!w||!w.hwPlay){now.textContent='Vorschau lädt noch …';return 0}
  await prep(x);now.textContent='Läuft: '+x[1];Object.values(rows).forEach(function(r){r.classList.remove('act')});rows[x[0]].classList.add('act');
+ if(x[0].indexOf('ap:')===0){if(!w.apPeek){now.textContent='Nur auf der Seite Training';return 0}return w.apPeek(x[0].slice(3))}
  if(x[0].indexOf('tv:')===0){if(!w.hwTransOne){now.textContent='Nur auf der Seite Training';return 0}return w.hwTransOne(x[0].slice(3))||1500}
  if(x[0].indexOf('trans')===0){if(!w.hwTrans){now.textContent='Nur auf der Seite Training';return 0}return w.hwTrans()}
  var d=w.hwPlay(x[0])||1500;return d}
