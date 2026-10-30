@@ -959,7 +959,7 @@ tr.today td.closed{color:var(--d1)}
   </section>
 
   <!-- 15 Rückenstudie: zwei Ringe -->
-  <section class="slide" data-sec="14" data-count="1" data-hide-from="2026-12-01">
+  <section class="slide" data-sec="14" data-count="1" data-hide-from="2026-11-02">
     <p class="kicker rv" style="text-align:center">Rückenstudie</p>
     <div class="rings">
       <div class="ringbox rv">
@@ -974,13 +974,36 @@ tr.today td.closed{color:var(--d1)}
   </section>
 
   <!-- 16 So gemessen -->
-  <section class="slide" data-sec="13" data-count="1">
+  <section class="slide" data-sec="13" data-count="1" data-hide-from="2026-11-02">
     <p class="kicker rv">So haben wir gemessen</p>
     <h2 class="rv">Alle litten zu Beginn unter Rückenbeschwerden.</h2>
     <div class="steps">
       <div class="rv"><b><span data-to="5">5</span></b><span>Monate gezieltes bonaVITA-Training</span></div>
       <div class="rv"><b><span data-to="50">50</span></b><span>Teilnehmer:innen ohne regelmäßiges Training zuvor</span></div>
     </div>
+  </section>
+
+  <!-- Ab 2.11.: Gesundheitsförderung -->
+  <section class="slide" data-sec="14" data-show-from="2026-11-02">
+    <p class="kicker rv">Gesund bleiben</p>
+    <h2 class="rv" style="font-size:100px">Gesundheit hat drei Säulen.</h2>
+    <div class="steps">
+      <div class="rv"><b style="font-size:96px">Bewegung</b><span>Regelmäßig und gezielt trainieren &ndash; für Kraft, Beweglichkeit und Ausdauer.</span></div>
+      <div class="rv"><b style="font-size:96px">Ernährung</b><span>Ausgewogen essen und die Mahlzeiten zum Training passend wählen.</span></div>
+      <div class="rv"><b style="font-size:96px">Erholung</b><span>Schlaf und Pausen geben dem Körper Zeit, sich anzupassen.</span></div>
+    </div>
+  </section>
+
+  <!-- Ab 2.11.: Ernährung -->
+  <section class="slide lime" data-sec="16" data-show-from="2026-11-02">
+    <p class="kicker rv">Ernährung &amp; Training</p>
+    <h2 class="rv" style="font-size:96px;line-height:1.05">Wissen Sie, wie viele Makros Sie brauchen?</h2>
+    <ul class="list">
+      <li class="rv">Eiweiß, Kohlenhydrate, Fett: Was braucht Ihr Körper wirklich?</li>
+      <li class="rv">Was esse ich vor und nach dem Training?</li>
+      <li class="rv">Wie unterstütze ich Muskelaufbau und Erholung?</li>
+    </ul>
+    <p class="lead rv">Sprechen Sie uns an &ndash; wir helfen gerne weiter.</p>
   </section>
 
   <!-- Alltag -->
@@ -1046,9 +1069,15 @@ tr.today td.closed{color:var(--d1)}
     <p class="rv" style="font-size:32px;line-height:1.35;color:var(--mute);margin-top:24px;max-width:1650px">Nach der dreimonatigen Erstlaufzeit bleibt die Mitgliedschaft weiterhin flexibel zum Ende des Folgemonats k&uuml;ndbar.<br>Bei Fragen sind wir gerne pers&ouml;nlich da: im Training oder unter 07745&nbsp;927&nbsp;00&nbsp;00.</p>
   </section>
 
-  <section class="slide lime" data-sec="13" id="s-weiter">
+  <section class="slide lime" data-sec="13" id="s-weiter" data-hide-from="2026-11-02">
     <p class="kicker rv">Gemeinsam stärker</p>
     <h2 class="rv">Gezieltes Training kann Rückenbeschwerden deutlich verbessern.</h2>
+    <p class="lead rv">Empfehlen Sie bonaVITA gerne weiter. Freunde &amp; Bekannte trainieren beim Probetraining kostenlos mit.</p>
+  </section>
+
+  <section class="slide lime" data-sec="13" id="s-weiter2" data-show-from="2026-11-02">
+    <p class="kicker rv">Gemeinsam stärker</p>
+    <h2 class="rv">Wer sich bewegt, bleibt gesund.</h2>
     <p class="lead rv">Empfehlen Sie bonaVITA gerne weiter. Freunde &amp; Bekannte trainieren beim Probetraining kostenlos mit.</p>
   </section>
 
@@ -1169,7 +1198,7 @@ function tick(){
     h+='<i style="--x:'+x+'px;--k:'+i+';width:'+sz+'px;height:'+sz+'px;top:'+y+'px;margin-left:'+(-sz/2)+'px"></i>';
   }
   sc.innerHTML=h;
-  var before=document.getElementById('s-weiter');
+  var before=document.getElementById('s-weiter')||document.getElementById('s-weiter2');
   CONFIG.aktionen.forEach(function(a){
     if(a.bis&&new Date()>new Date(a.bis+'T23:59:59'))return;
     var s=document.createElement('section');s.className='slide'+(a.lime?' lime':'');s.dataset.sec=a.sec||14;
