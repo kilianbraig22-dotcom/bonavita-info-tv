@@ -1686,7 +1686,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
     else if(k==='fog'){h='<div style="position:absolute;inset:0;background:linear-gradient(rgba(220,220,225,.22),rgba(220,220,225,.34));"></div>'}
     else if(tvw&&(k==='cloud'||k==='part'||k==='clear'||!WX.day)){h=''}
     else if(k==='cloud'||k==='part'){h='<div style="position:absolute;inset:0;background:rgba(60,60,70,'+(k==='cloud'?.16:.07)+')"></div>'}
-    else if(k==='clear'&&WX.day){for(j=0;j<3;j++)h+='<i style="position:absolute;top:-80px;left:'+Math.round(R(200,1500))+'px;width:'+Math.round(R(110,200))+'px;height:1300px;transform:rotate(-18deg);transform-origin:50% 0;background:linear-gradient(rgba(255,214,140,.22),rgba(255,214,140,0) 85%);filter:blur(6px)"></i>'}
+    else if(k==='clear'&&WX.day){for(j=0;j<3;j++)h+='<i style="position:absolute;top:-80px;left:'+Math.round(R(200,1500))+'px;width:'+Math.round(R(110,200))+'px;height:1300px;transform:rotate(-18deg);transform-origin:50% 0;background:linear-gradient(rgba(255,214,140,.22),rgba(255,214,140,0) 85%)"></i>'}
     else if(!WX.day){h='<div style="position:absolute;inset:0;background:rgba(10,15,40,.22)"></div>'}
     wxl.innerHTML=h;
   }
