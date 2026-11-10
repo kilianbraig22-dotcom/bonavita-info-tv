@@ -248,10 +248,6 @@ tr.today td.closed{color:var(--d1)}
 .au[data-look="2"]{--lime:#d9b45a;--lime-rgb:217,180,90;--teal:#f0c24b;--d1:#5a4308;--d2:#3d2c05;--bar:#c79a2e}
 .au[data-look="2"] .slide.lime{background:linear-gradient(160deg,#ecc86e,#c79a2e)}
 .au[data-look="2"] img[src*="logo"]{filter:hue-rotate(-14deg) saturate(1.1)}
-html[data-tr="1"]:not(.lite) .slide{transform:translateX(90px)}
-html[data-tr="1"]:not(.lite) .slide.active{transform:none;transition:opacity .7s ease,transform .9s cubic-bezier(.2,.8,.2,1),visibility 0s}
-html[data-tr="2"]:not(.lite) .slide{transform:scale(.94)}
-html[data-tr="2"]:not(.lite) .slide.active{transform:none;transition:opacity .7s ease,transform .9s cubic-bezier(.2,.8,.2,1),visibility 0s}
 .mleg{display:flex;flex-direction:column;gap:22px;margin-top:44px}
 .mleg>div{display:grid;grid-template-columns:34px 330px 1fr;align-items:baseline;gap:20px;border-top:2px solid var(--line);padding-top:18px}
 .mleg i{width:28px;height:28px;border-radius:50%;transform:translateY(4px)}
@@ -407,7 +403,7 @@ html[data-tr="2"]:not(.lite) .slide.active{transform:none;transition:opacity .7s
 .au .hwskel .skwrap.go .skel.au-sk.on{animation:auon 2.7s ease both}
 .au .hwskel .skwrap.go .skfl{animation:aufl 2.7s ease-out both}
 @keyframes auon{0%,10%{opacity:0}26%,80%{opacity:1}100%{opacity:0}}
-@keyframes aufl{0%{opacity:0}10%{opacity:.9}26%{opacity:0}78%{opacity:0}88%{opacity:.7}100%{opacity:0}}
+@keyframes aufl{0%{opacity:0}10%{opacity:.4}26%{opacity:0}78%{opacity:0}88%{opacity:.3}100%{opacity:0}}
 .aupk{position:absolute;bottom:0;width:640px;height:860px;z-index:60;pointer-events:none;animation:aupk 4.4s ease-in-out both}
 .aupk.l{left:70px}.aupk.r{right:70px}
 .aupk i{position:absolute;left:-15%;right:-15%;bottom:0;height:80%;background:radial-gradient(ellipse at 50% 80%,rgba(255,196,110,.5),rgba(255,196,110,0) 65%)}
@@ -1207,7 +1203,7 @@ function tick(){
   (function(){
     var FA=["Schon 20 bis 30 Minuten zügiges Gehen am Tag tun dem Herz-Kreislauf-System gut.", "Muskeln verbrauchen auch in Ruhe mehr Energie als Fettgewebe.", "Krafttraining stärkt nicht nur Muskeln, sondern auch Knochen und Sehnen.", "Guter Schlaf unterstützt die Erholung nach dem Training.", "Nach dem Training hilft Eiweiß den Muskeln bei der Regeneration.", "Mehr als die Hälfte Ihres Körpers besteht aus Wasser.", "Regelmäßige Bewegung baut Stress ab und hebt die Stimmung.", "Ein gutes Aufwärmen bereitet Gelenke und Muskeln auf die Belastung vor.", "Ihre Wirbelsäule hat 23 Bandscheiben, die als Stoßdämpfer arbeiten.", "Das Herz schlägt in Ruhe etwa 60- bis 80-mal pro Minute.", "Der menschliche Körper hat mehr als 600 Muskeln.", "Die Wirbelsäule hat eine Doppel-S-Form, die Stöße abfedert.", "Trinken Sie über den Tag verteilt, nicht erst bei Durst.", "Ein Muskel wächst nicht im Training, sondern in der Erholung danach.", "Auch kleine Portionen zählen: Treppe, Spaziergang, Fahrrad.", "Fachleute empfehlen Erwachsenen Krafttraining an mindestens zwei Tagen pro Woche.", "Die WHO empfiehlt Erwachsenen mindestens 150 Minuten moderate Bewegung pro Woche.", "Wer lange sitzt, tut seinem Rücken mit einem Positionswechsel pro Stunde etwas Gutes.", "Ihre Füße tragen bei jedem Schritt Ihr gesamtes Körpergewicht.", "Gleichgewichtstraining hilft, Stürzen vorzubeugen.", "Kohlenhydrate sind der wichtigste Energielieferant bei intensiver Belastung.", "Ein Spaziergang in der Mittagspause bringt Tageslicht und Bewegung.", "Lächeln ist ansteckend. Probieren Sie es beim nächsten Satz aus.", "Der Oberschenkelknochen ist der längste und stärkste Knochen des Körpers.", "Die Gesäßmuskulatur ist der größte Muskel des Körpers.", "Gelenkknorpel wird durch Bewegung mit Nährstoffen versorgt.", "Wer regelmäßig trainiert, schläft oft besser.", "Kleine Schritte zählen. Wer dranbleibt, gewinnt.", "Ein starker Rumpf entlastet den Rücken im Alltag.", "Dehnen fühlt sich gut an, für die Erholung zählen aber vor allem Schlaf und Ernährung."],ed2=Math.floor(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())/864e5);
     var fe=document.getElementById('faktText');if(fe)fe.textContent=FA[ed2%FA.length];
-    var qq=location.search,lm=qq.match(/[?&]look=(\d)/),tm2=qq.match(/[?&]tr=(\d)/);document.documentElement.setAttribute('data-look',String(lm?+lm[1]:ed2%3));document.documentElement.setAttribute('data-tr',String(tm2?+tm2[1]:Math.floor(ed2/3)%3));
+    var qq=location.search,lm=qq.match(/[?&]look=(\d)/),tm2=qq.match(/[?&]tr=(\d)/);document.documentElement.setAttribute('data-look',String(lm?+lm[1]:ed2%3));
     ['tipps','info'].forEach(function(k){var l=[].slice.call(document.querySelectorAll('.slide[data-pool="'+k+'"]'));if(l.length<2)return;var ph=l.map(function(s){var c=document.createComment('p');s.parentNode.insertBefore(c,s);return c});var sh=l.slice().sort(function(){return Math.random()-.5});sh.forEach(function(s,i){ph[i].parentNode.insertBefore(s,ph[i])});ph.forEach(function(c){c.parentNode.removeChild(c)})});
   })();
 
@@ -1270,7 +1266,7 @@ buildWeek();tick();setInterval(tick,15000);
   var pools={};[].forEach.call(document.querySelectorAll('.slide[data-pool]'),function(s){(pools[s.getAttribute('data-pool')]=pools[s.getAttribute('data-pool')]||[]).push(s)});
   Object.keys(pools).forEach(function(k){var l=pools[k],keep=+l[0].getAttribute('data-keep')||Math.ceil(l.length/2);if(keep>=l.length)return;var st=(per*keep)%l.length,ok={};for(var i=0;i<keep;i++)ok[(st+i)%l.length]=1;l.forEach(function(s,i){if(!ok[i]&&s.parentNode)s.parentNode.removeChild(s)})});
   var ORD=['alex','dominic','siggi','nadja','elijah','verena','tatjana','kilian','elena','roland','kathleen','vinci','illia','senta','jovana','angelika'],fs={},st2=(per*5)%ORD.length;
-  for(var i=0;i<8;i++)fs[ORD[(st2+i)%ORD.length]]=1;
+  var nf=/Silk|AFT|Tizen|SMART-TV|Web0S|webOS/i.test(navigator.userAgent)?4:8;for(var i=0;i<nf;i++)fs[ORD[(st2+i)%ORD.length]]=1;
   window.bvFeat=function(k){return /[?&]feat=all/.test(q)||!!fs[k]};window.bvFeatList=function(){return ORD.filter(function(k){return fs[k]})};
 })();
 var slides=Array.prototype.slice.call(document.querySelectorAll('.slide')),idx=0;
@@ -1681,11 +1677,13 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   // Live-Wetter (Open-Meteo, Jestetten): Effekte passen sich dem aktuellen Wetter an
   var WX={k:'clear',wind:0,day:true},wxl=document.createElement('div');wxl.className='wxl';wxl.style.cssText='position:absolute;inset:0;pointer-events:none;overflow:hidden';box.appendChild(wxl);
   function wxKind(c,cl){if(c>=95)return'storm';if(c>=71&&c<=77||c===85||c===86)return'snow';if(c>=51&&c<=67||c>=80&&c<=82)return'rain';if(c===45||c===48)return'fog';if(c===3||cl>=85)return'cloud';if(c===0||c===1)return'clear';return'part'}
+  var wxSig='',tvw=/Silk|AFT|Tizen|SMART-TV|Web0S|webOS/i.test(navigator.userAgent);
   function wxApply(){
+    var sg=WX.k+(WX.day?'d':'n');if(sg===wxSig)return;wxSig=sg;
     wxl.innerHTML='';var k=WX.k,h='',j,c;
-    if(k==='rain'||k==='storm'){c=Math.round((k==='storm'?110:70)*S);for(j=0;j<c;j++)h+='<i style="position:absolute;left:'+Math.round(R(-100,2000))+'px;top:0;width:2px;height:'+Math.round(R(36,70))+'px;background:linear-gradient(rgba(190,210,230,0),rgba(190,210,230,.65));transform:rotate(8deg);opacity:0;animation:aurain '+R(.7,1.1).toFixed(2)+'s linear '+R(0,1.2).toFixed(2)+'s infinite"></i>';h+='<div style="position:absolute;inset:0;background:rgba(40,55,75,'+(k==='storm'?.28:.16)+')"></div>'}
-    else if(k==='snow'){c=Math.round(60*S);for(j=0;j<c;j++)h+=flake(j%3===0?1:0)}
-    else if(k==='fog'){h='<div style="position:absolute;inset:0;background:linear-gradient(rgba(220,220,225,.22),rgba(220,220,225,.34));animation:sdfogd 30s ease-in-out infinite alternate"></div>'}
+    if(k==='rain'||k==='storm'){c=Math.round((k==='storm'?110:70)*S*(tvw?.35:1));for(j=0;j<c;j++)h+='<i style="position:absolute;left:'+Math.round(R(-100,2000))+'px;top:0;width:2px;height:'+Math.round(R(36,70))+'px;background:linear-gradient(rgba(190,210,230,0),rgba(190,210,230,.65));transform:rotate(8deg);opacity:0;animation:aurain '+R(.7,1.1).toFixed(2)+'s linear '+R(0,1.2).toFixed(2)+'s infinite"></i>';h+='<div style="position:absolute;inset:0;background:rgba(40,55,75,'+(k==='storm'?.28:.16)+')"></div>'}
+    else if(k==='snow'){c=Math.round(60*S*(tvw?.4:1));for(j=0;j<c;j++)h+=flake(j%3===0?1:0)}
+    else if(k==='fog'){h='<div style="position:absolute;inset:0;background:linear-gradient(rgba(220,220,225,.22),rgba(220,220,225,.34));"></div>'}
     else if(k==='cloud'||k==='part'){h='<div style="position:absolute;inset:0;background:rgba(60,60,70,'+(k==='cloud'?.16:.07)+')"></div>'}
     else if(k==='clear'&&WX.day){for(j=0;j<3;j++)h+='<i style="position:absolute;top:-80px;left:'+Math.round(R(200,1500))+'px;width:'+Math.round(R(110,200))+'px;height:1300px;transform:rotate(-18deg);transform-origin:50% 0;background:linear-gradient(rgba(255,214,140,.22),rgba(255,214,140,0) 85%);filter:blur(6px)"></i>'}
     else if(!WX.day){h='<div style="position:absolute;inset:0;background:rgba(10,15,40,.22)"></div>'}
