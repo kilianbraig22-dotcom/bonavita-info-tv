@@ -1,0 +1,76 @@
+{
+ "_hinweis": "Diese Datei pflegen die Agenten. Nur Text hier ändern, kein Code. Siehe agents/*.md",
+ "motto": {
+  "0": "Schön, dass Sie da sind.",
+  "1": "Starke Woche, starker Rücken.",
+  "2": "Dranbleiben lohnt sich.",
+  "3": "Halbzeit. Weiter so!",
+  "4": "Noch einmal Kraft tanken vor dem Wochenende.",
+  "5": "Zum Wochenende noch einmal Gas geben.",
+  "6": "Samstagstraining. Respekt!"
+ },
+ "mottoAlt": {
+  "0": [
+   "Genießen Sie Ihre Zeit bei uns.",
+   "Bewegung tut auch am Sonntag gut."
+  ],
+  "1": [
+   "Neue Woche, neue Kraft.",
+   "Der Start ist gemacht. Weiter so!"
+  ],
+  "2": [
+   "Schritt für Schritt zum Ziel.",
+   "Jede Einheit zählt."
+  ],
+  "3": [
+   "Mitte der Woche, volle Energie.",
+   "Heute schon bewegt? Dann los."
+  ],
+  "4": [
+   "Fast geschafft. Noch ein starker Tag.",
+   "Gönnen Sie sich heute eine gute Einheit."
+  ],
+  "5": [
+   "Stark ins Wochenende.",
+   "Zeit für eine letzte Runde."
+  ],
+  "6": [
+   "Wer samstags trainiert, ist ein Vorbild.",
+   "Ein Wochenende mit Bewegung."
+  ]
+ },
+ "fakten": [
+  "Schon 20 bis 30 Minuten zügiges Gehen am Tag tun dem Herz-Kreislauf-System gut.",
+  "Muskeln verbrauchen auch in Ruhe mehr Energie als Fettgewebe.",
+  "Krafttraining stärkt nicht nur Muskeln, sondern auch Knochen und Sehnen.",
+  "Guter Schlaf unterstützt die Erholung nach dem Training.",
+  "Nach dem Training hilft Eiweiß den Muskeln bei der Regeneration.",
+  "Mehr als die Hälfte Ihres Körpers besteht aus Wasser.",
+  "Regelmäßige Bewegung baut Stress ab und hebt die Stimmung.",
+  "Ein gutes Aufwärmen bereitet Gelenke und Muskeln auf die Belastung vor.",
+  "Ihre Wirbelsäule hat 23 Bandscheiben, die als Stoßdämpfer arbeiten.",
+  "Das Herz schlägt in Ruhe etwa 60- bis 80-mal pro Minute.",
+  "Der menschliche Körper hat mehr als 600 Muskeln.",
+  "Die Wirbelsäule hat eine Doppel-S-Form, die Stöße abfedert.",
+  "Trinken Sie über den Tag verteilt, nicht erst bei Durst.",
+  "Ein Muskel wächst nicht im Training, sondern in der Erholung danach.",
+  "Auch kleine Portionen zählen: Treppe, Spaziergang, Fahrrad.",
+  "Fachleute empfehlen Erwachsenen Krafttraining an mindestens zwei Tagen pro Woche.",
+  "Die WHO empfiehlt Erwachsenen mindestens 150 Minuten moderate Bewegung pro Woche.",
+  "Wer lange sitzt, tut seinem Rücken mit einem Positionswechsel pro Stunde etwas Gutes.",
+  "Ihre Füße tragen bei jedem Schritt Ihr gesamtes Körpergewicht.",
+  "Gleichgewichtstraining hilft, Stürzen vorzubeugen.",
+  "Kohlenhydrate sind der wichtigste Energielieferant bei intensiver Belastung.",
+  "Ein Spaziergang in der Mittagspause bringt Tageslicht und Bewegung.",
+  "Lächeln ist ansteckend. Probieren Sie es beim nächsten Satz aus.",
+  "Der Oberschenkelknochen ist der längste und stärkste Knochen des Körpers.",
+  "Die Gesäßmuskulatur ist der größte Muskel des Körpers.",
+  "Gelenkknorpel wird durch Bewegung mit Nährstoffen versorgt.",
+  "Wer regelmäßig trainiert, schläft oft besser.",
+  "Kleine Schritte zählen. Wer dranbleibt, gewinnt.",
+  "Ein starker Rumpf entlastet den Rücken im Alltag.",
+  "Dehnen fühlt sich gut an, für die Erholung zählen aber vor allem Schlaf und Ernährung."
+ ],
+ "aktionen": [],
+ "themenwoche": null
+}

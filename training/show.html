@@ -1153,6 +1153,8 @@ tr.today td.closed{color:var(--d1)}
 </div>
 
 <script>
+/* ===== Inhalte aus content.json (von den Agenten gepflegt; bei Fehler gelten die Werte darunter) ===== */
+(function(){try{var x=new XMLHttpRequest();x.open('GET','content.json?v='+Math.floor(Date.now()/6e5),false);x.send();if(x.status===200||(x.status===0&&x.responseText)){window.BV_C=JSON.parse(x.responseText)}}catch(e){}})();
 /* ===== Einstellungen: hier anpassen ===== */
 var CONFIG = {
   halloween: "auto",   // true = immer an, "auto" = 15.10.–01.11. nach Datum, false = nie
@@ -1176,6 +1178,7 @@ var CONFIG = {
   aktionen: []
 };
 /* ======================================== */
+(function(){var c=window.BV_C;if(!c)return;if(c.motto)CONFIG.motto=c.motto;if(c.mottoAlt)CONFIG.mottoAlt=c.mottoAlt;if(c.aktionen)CONFIG.aktionen=c.aktionen;if(c.fakten&&c.fakten.length)window.BV_FACTS=c.fakten})();
 
 var DAYS=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
 var stage=document.getElementById('stage');
@@ -1227,7 +1230,7 @@ function tick(){
   document.getElementById('motto').textContent=hwOn?CONFIG.hwMotto:mo0;
   // Täglich neu: Fakt des Tages, Figur des Tages, Hintergrundton pro 3-Tage-Block, Tipp-Folien in neuer Reihenfolge bei jedem Laden
   (function(){
-    var FA=["Schon 20 bis 30 Minuten zügiges Gehen am Tag tun dem Herz-Kreislauf-System gut.", "Muskeln verbrauchen auch in Ruhe mehr Energie als Fettgewebe.", "Krafttraining stärkt nicht nur Muskeln, sondern auch Knochen und Sehnen.", "Guter Schlaf unterstützt die Erholung nach dem Training.", "Nach dem Training hilft Eiweiß den Muskeln bei der Regeneration.", "Mehr als die Hälfte Ihres Körpers besteht aus Wasser.", "Regelmäßige Bewegung baut Stress ab und hebt die Stimmung.", "Ein gutes Aufwärmen bereitet Gelenke und Muskeln auf die Belastung vor.", "Ihre Wirbelsäule hat 23 Bandscheiben, die als Stoßdämpfer arbeiten.", "Das Herz schlägt in Ruhe etwa 60- bis 80-mal pro Minute.", "Der menschliche Körper hat mehr als 600 Muskeln.", "Die Wirbelsäule hat eine Doppel-S-Form, die Stöße abfedert.", "Trinken Sie über den Tag verteilt, nicht erst bei Durst.", "Ein Muskel wächst nicht im Training, sondern in der Erholung danach.", "Auch kleine Portionen zählen: Treppe, Spaziergang, Fahrrad.", "Fachleute empfehlen Erwachsenen Krafttraining an mindestens zwei Tagen pro Woche.", "Die WHO empfiehlt Erwachsenen mindestens 150 Minuten moderate Bewegung pro Woche.", "Wer lange sitzt, tut seinem Rücken mit einem Positionswechsel pro Stunde etwas Gutes.", "Ihre Füße tragen bei jedem Schritt Ihr gesamtes Körpergewicht.", "Gleichgewichtstraining hilft, Stürzen vorzubeugen.", "Kohlenhydrate sind der wichtigste Energielieferant bei intensiver Belastung.", "Ein Spaziergang in der Mittagspause bringt Tageslicht und Bewegung.", "Lächeln ist ansteckend. Probieren Sie es beim nächsten Satz aus.", "Der Oberschenkelknochen ist der längste und stärkste Knochen des Körpers.", "Die Gesäßmuskulatur ist der größte Muskel des Körpers.", "Gelenkknorpel wird durch Bewegung mit Nährstoffen versorgt.", "Wer regelmäßig trainiert, schläft oft besser.", "Kleine Schritte zählen. Wer dranbleibt, gewinnt.", "Ein starker Rumpf entlastet den Rücken im Alltag.", "Dehnen fühlt sich gut an, für die Erholung zählen aber vor allem Schlaf und Ernährung."],ed2=Math.floor(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())/864e5);
+    var FA=window.BV_FACTS&&window.BV_FACTS.length?window.BV_FACTS:["Schon 20 bis 30 Minuten zügiges Gehen am Tag tun dem Herz-Kreislauf-System gut.","Guter Schlaf unterstützt die Erholung nach dem Training.","Regelmäßige Bewegung baut Stress ab und hebt die Stimmung."],ed2=Math.floor(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())/864e5);
     var fe=document.getElementById('faktText');if(fe)fe.textContent=FA[ed2%FA.length];
     var qq=location.search,lm=qq.match(/[?&]look=(\d)/),tm2=qq.match(/[?&]tr=(\d)/);document.documentElement.setAttribute('data-look',String(lm?+lm[1]:ed2%3));
     ['tipps','info'].forEach(function(k){var l=[].slice.call(document.querySelectorAll('.slide[data-pool="'+k+'"]'));if(l.length<2)return;var ph=l.map(function(s){var c=document.createComment('p');s.parentNode.insertBefore(c,s);return c});var sh=l.slice().sort(function(){return Math.random()-.5});sh.forEach(function(s,i){ph[i].parentNode.insertBefore(s,ph[i])});ph.forEach(function(c){c.parentNode.removeChild(c)})});
@@ -1273,8 +1276,8 @@ function tick(){
   sc.innerHTML=h;
   var before=document.getElementById('s-weiter')||document.getElementById('s-weiter2');
   CONFIG.aktionen.forEach(function(a){
-    if(a.bis&&new Date()>new Date(a.bis+'T23:59:59'))return;
-    var s=document.createElement('section');s.className='slide'+(a.lime?' lime':'');s.dataset.sec=a.sec||14;
+    var nn=new Date(),sm=location.search.match(/[?&]sday=(\d+)-(\d+)/);if(sm)nn=new Date(nn.getFullYear(),+sm[1]-1,+sm[2],12);if(a.bis&&nn>new Date(a.bis+'T23:59:59'))return;if(a.von&&nn<new Date(a.von+'T00:00:00'))return;
+    var s=document.createElement('section');s.className='slide'+(a.lime?' lime':'');s.dataset.sec=a.sec||14;if(a.pool){s.dataset.pool=a.pool;s.dataset.keep=a.keep||4}
     var k=document.createElement('p');k.className='kicker rv';k.textContent=a.kicker||'Aktion';
     var h2=document.createElement('h2');h2.className='rv';h2.textContent=a.title;
     var t=document.createElement('p');t.className='lead rv';t.textContent=a.text||'';
