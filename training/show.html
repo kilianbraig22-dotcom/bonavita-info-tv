@@ -888,7 +888,7 @@ tr.today td.closed{color:var(--d1)}
           <figure class="hwskel"><div class="skwrap" data-t="3400,8800"><img class="photo" src="img/angelika.jpg" alt=""><img class="photo skel au-sk" src="img/herbst-angelika.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Angelika Fuchs</figcaption></figure>
           <figure class="hwskel"><div class="skwrap" data-t="4800,9300"><img class="photo" src="img/tatjana.jpg" alt=""><img class="photo skel au-sk" src="img/herbst-tatjana.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Tatjana Beilmann</figcaption></figure>
           <figure class="hwskel"><div class="skwrap" data-t="6800,10700"><img class="photo" src="img/verena.jpg" alt=""><img class="photo skel au-sk" src="img/herbst-verena.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Verena Weider</figcaption></figure>
-          <figure class="hwskel"><div class="skwrap" data-t="5000,9600"><img class="photo" src="img/jasmin.jpg" alt=""><i class="skfl"></i></div><figcaption>Jasmin Konrad</figcaption></figure>
+          <figure class="hwskel"><div class="skwrap" data-t="5000,9600"><img class="photo" src="img/jasmin.jpg" alt=""><img class="photo skel au-sk" src="img/herbst-jasmin.jpg" alt="" aria-hidden="true"><i class="skfl"></i></div><figcaption>Jasmin Konrad</figcaption></figure>
         </div></div>
       <div class="teamrow">
         <div class="grp rv"><h4>Training</h4>
@@ -1363,7 +1363,7 @@ buildWeek();tick();setInterval(tick,15000);
   window.bvPer=per;window.bvWeek=Math.floor((ed+3)/7);
   var pools={};[].forEach.call(document.querySelectorAll('.slide[data-pool]'),function(s){(pools[s.getAttribute('data-pool')]=pools[s.getAttribute('data-pool')]||[]).push(s)});
   Object.keys(pools).forEach(function(k){var l=pools[k],keep=+l[0].getAttribute('data-keep')||Math.ceil(l.length/2);if(keep>=l.length)return;var st=(per*keep)%l.length,ok={};for(var i=0;i<keep;i++)ok[(st+i)%l.length]=1;l.forEach(function(s,i){if(!ok[i]&&s.parentNode)s.parentNode.removeChild(s)})});
-  var ORD=['alex','dominic','siggi','nadja','elijah','verena','tatjana','kilian','elena','roland','kathleen','vinci','illia','senta','jovana','angelika'],fs={},st2=(per*5)%ORD.length;
+  var ORD=['alex','dominic','siggi','nadja','elijah','verena','tatjana','kilian','elena','roland','kathleen','vinci','illia','senta','jovana','angelika','jasmin'],fs={},st2=(per*5)%ORD.length;
   var nf=/Silk|AFT|Tizen|SMART-TV|Web0S|webOS/i.test(navigator.userAgent)?4:8;for(var i=0;i<nf;i++)fs[ORD[(st2+i)%ORD.length]]=1;
   window.bvFeat=function(k){return /[?&]feat=all/.test(q)||!!fs[k]};window.bvFeatList=function(){return ORD.filter(function(k){return fs[k]})};
 })();
@@ -1832,7 +1832,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
 (function(){
   var de=document.documentElement,stg=document.getElementById('stage');if(!stg)return;
   var xm=de.classList.contains('xm'),pre=xm?'cut-xmas-':'cut-herbst-';
-  var PA=['alex','elijah','kilian','siggi','roland','vinci','angelika','dominic','elena','illia','jovana','kathleen','nadja','senta','tatjana','verena'];
+  var PA=['alex','elijah','kilian','siggi','roland','vinci','angelika','dominic','elena','illia','jovana','jasmin','kathleen','nadja','senta','tatjana','verena'];
   var P=PA.filter(function(k){return !window.bvFeat||window.bvFeat(k)}),bag=[],last=(function(){try{return localStorage.getItem('bvap')||''}catch(e){return ''}})();
   // Weihnachts-Verwandlung: Foto -> Weihnachtsfigur (Bilder xmas-<name>.jpg), wird per Skript an jede Person gehaengt
   if(xm){[].forEach.call(document.querySelectorAll('.hwskel .skwrap'),function(w){var b=w.querySelector('img.photo'),k=((b&&b.getAttribute('src')||'').match(/img\/(\w+)\.jpg/)||[])[1];if(k==='vincenza')k='vinci';if(!k||PA.indexOf(k)<0)return;var im=new Image();im.className='photo skel xm-sk';im.alt='';im.setAttribute('aria-hidden','true');im.onerror=function(){if(im.parentNode)im.parentNode.removeChild(im)};im.src='img/xmas-'+k+'.jpg';var fl=w.querySelector('.skfl');w.insertBefore(im,fl)})}
