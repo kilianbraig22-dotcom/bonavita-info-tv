@@ -1742,10 +1742,9 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   var de=document.documentElement,stg=document.getElementById('stage');if(!stg)return;
   var xm=de.classList.contains('xm'),pre=xm?'cut-xmas-':'cut-herbst-';
   var PA=['alex','elijah','kilian','siggi','roland','vinci','angelika','dominic','elena','illia','jovana','kathleen','nadja','senta','tatjana','verena'];
-  if(xm)PA=PA.filter(function(k){return k!=='dominic'});
   var P=PA.filter(function(k){return !window.bvFeat||window.bvFeat(k)}),bag=[],last=(function(){try{return localStorage.getItem('bvap')||''}catch(e){return ''}})();
   // Weihnachts-Verwandlung: Foto -> Weihnachtsfigur (Bilder xmas-<name>.jpg), wird per Skript an jede Person gehaengt
-  if(xm){[].forEach.call(document.querySelectorAll('.hwskel .skwrap'),function(w){var b=w.querySelector('img.photo'),k=((b&&b.getAttribute('src')||'').match(/img\/(\w+)\.jpg/)||[])[1];if(k==='vincenza')k='vinci';if(!k||k==='dominic')return;var im=new Image();im.className='photo skel xm-sk';im.alt='';im.setAttribute('aria-hidden','true');im.onerror=function(){if(im.parentNode)im.parentNode.removeChild(im)};im.src='img/xmas-'+k+'.jpg';var fl=w.querySelector('.skfl');w.insertBefore(im,fl)})}
+  if(xm){[].forEach.call(document.querySelectorAll('.hwskel .skwrap'),function(w){var b=w.querySelector('img.photo'),k=((b&&b.getAttribute('src')||'').match(/img\/(\w+)\.jpg/)||[])[1];if(k==='vincenza')k='vinci';if(!k)return;var im=new Image();im.className='photo skel xm-sk';im.alt='';im.setAttribute('aria-hidden','true');im.onerror=function(){if(im.parentNode)im.parentNode.removeChild(im)};im.src='img/xmas-'+k+'.jpg';var fl=w.querySelector('.skfl');w.insertBefore(im,fl)})}
   P.forEach(function(p){var im=new Image();im.src='img/'+pre+p+'.webp'});
   var sm=location.search.match(/[?&]sday=(\d+)-(\d+)/),nw=new Date(),nm=sm?+sm[1]:nw.getMonth()+1,nd=sm?+sm[2]:nw.getDate();
   function nxt(){if(xm&&nm===12&&(nd===5||nd===6)&&P.indexOf('roland')>-1&&Math.random()<.5){last='roland';return last}if(!bag.length){bag=P.slice().sort(function(){return Math.random()-.5});if(bag[bag.length-1]===last&&bag.length>1)bag.unshift(bag.pop())}last=bag.pop();try{localStorage.setItem('bvap',last)}catch(e){}return last}
