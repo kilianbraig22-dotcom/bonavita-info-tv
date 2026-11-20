@@ -411,6 +411,13 @@ tr.today td.closed{color:var(--d1)}
 .au .hwskel .skwrap.go .skfl{animation:aufl 2.7s ease-out both}
 @keyframes auon{0%,10%{opacity:0}26%,80%{opacity:1}100%{opacity:0}}
 @keyframes aufl{0%{opacity:0}10%{opacity:.4}26%{opacity:0}78%{opacity:0}88%{opacity:.3}100%{opacity:0}}
+.xm .hwskel .skel.xm-sk{display:block;position:absolute;inset:-1px!important;width:calc(100% + 2px)!important;height:calc(100% + 2px)!important;border-radius:0!important;object-position:50% 6%;opacity:0;background:#10203a}
+.xm .hwskel .skfl{display:block;position:absolute;inset:0;opacity:0;pointer-events:none;background:radial-gradient(circle at 50% 55%,rgba(255,255,255,.95),rgba(170,215,255,.5) 55%,rgba(170,215,255,0) 80%)}
+.xm .hwskel .skwrap.go .skel.xm-sk.on{animation:auon 2.7s ease both}
+.xm .hwskel .skwrap.go .skfl{animation:aufl 2.7s ease-out both}
+.xm .aupk i{background:radial-gradient(ellipse at 50% 80%,rgba(190,225,255,.5),rgba(190,225,255,0) 65%)}
+.xm .aupk img{filter:drop-shadow(0 0 22px rgba(200,228,255,.6))}
+.xm .aupk.chef{width:760px;height:1010px}
 .aupk{position:absolute;bottom:0;width:640px;height:860px;z-index:60;pointer-events:none;animation:aupk 4.4s ease-in-out both}
 .aupk.l{left:70px}.aupk.r{right:70px}
 .aupk i{position:absolute;left:-15%;right:-15%;bottom:0;height:80%;background:radial-gradient(ellipse at 50% 80%,rgba(255,196,110,.5),rgba(255,196,110,0) 65%)}
@@ -1730,15 +1737,21 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   window.sePlay=function(k){if(FXS[k])FXS[k]()};
 })();
 
-// Herbst: freundlicher Auftritt der Team-Figuren statt Jumpscare (reihum, nie dieselbe Person zweimal hintereinander)
+// Herbst/Weihnachten: freundlicher Auftritt der Team-Figuren statt Jumpscare (reihum, nie dieselbe Person zweimal hintereinander)
 (function(){
   var de=document.documentElement,stg=document.getElementById('stage');if(!stg)return;
-  var PA=['alex','elijah','kilian','siggi','roland','vinci','angelika','dominic','elena','illia','jovana','kathleen','nadja','senta','tatjana','verena'],P=PA.filter(function(k){return !window.bvFeat||window.bvFeat(k)}),bag=[],last=(function(){try{return localStorage.getItem('bvap')||''}catch(e){return ''}})();
-  P.forEach(function(p){var im=new Image();im.src='img/cut-herbst-'+p+'.webp'});
-  function nxt(){if(!bag.length){bag=P.slice().sort(function(){return Math.random()-.5});if(bag[bag.length-1]===last&&bag.length>1)bag.unshift(bag.pop())}last=bag.pop();try{localStorage.setItem('bvap',last)}catch(e){}return last}
-  window.apPeek=function(p){p=p||nxt();var d=document.createElement('div');d.className='aupk '+(Math.random()<.5?'l':'r');d.innerHTML='<i></i><img src="img/cut-herbst-'+p+'.webp" alt="">';stg.appendChild(d);setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d)},4600);return 4600};
+  var xm=de.classList.contains('xm'),pre=xm?'cut-xmas-':'cut-herbst-';
+  var PA=['alex','elijah','kilian','siggi','roland','vinci','angelika','dominic','elena','illia','jovana','kathleen','nadja','senta','tatjana','verena'];
+  if(xm)PA=PA.filter(function(k){return k!=='dominic'});
+  var P=PA.filter(function(k){return !window.bvFeat||window.bvFeat(k)}),bag=[],last=(function(){try{return localStorage.getItem('bvap')||''}catch(e){return ''}})();
+  // Weihnachts-Verwandlung: Foto -> Weihnachtsfigur (Bilder xmas-<name>.jpg), wird per Skript an jede Person gehaengt
+  if(xm){[].forEach.call(document.querySelectorAll('.hwskel .skwrap'),function(w){var b=w.querySelector('img.photo'),k=((b&&b.getAttribute('src')||'').match(/img\/(\w+)\.jpg/)||[])[1];if(k==='vincenza')k='vinci';if(!k||k==='dominic')return;var im=new Image();im.className='photo skel xm-sk';im.alt='';im.setAttribute('aria-hidden','true');im.onerror=function(){if(im.parentNode)im.parentNode.removeChild(im)};im.src='img/xmas-'+k+'.jpg';var fl=w.querySelector('.skfl');w.insertBefore(im,fl)})}
+  P.forEach(function(p){var im=new Image();im.src='img/'+pre+p+'.webp'});
+  var sm=location.search.match(/[?&]sday=(\d+)-(\d+)/),nw=new Date(),nm=sm?+sm[1]:nw.getMonth()+1,nd=sm?+sm[2]:nw.getDate();
+  function nxt(){if(xm&&nm===12&&(nd===5||nd===6)&&P.indexOf('roland')>-1&&Math.random()<.5){last='roland';return last}if(!bag.length){bag=P.slice().sort(function(){return Math.random()-.5});if(bag[bag.length-1]===last&&bag.length>1)bag.unshift(bag.pop())}last=bag.pop();try{localStorage.setItem('bvap',last)}catch(e){}return last}
+  window.apPeek=function(p){p=p||nxt();var d=document.createElement('div');d.className='aupk '+(Math.random()<.5?'l':'r')+(xm&&(p==='siggi'||p==='alex')?' chef':'');d.innerHTML='<i></i><img src="img/'+pre+p+'.webp" alt="">';stg.appendChild(d);setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d)},4600);return 4600};
   if(window.hwManual||/[?&]jumpscare=0/.test(location.search))return;
-  (function loop(){setTimeout(function(){var s=document.querySelector('.slide.active');if(de.classList.contains('au')&&window.hwLvl>=2&&!window.hwBusy&&!(s&&s.hasAttribute('data-nofx'))&&!stg.classList.contains('lite')){window.hwBusy=true;var d=window.apPeek();setTimeout(function(){window.hwBusy=false},d)}loop()},(window.hwTV?45000:30000)+Math.random()*25000)})();
+  (function loop(){setTimeout(function(){var s=document.querySelector('.slide.active');if((de.classList.contains('au')||xm)&&window.hwLvl>=2&&!window.hwBusy&&!(s&&s.hasAttribute('data-nofx'))&&!stg.classList.contains('lite')){window.hwBusy=true;var d=window.apPeek();setTimeout(function(){window.hwBusy=false},d)}loop()},(window.hwTV?45000:30000)+Math.random()*25000)})();
 })();
 
 // Wach-Video (NUR mit ?wach=1, hängt den Fire TV auf): winziges, unsichtbares Video in Dauerschleife, damit der Fire TV nicht in den Ruhemodus geht
@@ -1758,12 +1771,12 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   var ts=[],last={},cnt=0;
   function clear(){while(ts.length)clearTimeout(ts.pop())}
   function go(fig,n,force){
-    if(!(document.documentElement.classList.contains('hw')||document.documentElement.classList.contains('au'))||(window.hwManual&&!force)||window.hwLvl<2||document.getElementById('stage').classList.contains('lite'))return;
-    if(!force&&document.documentElement.classList.contains('au')&&window.bvFeat){var bi=fig.querySelector('img.photo'),bk=((bi&&bi.getAttribute('src')||'').match(/img\/(\w+)\.jpg/)||[])[1];if(bk==='vincenza')bk='vinci';if(bk&&!window.bvFeat(bk))return}
+    if(!(document.documentElement.classList.contains('hw')||document.documentElement.classList.contains('au')||document.documentElement.classList.contains('xm'))||(window.hwManual&&!force)||window.hwLvl<2||document.getElementById('stage').classList.contains('lite'))return;
+    if(!force&&(document.documentElement.classList.contains('au')||document.documentElement.classList.contains('xm'))&&window.bvFeat){var bi=fig.querySelector('img.photo'),bk=((bi&&bi.getAttribute('src')||'').match(/img\/(\w+)\.jpg/)||[])[1];if(bk==='vincenza')bk='vinci';if(bk&&!window.bvFeat(bk))return}
     var v=[].filter.call(fig.querySelectorAll('.skel'),function(e){return getComputedStyle(e).display!=='none'}),k;if(!v.length)return;do{k=(Math.random()*v.length)|0}while(v.length>1&&k===last[n]);last[n]=k;
     [].forEach.call(fig.querySelectorAll('.skel'),function(e){e.classList.toggle('on',e===v[k])});
     fig.classList.remove('go');void fig.offsetWidth;fig.classList.add('go');
-    ts.push(setTimeout(function(){fig.classList.remove('go')},document.documentElement.classList.contains('au')?2800:700));
+    ts.push(setTimeout(function(){fig.classList.remove('go')},document.documentElement.classList.contains('au')||document.documentElement.classList.contains('xm')?2800:700));
   }
   function upd(){
     document.documentElement.classList.toggle('nofx',!!document.querySelector('.slide.active[data-nofx]'));
@@ -1773,7 +1786,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
       (f.getAttribute('data-t')||'3000,7000').split(',').forEach(function(d){ts.push(setTimeout(function(){go(f,n)},+d))});
     });
   }
-  window.hwTransOne=function(name){var s=document.querySelector('.slide.active');if(!s)return 0;var img=[].filter.call(s.querySelectorAll('.skel'),function(e){return (e.getAttribute('src')||'').indexOf('/'+name+'.jpg')>-1})[0];if(!img)return 0;var fig=img.closest('.skwrap');[].forEach.call(fig.querySelectorAll('.skel'),function(v){v.classList.toggle('on',v===img)});fig.classList.remove('go');void fig.offsetWidth;fig.classList.add('go');setTimeout(function(){fig.classList.remove('go')},document.documentElement.classList.contains('au')?2800:700);return 3000};
+  window.hwTransOne=function(name){var s=document.querySelector('.slide.active');if(!s)return 0;var img=[].filter.call(s.querySelectorAll('.skel'),function(e){return (e.getAttribute('src')||'').indexOf('/'+name+'.jpg')>-1})[0];if(!img)return 0;var fig=img.closest('.skwrap');[].forEach.call(fig.querySelectorAll('.skel'),function(v){v.classList.toggle('on',v===img)});fig.classList.remove('go');void fig.offsetWidth;fig.classList.add('go');setTimeout(function(){fig.classList.remove('go')},document.documentElement.classList.contains('au')||document.documentElement.classList.contains('xm')?2800:700);return 3000};
   window.hwTrans=function(){var s=document.querySelector('.slide.active');var c=0;all.forEach(function(f,n){if(f.closest('.slide')===s){setTimeout(function(){go(f,n,true)},c*900);c++}});return 900*c+1500};
   slides2.forEach(function(s){new MutationObserver(upd).observe(s,{attributes:true,attributeFilter:['class']})});
 })();
