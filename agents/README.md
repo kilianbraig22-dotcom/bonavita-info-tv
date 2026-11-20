@@ -12,9 +12,9 @@ Alle laufen als geplante Aufgaben in Claude. Reihenfolge der Sicherheit:
 | Design-Agent | täglich | design.md | ja, nur Design, nur nach grünem Check |
 | Wochenbericht | sonntags, nach dem Redakteur | bericht.md | nur lesen, Nachricht an Kilian |
 | Feiertags-Agent | am 25. jeden Monats | feiertag.md | ja, nur `aktionen` in content.json, nur nach grünem Check |
-| Qualitäts-Wächter | täglich, nach dem Design-Agent | waechter.md | nein, nur melden |
+| Prüf-Agent (unabhängiger Check) | täglich 5:51 und 22:51 | waechter.md | nur Reverts von Agent-Commits bei rotem Check |
 | Saison-Vorbereiter | am 1. jeden Monats | saison.md | ja, nur `agents/saison/` |
 | Wetter-Tipps | täglich früh | wetter.md | ja, nur Wetter-Tipp in content.json, nur nach grünem Check |
 
 Gemeinsame Regeln: Du-/Sie-Form: die Gäste werden gesiezt. Deutsch, kurz, freundlich, kein Heilversprechen.
-Der Prüf-Agent ist `tools/check.py` und wird von den anderen vor jedem Push ausgeführt.
+`tools/check.py` ist das Prüfwerkzeug. Die Entscheidung, ob eine Agent-Änderung stehen bleibt, trifft der unabhängige Prüf-Agent (waechter.md); er nimmt fehlerhafte Agent-Commits selbst zurück. Kilian muss nichts prüfen.
