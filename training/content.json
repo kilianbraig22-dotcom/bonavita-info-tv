@@ -1,76 +1,293 @@
 {
- "_hinweis": "Diese Datei pflegen die Agenten. Nur Text hier ändern, kein Code. Siehe agents/*.md",
- "motto": {
-  "0": "Schön, dass Sie da sind.",
-  "1": "Starke Woche, starker Rücken.",
-  "2": "Dranbleiben lohnt sich.",
-  "3": "Halbzeit. Weiter so!",
-  "4": "Noch einmal Kraft tanken vor dem Wochenende.",
-  "5": "Zum Wochenende noch einmal Gas geben.",
-  "6": "Samstagstraining. Respekt!"
- },
- "mottoAlt": {
-  "0": [
-   "Genießen Sie Ihre Zeit bei uns.",
-   "Bewegung tut auch am Sonntag gut."
+  "_hinweis": "Diese Datei pflegen die Agenten. Nur Text hier ändern, kein Code. Siehe agents/*.md",
+  "motto": {
+    "0": "Schön, dass Sie da sind.",
+    "1": "Starke Woche, starker Rücken.",
+    "2": "Dranbleiben lohnt sich.",
+    "3": "Halbzeit. Weiter so!",
+    "4": "Noch einmal Kraft tanken vor dem Wochenende.",
+    "5": "Zum Wochenende noch einmal Gas geben.",
+    "6": "Samstagstraining. Respekt!"
+  },
+  "mottoAlt": {
+    "0": [
+      "Genießen Sie Ihre Zeit bei uns.",
+      "Bewegung tut auch am Sonntag gut."
+    ],
+    "1": [
+      "Neue Woche, neue Kraft.",
+      "Der Start ist gemacht. Weiter so!"
+    ],
+    "2": [
+      "Schritt für Schritt zum Ziel.",
+      "Jede Einheit zählt."
+    ],
+    "3": [
+      "Mitte der Woche, volle Energie.",
+      "Heute schon bewegt? Dann los."
+    ],
+    "4": [
+      "Fast geschafft. Noch ein starker Tag.",
+      "Gönnen Sie sich heute eine gute Einheit."
+    ],
+    "5": [
+      "Stark ins Wochenende.",
+      "Zeit für eine letzte Runde."
+    ],
+    "6": [
+      "Wer samstags trainiert, ist ein Vorbild.",
+      "Ein Wochenende mit Bewegung."
+    ]
+  },
+  "fakten": [
+    "Schon 20 bis 30 Minuten zügiges Gehen am Tag tun dem Herz-Kreislauf-System gut.",
+    "Muskeln verbrauchen auch in Ruhe mehr Energie als Fettgewebe.",
+    "Krafttraining stärkt nicht nur Muskeln, sondern auch Knochen und Sehnen.",
+    "Guter Schlaf unterstützt die Erholung nach dem Training.",
+    "Nach dem Training hilft Eiweiß den Muskeln bei der Regeneration.",
+    "Mehr als die Hälfte Ihres Körpers besteht aus Wasser.",
+    "Regelmäßige Bewegung baut Stress ab und hebt die Stimmung.",
+    "Ein gutes Aufwärmen bereitet Gelenke und Muskeln auf die Belastung vor.",
+    "Ihre Wirbelsäule hat 23 Bandscheiben, die als Stoßdämpfer arbeiten.",
+    "Das Herz schlägt in Ruhe etwa 60- bis 80-mal pro Minute.",
+    "Der menschliche Körper hat mehr als 600 Muskeln.",
+    "Die Wirbelsäule hat eine Doppel-S-Form, die Stöße abfedert.",
+    "Trinken Sie über den Tag verteilt, nicht erst bei Durst.",
+    "Ein Muskel wächst nicht im Training, sondern in der Erholung danach.",
+    "Auch kleine Portionen zählen: Treppe, Spaziergang, Fahrrad.",
+    "Fachleute empfehlen Erwachsenen Krafttraining an mindestens zwei Tagen pro Woche.",
+    "Die WHO empfiehlt Erwachsenen mindestens 150 Minuten moderate Bewegung pro Woche.",
+    "Wer lange sitzt, tut seinem Rücken mit einem Positionswechsel pro Stunde etwas Gutes.",
+    "Ihre Füße tragen bei jedem Schritt Ihr gesamtes Körpergewicht.",
+    "Gleichgewichtstraining hilft, Stürzen vorzubeugen.",
+    "Kohlenhydrate sind der wichtigste Energielieferant bei intensiver Belastung.",
+    "Ein Spaziergang in der Mittagspause bringt Tageslicht und Bewegung.",
+    "Lächeln ist ansteckend. Probieren Sie es beim nächsten Satz aus.",
+    "Der Oberschenkelknochen ist der längste und stärkste Knochen des Körpers.",
+    "Die Gesäßmuskulatur ist der größte Muskel des Körpers.",
+    "Gelenkknorpel wird durch Bewegung mit Nährstoffen versorgt.",
+    "Wer regelmäßig trainiert, schläft oft besser.",
+    "Kleine Schritte zählen. Wer dranbleibt, gewinnt.",
+    "Ein starker Rumpf entlastet den Rücken im Alltag.",
+    "Dehnen fühlt sich gut an, für die Erholung zählen aber vor allem Schlaf und Ernährung."
   ],
-  "1": [
-   "Neue Woche, neue Kraft.",
-   "Der Start ist gemacht. Weiter so!"
+  "aktionen": [
+    {
+      "von": "2026-12-01",
+      "bis": "2026-12-01",
+      "kicker": "Türchen 1",
+      "title": "Kalter Start? Erst aufwärmen!",
+      "text": "Im Winter sind Muskeln und Sehnen steifer. Fünf bis zehn Minuten locker aufwärmen senken das Verletzungsrisiko deutlich.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-02",
+      "bis": "2026-12-02",
+      "kicker": "Türchen 2",
+      "title": "Trinken nicht vergessen",
+      "text": "Auch bei Kälte schwitzt du beim Training. Ein Glas Wasser vor und eines nach dem Training hält Kreislauf und Muskeln fit.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-03",
+      "bis": "2026-12-03",
+      "kicker": "Türchen 3",
+      "title": "Licht tanken im Winter",
+      "text": "Wenig Sonne heißt wenig Vitamin D. Geh täglich ein paar Minuten raus und sprich bei Fragen mit deinem Arzt.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-04",
+      "bis": "2026-12-04",
+      "kicker": "Türchen 4",
+      "title": "Schneeschippen ist Training",
+      "text": "Gerader Rücken, in die Knie gehen, kleine Portionen heben: So schonst du Rücken und Schultern.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-05",
+      "bis": "2026-12-05",
+      "kicker": "Türchen 5",
+      "title": "Glatt, glatt, glatt",
+      "text": "Kurze Schritte, Füße flach aufsetzen, Hände aus den Taschen: So bleibst du auf Eis sicher auf den Beinen.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-06",
+      "bis": "2026-12-06",
+      "kicker": "Türchen 6",
+      "title": "Nikolaus: Süßes darf sein",
+      "text": "Gönn dir Schokolade und Mandarinen. Ein flotter Spaziergang danach tut gut und macht den Kopf frei.",
+      "sec": 14,
+      "lime": true
+    },
+    {
+      "von": "2026-12-07",
+      "bis": "2026-12-07",
+      "kicker": "Türchen 7",
+      "title": "Treppe statt Aufzug",
+      "text": "Jede Etage zählt: Treppensteigen trainiert Beine und Kreislauf und kostet keine Extrazeit.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-08",
+      "bis": "2026-12-08",
+      "kicker": "Türchen 8",
+      "title": "Schlaf ist Erholung",
+      "text": "Im Schlaf repariert dein Körper Muskeln und Gewebe. Sieben bis acht Stunden helfen mehr, als viele denken.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-09",
+      "bis": "2026-12-09",
+      "kicker": "Türchen 9",
+      "title": "Schultern lockern",
+      "text": "Wer viel sitzt, spürt es im Nacken. Schultern kreisen und Arme weit öffnen lösen Spannung in einer Minute.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-10",
+      "bis": "2026-12-10",
+      "kicker": "Türchen 10",
+      "title": "Plätzchen mit Köpfchen",
+      "text": "Ein paar Plätzchen sind kein Drama. Mit einer Portion Eiweiß vorher bist du länger satt.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-11",
+      "bis": "2026-12-11",
+      "kicker": "Türchen 11",
+      "title": "Atme tief durch",
+      "text": "Fünf ruhige Atemzüge in den Bauch senken den Puls und bringen Ruhe in stressige Adventstage.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-12",
+      "bis": "2026-12-12",
+      "kicker": "Türchen 12",
+      "title": "Warme Füße, sichere Schritte",
+      "text": "Gute Socken und festes Schuhwerk halten die Füße warm und stabil und schützen vor Ausrutschern.",
+      "sec": 14,
+      "lime": true
+    },
+    {
+      "von": "2026-12-13",
+      "bis": "2026-12-13",
+      "kicker": "Türchen 13",
+      "title": "Kraft hält jung",
+      "text": "Zweimal pro Woche Krafttraining erhält Muskeln und Knochen bis ins hohe Alter. Wir zeigen dir, wie du anfängst.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-14",
+      "bis": "2026-12-14",
+      "kicker": "Türchen 14",
+      "title": "Bewegung gegen den Winterblues",
+      "text": "Tageslicht und Bewegung heben die Stimmung. Schon 20 Minuten draußen machen einen Unterschied.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-15",
+      "bis": "2026-12-15",
+      "kicker": "Türchen 15",
+      "title": "Pausen gehören zum Plan",
+      "text": "Muskeln wachsen in der Pause, nicht beim Training. Plane Ruhetage bewusst ein.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-16",
+      "bis": "2026-12-16",
+      "kicker": "Türchen 16",
+      "title": "Haltung checken",
+      "text": "Aufrecht sitzen, Füße flach, Bildschirm auf Augenhöhe: Dein Nacken wird es dir danken.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-17",
+      "bis": "2026-12-17",
+      "kicker": "Türchen 17",
+      "title": "Tee statt Glühwein",
+      "text": "Ingwer- oder Kamillentee wärmt von innen, hydriert und macht abends nicht müde.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-18",
+      "bis": "2026-12-18",
+      "kicker": "Türchen 18",
+      "title": "Kleine Einheiten zählen",
+      "text": "Zehn Minuten Bewegung sind besser als gar keine. Kniebeugen beim Zähneputzen zählen auch.",
+      "sec": 14,
+      "lime": true
+    },
+    {
+      "von": "2026-12-19",
+      "bis": "2026-12-19",
+      "kicker": "Türchen 19",
+      "title": "Jede Stunde kurz strecken",
+      "text": "Steh einmal pro Stunde auf und streck dich. Dein Rücken freut sich über jede Unterbrechung.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-20",
+      "bis": "2026-12-20",
+      "kicker": "Türchen 20",
+      "title": "Geschenktipp: Bewegung",
+      "text": "Wie wäre ein Gutschein für Training oder Physiotherapie? Schenke Wohlbefinden. Frag uns an der Rezeption.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-21",
+      "bis": "2026-12-21",
+      "kicker": "Türchen 21",
+      "title": "Wintersonnenwende",
+      "text": "Heute ist der kürzeste Tag. Ab jetzt wird es täglich ein bisschen heller. Nutze das Licht für einen Spaziergang.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-22",
+      "bis": "2026-12-22",
+      "kicker": "Türchen 22",
+      "title": "Stress abbauen",
+      "text": "Wenn es hektisch wird: Zehn Minuten zügig gehen bauen Stresshormone ab und schaffen Klarheit.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-23",
+      "bis": "2026-12-23",
+      "kicker": "Türchen 23",
+      "title": "Morgen ist Heiligabend",
+      "text": "Ein Spaziergang nach dem Festessen hilft der Verdauung und bringt die ganze Familie nach draußen.",
+      "sec": 14,
+      "lime": false
+    },
+    {
+      "von": "2026-12-24",
+      "bis": "2026-12-24",
+      "kicker": "Türchen 24",
+      "title": "Frohe Weihnachten!",
+      "text": "Das ganze BonaVITA-Team wünscht dir und deiner Familie ein friedliches und gesundes Fest.",
+      "sec": 14,
+      "lime": true
+    }
   ],
-  "2": [
-   "Schritt für Schritt zum Ziel.",
-   "Jede Einheit zählt."
-  ],
-  "3": [
-   "Mitte der Woche, volle Energie.",
-   "Heute schon bewegt? Dann los."
-  ],
-  "4": [
-   "Fast geschafft. Noch ein starker Tag.",
-   "Gönnen Sie sich heute eine gute Einheit."
-  ],
-  "5": [
-   "Stark ins Wochenende.",
-   "Zeit für eine letzte Runde."
-  ],
-  "6": [
-   "Wer samstags trainiert, ist ein Vorbild.",
-   "Ein Wochenende mit Bewegung."
-  ]
- },
- "fakten": [
-  "Schon 20 bis 30 Minuten zügiges Gehen am Tag tun dem Herz-Kreislauf-System gut.",
-  "Muskeln verbrauchen auch in Ruhe mehr Energie als Fettgewebe.",
-  "Krafttraining stärkt nicht nur Muskeln, sondern auch Knochen und Sehnen.",
-  "Guter Schlaf unterstützt die Erholung nach dem Training.",
-  "Nach dem Training hilft Eiweiß den Muskeln bei der Regeneration.",
-  "Mehr als die Hälfte Ihres Körpers besteht aus Wasser.",
-  "Regelmäßige Bewegung baut Stress ab und hebt die Stimmung.",
-  "Ein gutes Aufwärmen bereitet Gelenke und Muskeln auf die Belastung vor.",
-  "Ihre Wirbelsäule hat 23 Bandscheiben, die als Stoßdämpfer arbeiten.",
-  "Das Herz schlägt in Ruhe etwa 60- bis 80-mal pro Minute.",
-  "Der menschliche Körper hat mehr als 600 Muskeln.",
-  "Die Wirbelsäule hat eine Doppel-S-Form, die Stöße abfedert.",
-  "Trinken Sie über den Tag verteilt, nicht erst bei Durst.",
-  "Ein Muskel wächst nicht im Training, sondern in der Erholung danach.",
-  "Auch kleine Portionen zählen: Treppe, Spaziergang, Fahrrad.",
-  "Fachleute empfehlen Erwachsenen Krafttraining an mindestens zwei Tagen pro Woche.",
-  "Die WHO empfiehlt Erwachsenen mindestens 150 Minuten moderate Bewegung pro Woche.",
-  "Wer lange sitzt, tut seinem Rücken mit einem Positionswechsel pro Stunde etwas Gutes.",
-  "Ihre Füße tragen bei jedem Schritt Ihr gesamtes Körpergewicht.",
-  "Gleichgewichtstraining hilft, Stürzen vorzubeugen.",
-  "Kohlenhydrate sind der wichtigste Energielieferant bei intensiver Belastung.",
-  "Ein Spaziergang in der Mittagspause bringt Tageslicht und Bewegung.",
-  "Lächeln ist ansteckend. Probieren Sie es beim nächsten Satz aus.",
-  "Der Oberschenkelknochen ist der längste und stärkste Knochen des Körpers.",
-  "Die Gesäßmuskulatur ist der größte Muskel des Körpers.",
-  "Gelenkknorpel wird durch Bewegung mit Nährstoffen versorgt.",
-  "Wer regelmäßig trainiert, schläft oft besser.",
-  "Kleine Schritte zählen. Wer dranbleibt, gewinnt.",
-  "Ein starker Rumpf entlastet den Rücken im Alltag.",
-  "Dehnen fühlt sich gut an, für die Erholung zählen aber vor allem Schlaf und Ernährung."
- ],
- "aktionen": [],
- "themenwoche": null
+  "themenwoche": null
 }

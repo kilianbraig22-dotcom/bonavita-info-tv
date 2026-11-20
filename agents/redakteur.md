@@ -18,3 +18,6 @@ Ziel: Die Präsentation soll sich jede Woche frisch anfühlen, ohne dass jemand 
 - Nicht anfassen: `show.html`, Bilder, `physio/`, `test/`.
 - Keine Gesundheitsaussagen mit Zahlen oder Versprechen. Im Zweifel weglassen.
 - Keine Namen oder Fotos von Personen.
+
+## Adventskalender
+Für den 1.–24. Dezember 2026 liegen in `aktionen` fertige „Türchen“-Folien (Kicker „Türchen N“). Nur ändern, wenn ein Text fachlich falsch ist oder besser passt.
