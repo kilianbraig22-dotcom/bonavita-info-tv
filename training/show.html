@@ -739,6 +739,14 @@ tr.today td.closed{color:var(--d1)}
 @keyframes sdshoot{0%{opacity:0;transform:translate(0,0) rotate(24deg)}12%{opacity:1}100%{opacity:0;transform:translate(760px,350px) rotate(24deg)}}
 .sdspk{position:absolute;width:14px;height:14px;border-radius:50%;background:#ffe9a0;box-shadow:0 0 16px 6px rgba(255,226,130,.7);opacity:0;animation:sdspark 3.2s ease-in-out var(--dl) forwards}
 @keyframes sdspark{0%{opacity:0;transform:scale(.3)}30%{opacity:1;transform:scale(1.2)}60%{opacity:.8;transform:scale(.8)}100%{opacity:0;transform:scale(.3)}}
+.xm .tmx{position:relative;width:960px;height:584px;flex:none;border-radius:44px;overflow:hidden;box-shadow:0 0 0 14px rgba(var(--lime-rgb),.18),0 30px 90px rgba(0,0,0,.5);animation:float 7s ease-in-out infinite alternate}
+.xm .tmx .photo{position:absolute;inset:0;width:100%;height:100%;box-shadow:none;animation:none;border-radius:0}
+.xm .tmx .tmxs{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;opacity:0}
+.xm .tmx .tmfl{position:absolute;inset:0;opacity:0;pointer-events:none;background:radial-gradient(circle at 50% 55%,rgba(255,255,255,.95),rgba(170,215,255,.5) 55%,rgba(170,215,255,0) 80%)}
+.xm .tmx.go .tmxs{animation:tmon 5.6s ease both}
+.xm .tmx.go .tmfl{animation:tmfl 5.6s ease-out both}
+@keyframes tmon{0%,8%{opacity:0}20%,82%{opacity:1}94%,100%{opacity:0}}
+@keyframes tmfl{0%{opacity:0}8%{opacity:.5}20%{opacity:0}80%{opacity:0}88%{opacity:.4}100%{opacity:0}}
 .sdmoon{position:absolute;left:700px;top:30px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,246,214,.95) 0,rgba(255,240,200,.85) 32%,rgba(255,230,170,.25) 55%,rgba(255,230,170,0) 70%);opacity:0;animation:sdmn 12s ease-in-out both}
 @keyframes sdmn{0%{opacity:0}15%,80%{opacity:.95}100%{opacity:0}}
 .sdtr{position:absolute;left:0;width:8px;height:8px;border-radius:50%;background:#ffe9a0;box-shadow:0 0 10px 3px rgba(255,226,130,.7);opacity:0;animation:sdtrk 7s linear var(--dl) both}
@@ -790,7 +798,7 @@ tr.today td.closed{color:var(--d1)}
 @keyframes tdl{0%,38%{transform:scaleX(1)}100%{transform:scaleX(.03)}}
 @keyframes tdn{0%,30%{opacity:1}45%,100%{opacity:0}}
 @keyframes tdw{0%,88%{opacity:1}100%{opacity:0;visibility:hidden}}
-.sdcand{position:absolute;left:1390px;bottom:8px;width:200px;height:109px}
+.sdcand{position:absolute;left:860px;bottom:8px;width:200px;height:109px}
 .sdground{position:absolute;left:0;bottom:10px;width:1920px;height:70px}
 .sdfrost{position:absolute;inset:0;box-shadow:inset 0 0 220px 40px rgba(190,225,255,.17)}
 .sdf.n{background:radial-gradient(circle,#fff 28%,rgba(255,255,255,0) 72%);box-shadow:none}
@@ -1826,6 +1834,13 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
   var P=PA.filter(function(k){return !window.bvFeat||window.bvFeat(k)}),bag=[],last=(function(){try{return localStorage.getItem('bvap')||''}catch(e){return ''}})();
   // Weihnachts-Verwandlung: Foto -> Weihnachtsfigur (Bilder xmas-<name>.jpg), wird per Skript an jede Person gehaengt
   if(xm){[].forEach.call(document.querySelectorAll('.hwskel .skwrap'),function(w){var b=w.querySelector('img.photo'),k=((b&&b.getAttribute('src')||'').match(/img\/(\w+)\.jpg/)||[])[1];if(k==='vincenza')k='vinci';if(!k)return;var im=new Image();im.className='photo skel xm-sk';im.alt='';im.setAttribute('aria-hidden','true');im.onerror=function(){if(im.parentNode)im.parentNode.removeChild(im)};im.src='img/xmas-'+k+'.jpg';var fl=w.querySelector('.skfl');w.insertBefore(im,fl)})}
+  // Weihnachts-Teamfoto: Foto -> Lichtblitz -> Winter-Version -> Lichtblitz -> Foto
+  if(xm){(function(){var im=document.querySelector('.slide.title img.photo[src*="team.jpg"]');if(!im)return;var sl=im.closest('.slide'),w=document.createElement('div');w.className='tmx';im.parentNode.insertBefore(w,im);w.appendChild(im);var x=new Image();x.className='tmxs';x.alt='';x.setAttribute('aria-hidden','true');x.src='img/team-xmas.jpg';w.appendChild(x);var f=document.createElement('i');f.className='tmfl';w.appendChild(f);var ts=[];
+    function go(){w.classList.remove('go');void w.offsetWidth;w.classList.add('go');ts.push(setTimeout(function(){w.classList.remove('go')},5600))}
+    window.xmTeam=function(){go();return 5600};
+    if(window.hwManual)return;
+    new MutationObserver(function(){while(ts.length)clearTimeout(ts.pop());w.classList.remove('go');if(sl.classList.contains('active')&&!stg.classList.contains('lite'))ts.push(setTimeout(go,2400))}).observe(sl,{attributes:true,attributeFilter:['class']});
+  })()}
   P.forEach(function(p){var im=new Image();im.src='img/'+pre+p+'.webp'});
   var sm=location.search.match(/[?&]sday=(\d+)-(\d+)/),nw=new Date(),nm=sm?+sm[1]:nw.getMonth()+1,nd=sm?+sm[2]:nw.getDate();
   function nxt(){if(xm&&nm===12&&(nd===5||nd===6)&&P.indexOf('roland')>-1&&Math.random()<.5){last='roland';return last}if(!bag.length){bag=P.slice().sort(function(){return Math.random()-.5});if(bag[bag.length-1]===last&&bag.length>1)bag.unshift(bag.pop())}last=bag.pop();try{localStorage.setItem('bvap',last)}catch(e){}return last}
