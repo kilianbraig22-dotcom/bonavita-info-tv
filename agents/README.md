@@ -11,6 +11,10 @@ Alle laufen als geplante Aufgaben in Claude. Reihenfolge der Sicherheit:
 | Wochen-Redakteur | sonntags | redakteur.md | ja, nur content.json, nur nach grünem Check |
 | Design-Agent | täglich | design.md | ja, nur Design, nur nach grünem Check |
 | Wochenbericht | sonntags, nach dem Redakteur | bericht.md | nur lesen, Nachricht an Kilian |
+| Feiertags-Agent | am 25. jeden Monats | feiertag.md | ja, nur `aktionen` in content.json, nur nach grünem Check |
+| Qualitäts-Wächter | täglich, nach dem Design-Agent | waechter.md | nein, nur melden |
+| Saison-Vorbereiter | am 1. jeden Monats | saison.md | ja, nur `agents/saison/` |
+| Wetter-Tipps | täglich früh | wetter.md | ja, nur Wetter-Tipp in content.json, nur nach grünem Check |
 
 Gemeinsame Regeln: Du-/Sie-Form: die Gäste werden gesiezt. Deutsch, kurz, freundlich, kein Heilversprechen.
 Der Prüf-Agent ist `tools/check.py` und wird von den anderen vor jedem Push ausgeführt.
