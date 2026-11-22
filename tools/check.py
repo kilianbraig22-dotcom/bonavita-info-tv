@@ -44,6 +44,10 @@ with sync_playwright() as p:
             ctx = b.new_context(viewport={'width':1920,'height':1080},
                 user_agent='Mozilla/5.0 (Linux; Android 9; AFTMM Build/PS7233) Silk/100 like Chrome/100 Safari/537.36' if tv else None)
             pg = ctx.new_page(); logs = []
+            # Google Fonts sind für den Check irrelevant (Fallback-Schrift); in gesperrten Netzen nicht als Fehler werten
+            pg.route(re.compile(r'https://fonts\.(googleapis|gstatic)\.com/.*'), lambda r: r.fulfill(status=200, content_type='text/css', body=''))
+            # Wetter-Abruf (open-meteo) ebenfalls abfangen: der Check soll nicht vom Netz der Umgebung abhängen
+            pg.route(re.compile(r'https://api\.open-meteo\.com/.*'), lambda r: r.fulfill(status=200, content_type='application/json', body='{"current":{"weather_code":3,"cloud_cover":50,"wind_speed_10m":5,"is_day":1}}'))
             pg.on('pageerror', lambda e: logs.append(str(e)))
             pg.on('console', lambda m: m.type == 'error' and logs.append(m.text))
             try:
