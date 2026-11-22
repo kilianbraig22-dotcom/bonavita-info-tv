@@ -12,31 +12,38 @@
   "mottoAlt": {
     "0": [
       "Genießen Sie Ihre Zeit bei uns.",
-      "Bewegung tut auch am Sonntag gut."
+      "Bewegung tut auch am Sonntag gut.",
+      "Ein ruhiger Sonntag und eine bewegte Woche."
     ],
     "1": [
       "Neue Woche, neue Kraft.",
-      "Der Start ist gemacht. Weiter so!"
+      "Der Start ist gemacht. Weiter so!",
+      "Die Woche beginnt – Sie sind schon dabei."
     ],
     "2": [
       "Schritt für Schritt zum Ziel.",
-      "Jede Einheit zählt."
+      "Jede Einheit zählt.",
+      "Regelmäßigkeit schlägt Perfektion."
     ],
     "3": [
       "Mitte der Woche, volle Energie.",
-      "Heute schon bewegt? Dann los."
+      "Heute schon bewegt? Dann los.",
+      "Gut für Sie: Sie nehmen sich heute Zeit."
     ],
     "4": [
       "Fast geschafft. Noch ein starker Tag.",
-      "Gönnen Sie sich heute eine gute Einheit."
+      "Gönnen Sie sich heute eine gute Einheit.",
+      "Noch ein Training, dann ist es fast Wochenende."
     ],
     "5": [
       "Stark ins Wochenende.",
-      "Zeit für eine letzte Runde."
+      "Zeit für eine letzte Runde.",
+      "Ein guter Abschluss der Woche."
     ],
     "6": [
       "Wer samstags trainiert, ist ein Vorbild.",
-      "Ein Wochenende mit Bewegung."
+      "Ein Wochenende mit Bewegung.",
+      "Morgen beginnt die Adventszeit."
     ]
   },
   "fakten": [
@@ -69,7 +76,11 @@
     "Wer regelmäßig trainiert, schläft oft besser.",
     "Kleine Schritte zählen. Wer dranbleibt, gewinnt.",
     "Ein starker Rumpf entlastet den Rücken im Alltag.",
-    "Dehnen fühlt sich gut an, für die Erholung zählen aber vor allem Schlaf und Ernährung."
+    "Dehnen fühlt sich gut an, für die Erholung zählen aber vor allem Schlaf und Ernährung.",
+    "Wer Treppen steigt, trainiert nebenbei Beine, Gesäß und Kreislauf.",
+    "Ein kurzer Spaziergang bei Tageslicht unterstützt im Winter den Tag-Nacht-Rhythmus.",
+    "Beim Krafttraining ist saubere Ausführung wichtiger als das Gewicht.",
+    "Pausen zwischen den Sätzen gehören zum Training: Sie helfen der Muskulatur, wieder Kraft aufzubauen."
   ],
   "aktionen": [
     {
@@ -296,6 +307,13 @@
       "text": "Jasmin Konrad verstärkt unser Physiotherapie-Team. Wir freuen uns auf sie. Sprechen Sie sie gern an.",
       "sec": 14,
       "lime": true
+    },
+    {
+      "von": "2026-11-28",
+      "bis": "2026-11-28",
+      "kicker": "Advent",
+      "title": "Morgen ist der 1. Advent",
+      "text": "Wir wünschen Ihnen ein ruhiges, schönes Adventswochenende."
     }
   ],
   "themenwoche": null
