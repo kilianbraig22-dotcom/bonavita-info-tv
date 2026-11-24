@@ -245,6 +245,8 @@ tr.today td.closed{color:var(--d1)}
 /* Herbst: Fortschrittsbalken mit Farbverlauf und rundem Ende (statisch, TV-tauglich) */
 .au .bar i{background:linear-gradient(90deg,var(--teal),var(--lime));border-radius:0 5px 5px 0}
 #stage.lime.au .bar i,.au #stage.lime .bar i{background:var(--lime-ink)}
+/* Herbst: Schritt-Kreise im Weg mit zartem Akzentring (statisch, ohne Blur) */
+.au .step .nd{box-shadow:0 0 0 9px rgba(var(--lime-rgb),.22)}
 .au[data-look="1"]{--lime:#d9541e;--lime-rgb:217,84,30;--teal:#e8962e;--d1:#5a1d0a;--d2:#3d1406;--bar:#c8481a}
 .au[data-look="1"] .slide.lime{background:linear-gradient(160deg,#f29566,#d9663a)}
 .au[data-look="1"] img[src*="logo"]{filter:hue-rotate(-62deg) saturate(1.2)}
