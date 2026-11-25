@@ -247,6 +247,8 @@ tr.today td.closed{color:var(--d1)}
 #stage.lime.au .bar i,.au #stage.lime .bar i{background:var(--lime-ink)}
 /* Herbst: Schritt-Kreise im Weg mit zartem Akzentring (statisch, ohne Blur) */
 .au .step .nd{box-shadow:0 0 0 9px rgba(var(--lime-rgb),.22)}
+/* Herbst: kleines Blatt vor den Dachzeilen, Farbe wie die Schrift (statisch, TV-tauglich) */
+.au .kicker::before{content:"";display:inline-block;width:1em;height:1em;margin-right:.42em;vertical-align:-.14em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5.2 17.4C3 9.5 9.5 3 21 3L6.6 17.4Z'/%3E%3Cpath d='M7.6 18.8L21.4 5C21.6 16 14.5 22 7.6 18.8Z'/%3E%3Cpath d='M2.5 21.5L7 17' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5.2 17.4C3 9.5 9.5 3 21 3L6.6 17.4Z'/%3E%3Cpath d='M7.6 18.8L21.4 5C21.6 16 14.5 22 7.6 18.8Z'/%3E%3Cpath d='M2.5 21.5L7 17' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
 .au[data-look="1"]{--lime:#d9541e;--lime-rgb:217,84,30;--teal:#e8962e;--d1:#5a1d0a;--d2:#3d1406;--bar:#c8481a}
 .au[data-look="1"] .slide.lime{background:linear-gradient(160deg,#f29566,#d9663a)}
 .au[data-look="1"] img[src*="logo"]{filter:hue-rotate(-62deg) saturate(1.2)}
