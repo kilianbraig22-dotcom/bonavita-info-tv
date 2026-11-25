@@ -322,6 +322,24 @@
       "title": "Frost und Glätte: Sicher unterwegs",
       "text": "Tragen Sie Schuhe mit griffiger Sohle, gehen Sie in kurzen Schritten und halten Sie die Hände frei. Planen Sie für Ihren Weg etwas mehr Zeit ein.",
       "sec": 12
+    },
+    {
+      "von": "2026-12-20",
+      "bis": "2026-12-24",
+      "kicker": "Ferien",
+      "title": "Bald sind Weihnachtsferien",
+      "text": "Schulferien: in Baden-Württemberg vom 23. Dezember bis 9. Januar, im Kanton Schaffhausen vom 24. Dezember bis 3. Januar. Wir wünschen eine schöne Zeit.",
+      "sec": 12,
+      "lime": false
+    },
+    {
+      "von": "2026-12-22",
+      "bis": "2026-12-26",
+      "kicker": "Feiertag",
+      "title": "Schöne Weihnachtsfeiertage!",
+      "text": "Der 25. und 26. Dezember sind Feiertage in Baden-Württemberg und im Kanton Schaffhausen. Genießen Sie die festlichen Tage.",
+      "sec": 12,
+      "lime": false
     }
   ],
   "themenwoche": null
