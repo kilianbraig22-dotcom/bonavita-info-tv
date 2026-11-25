@@ -314,6 +314,14 @@
       "kicker": "Advent",
       "title": "Morgen ist der 1. Advent",
       "text": "Wir wünschen Ihnen ein ruhiges, schönes Adventswochenende."
+    },
+    {
+      "von": "2026-11-25",
+      "bis": "2026-11-27",
+      "kicker": "Wetter-Tipp",
+      "title": "Frost und Glätte: Sicher unterwegs",
+      "text": "Tragen Sie Schuhe mit griffiger Sohle, gehen Sie in kurzen Schritten und halten Sie die Hände frei. Planen Sie für Ihren Weg etwas mehr Zeit ein.",
+      "sec": 12
     }
   ],
   "themenwoche": null
