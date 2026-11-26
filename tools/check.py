@@ -36,7 +36,7 @@ class Q(http.server.SimpleHTTPRequestHandler):
 srv = socketserver.TCPServer(('127.0.0.1', 0), Q); port = srv.server_address[1]
 threading.Thread(target=srv.serve_forever, daemon=True).start()
 base = f'http://127.0.0.1:{port}/training/show.html'
-days = ['11-19','11-25','12-01','12-06','12-14','12-24','12-31','01-05']
+days = ['11-19','11-25','11-28','11-29','12-01','12-06','12-14','12-24','12-31','01-05']
 with sync_playwright() as p:
     b = p.chromium.launch()
     for day in days:
@@ -58,7 +58,7 @@ with sync_playwright() as p:
                 # jede Folie: Text darf nicht aus der Bühne laufen
                 bad = pg.evaluate("""()=>{const o=[];document.querySelectorAll('.slide').forEach((s,i)=>{s.classList.add('on');s.querySelectorAll('h1,h2,h3,p,li').forEach(e=>{const r=e.getBoundingClientRect();if(r.width&&(r.right>1925||r.bottom>1085))o.push((s.id||('#'+i))+': '+(e.textContent||'').slice(0,40))});s.classList.remove('on')});return o}""")
                 for x in bad[:3]: errs.append(f'{day}{" TV" if tv else ""}: Text ragt raus – {x}')
-                if shots and not tv and day in ('11-19','12-06','12-24'):
+                if shots and not tv and day in ('11-19','11-29','12-06','12-24'):
                     pg.screenshot(path=str(shots/f'{day}.png'))
             except Exception as e:
                 errs.append(f'{day}: {e}')

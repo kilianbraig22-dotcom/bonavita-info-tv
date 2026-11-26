@@ -84,6 +84,15 @@
   ],
   "aktionen": [
     {
+      "von": "2026-11-29",
+      "bis": "2026-11-30",
+      "kicker": "1. Advent",
+      "title": "Eine schöne Adventszeit!",
+      "text": "Die erste Kerze brennt. Wir wünschen Ihnen eine ruhige, gesunde und besinnliche Vorweihnachtszeit.",
+      "sec": 12,
+      "lime": false
+    },
+    {
       "von": "2026-12-01",
       "bis": "2026-12-01",
       "kicker": "Türchen 1",
