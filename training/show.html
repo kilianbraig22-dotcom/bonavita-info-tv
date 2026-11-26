@@ -94,7 +94,7 @@ canvas{display:block}
 @keyframes rvl{from{opacity:0}}
 
 /* title / closing */
-.title .col{flex:1}
+.title .col{flex:1;margin-bottom:90px}
 .title .logo{width:560px;display:block;margin-bottom:60px}
 .title h1{font-size:150px}
 .title .photo{width:960px;height:584px;object-position:50% 40%;flex:none;box-shadow:0 0 0 14px rgba(var(--lime-rgb),.18),0 30px 90px rgba(0,0,0,.5);animation:float 7s ease-in-out infinite alternate}
@@ -1306,7 +1306,7 @@ function tick(){
   else hwOn=CONFIG.halloween===true||CONFIG.halloween!==false&&((n.getMonth()===9&&n.getDate()>=15)||(n.getMonth()===10&&n.getDate()<=1));
   document.documentElement.classList.toggle('hw',hwOn);
   var mo0=CONFIG.motto[n.getDay()]||'';if(CONFIG.mottoAlt&&CONFIG.mottoAlt[n.getDay()]){var ml=[mo0].concat(CONFIG.mottoAlt[n.getDay()]);mo0=ml[(window.bvWeek||0)%ml.length]}
-  document.getElementById('motto').textContent=hwOn?CONFIG.hwMotto:mo0;
+  document.getElementById('motto').textContent=hwOn?CONFIG.hwMotto:(window.bvGruss||mo0);
   // Täglich neu: Fakt des Tages, Figur des Tages, Hintergrundton pro 3-Tage-Block, Tipp-Folien in neuer Reihenfolge bei jedem Laden
   (function(){
     var FA=window.BV_FACTS&&window.BV_FACTS.length?window.BV_FACTS:["Schon 20 bis 30 Minuten zügiges Gehen am Tag tun dem Herz-Kreislauf-System gut.","Guter Schlaf unterstützt die Erholung nach dem Training.","Regelmäßige Bewegung baut Stress ab und hebt die Stimmung."],ed2=Math.floor(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())/864e5);
@@ -1750,7 +1750,7 @@ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').catch(function(){
     else mot='Frohes neues Jahr!';
   }
   if(cnt){cnt.textContent=txt;cnt.classList.toggle('on',!!txt)}
-  if(mot&&mt)mt.textContent=mot;
+  if(mot&&mt){window.bvGruss=mot;mt.textContent=mot}
   var box=document.createElement('div');box.className='sdbox';box.setAttribute('aria-hidden','true');stg.appendChild(box);
   function el(h,life){var d=document.createElement('div');d.innerHTML=h;var e=d.firstChild;box.appendChild(e);if(life)setTimeout(function(){if(e.parentNode)e.parentNode.removeChild(e)},life);return e}
   var LEAF='<svg viewBox="-8 0 76 82"><path d="M30 2C34 14 46 14 52 10C50 22 58 28 66 28C56 34 56 42 62 50C50 48 44 54 44 62L33 58L33 80L27 80L27 58L16 62C16 54 10 48 -2 50C4 42 4 34 -6 28C2 28 10 22 8 10C14 14 26 14 30 2Z" fill="COL"/><path d="M30 12V58" stroke="rgba(0,0,0,.25)" stroke-width="2"/></svg>',LC=['#d9541e','#e8962e','#c0392b','#b07a30','#f0c24b','#a8431a'];

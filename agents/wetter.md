@@ -11,7 +11,7 @@ Ziel: Ein kurzer Praxis-Tipp, der zum Wetter der nächsten zwei Tage passt.
    - Kälteeinbruch: Muskeln und Sehnen länger aufwärmen.
    - Ruhiges Wetter: keinen Eintrag.
 3. In `aktionen` genau einen Eintrag mit `kicker":"Wetter-Tipp"` anlegen oder ersetzen: `von` heute, `bis` übermorgen, `title` max. 70, `text` max. 200, `sec` 12. Allgemein anerkanntes Wissen, kein Heilversprechen, keine Zahlen, die nicht sicher sind. Alte Wetter-Tipp-Einträge entfernen.
-4. `python3 tools/check.py` bis grün (Netzwerk-Fehler und der bekannte Motto-Überlauf ignorieren), `git pull --rebase`, Commit „Wetter-Tipp <Datum>“ (mit Attribution), push. Kurze Zeile in `agents/log.md` nur wenn ein Tipp gesetzt wurde.
+4. `python3 tools/check.py` bis grün (Netzwerk-Fehler ignorieren), `git pull --rebase`, Commit „Wetter-Tipp <Datum>“ (mit Attribution), push. Kurze Zeile in `agents/log.md` nur wenn ein Tipp gesetzt wurde.
 
 ## Grenzen
 Nur `training/content.json` (`aktionen`, nur Wetter-Tipp-Einträge) und `agents/log.md`.

@@ -28,6 +28,15 @@ for a in c.get('aktionen', []):
     for k in ('von', 'bis'):
         if a.get(k) and not re.fullmatch(r'\d{4}-\d\d-\d\d', a[k]): errs.append(f'Aktion {k} Format: {a[k]}')
 
+# Gäste werden gesiezt
+rotierend = [t for k in '0123456' for t in [c.get('motto', {}).get(k, '')] + c.get('mottoAlt', {}).get(k, [])] + c.get('fakten', [])
+alle = rotierend + [a.get(k, '') for a in c.get('aktionen', []) for k in ('title', 'text')]
+for t in alle:
+    if re.search(r'\b(du|dich|dir|dein(e|en|em|er|es)?|euch|euer|eure[nmrs]?)\b', t, re.I): errs.append(f'Du-Form statt Sie-Form: {t[:60]}')
+# Rotierende Texte erscheinen an beliebigen Wochen: kein Bezug auf einen bestimmten Tag
+for t in rotierend:
+    if re.search(r'\b(morgen|übermorgen|gestern)\b', t.replace('Guten Morgen', ''), re.I): errs.append(f'Zeitbezug in rotierendem Text (erscheint auch am falschen Tag): {t[:60]}')
+
 # 2) Browser
 from playwright.sync_api import sync_playwright
 os.chdir(ROOT)
@@ -59,12 +68,35 @@ with sync_playwright() as p:
                 bad = pg.evaluate("""()=>{const o=[];document.querySelectorAll('.slide').forEach((s,i)=>{s.classList.add('on');s.querySelectorAll('h1,h2,h3,p,li').forEach(e=>{const r=e.getBoundingClientRect();if(r.width&&(r.right>1925||r.bottom>1085))o.push((s.id||('#'+i))+': '+(e.textContent||'').slice(0,40))});s.classList.remove('on')});return o}""")
                 for x in bad[:3]: errs.append(f'{day}{" TV" if tv else ""}: Text ragt raus – {x}')
                 if shots and not tv and day in ('11-19','11-29','12-06','12-24'):
+                    pg.wait_for_timeout(2500)
                     pg.screenshot(path=str(shots/f'{day}.png'))
             except Exception as e:
                 errs.append(f'{day}: {e}')
             for l in logs:
                 if 'content.json' not in l and 'favicon' not in l: errs.append(f'{day}{" TV" if tv else ""} JS-Fehler: {l[:120]}')
             ctx.close()
+    # Titelfolie, unabhängig vom heutigen Wochentag: jeder Spruch passt, der Festtagsgruß bleibt stehen
+    for season, day, unten in (('au', '11-19', 1075), ('xm', '12-06', 1000)):
+        ctx = b.new_context(viewport={'width':1920,'height':1080}); pg = ctx.new_page()
+        pg.route(re.compile(r'https://fonts\.(googleapis|gstatic)\.com/.*'), lambda r: r.fulfill(status=200, content_type='text/css', body=''))
+        pg.route(re.compile(r'https://api\.open-meteo\.com/.*'), lambda r: r.fulfill(status=200, content_type='application/json', body='{"current":{"weather_code":3,"cloud_cover":50,"wind_speed_10m":5,"is_day":1}}'))
+        try:
+            pg.goto(f'{base}?sday={day}&season={season}&hw=0&hold=1&manual=1', wait_until='load')
+            pg.wait_for_timeout(3000)
+            if season == 'au':
+                texte = rotierend[:len(rotierend) - len(c.get('fakten', []))]
+            else:
+                gruss = pg.evaluate("document.getElementById('motto').textContent")
+                pg.evaluate("tick()")
+                danach = pg.evaluate("document.getElementById('motto').textContent")
+                if gruss != danach: errs.append(f'Titelfolie {season}: Festtagsgruß „{gruss}“ wird überschrieben durch „{danach}“')
+                texte = [danach]
+            for t in texte:
+                u = pg.evaluate("t=>{const m=document.getElementById('motto');m.textContent=t;const g=document.createRange();g.selectNodeContents(m);return Math.round(g.getBoundingClientRect().bottom)}", t)
+                if u > unten: errs.append(f'Titelfolie {season}: Spruch unten verdeckt/abgeschnitten ({u}px > {unten}px): {t[:50]}')
+        except Exception as e:
+            errs.append(f'Titelfolie {season}: {e}')
+        ctx.close()
     b.close()
 srv.shutdown()
 errs = list(dict.fromkeys(errs))

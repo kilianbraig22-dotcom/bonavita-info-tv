@@ -5,7 +5,7 @@
     "1": "Starke Woche, starker Rücken.",
     "2": "Dranbleiben lohnt sich.",
     "3": "Halbzeit. Weiter so!",
-    "4": "Noch einmal Kraft tanken vor dem Wochenende.",
+    "4": "Kraft tanken fürs Wochenende.",
     "5": "Zum Wochenende noch einmal Gas geben.",
     "6": "Samstagstraining. Respekt!"
   },
@@ -42,8 +42,7 @@
     ],
     "6": [
       "Wer samstags trainiert, ist ein Vorbild.",
-      "Ein Wochenende mit Bewegung.",
-      "Morgen beginnt die Adventszeit."
+      "Ein Wochenende mit Bewegung."
     ]
   },
   "fakten": [
@@ -106,7 +105,7 @@
       "bis": "2026-12-02",
       "kicker": "Türchen 2",
       "title": "Trinken nicht vergessen",
-      "text": "Auch bei Kälte schwitzt du beim Training. Ein Glas Wasser vor und eines nach dem Training hält Kreislauf und Muskeln fit.",
+      "text": "Auch bei Kälte schwitzen Sie beim Training. Ein Glas Wasser vor und eines nach dem Training hält Kreislauf und Muskeln fit.",
       "sec": 14,
       "lime": false
     },
@@ -115,7 +114,7 @@
       "bis": "2026-12-03",
       "kicker": "Türchen 3",
       "title": "Licht tanken im Winter",
-      "text": "Wenig Sonne heißt wenig Vitamin D. Geh täglich ein paar Minuten raus und sprich bei Fragen mit deinem Arzt.",
+      "text": "Wenig Sonne heißt wenig Vitamin D. Gehen Sie täglich ein paar Minuten raus und sprechen Sie bei Fragen mit Ihrem Arzt.",
       "sec": 14,
       "lime": false
     },
@@ -124,7 +123,7 @@
       "bis": "2026-12-04",
       "kicker": "Türchen 4",
       "title": "Schneeschippen ist Training",
-      "text": "Gerader Rücken, in die Knie gehen, kleine Portionen heben: So schonst du Rücken und Schultern.",
+      "text": "Gerader Rücken, in die Knie gehen, kleine Portionen heben: So schonen Sie Rücken und Schultern.",
       "sec": 14,
       "lime": false
     },
@@ -133,7 +132,7 @@
       "bis": "2026-12-05",
       "kicker": "Türchen 5",
       "title": "Glatt, glatt, glatt",
-      "text": "Kurze Schritte, Füße flach aufsetzen, Hände aus den Taschen: So bleibst du auf Eis sicher auf den Beinen.",
+      "text": "Kurze Schritte, Füße flach aufsetzen, Hände aus den Taschen: So bleiben Sie auf Eis sicher auf den Beinen.",
       "sec": 14,
       "lime": false
     },
@@ -142,7 +141,7 @@
       "bis": "2026-12-06",
       "kicker": "Türchen 6",
       "title": "Nikolaus: Süßes darf sein",
-      "text": "Gönn dir Schokolade und Mandarinen. Ein flotter Spaziergang danach tut gut und macht den Kopf frei.",
+      "text": "Gönnen Sie sich Schokolade und Mandarinen. Ein flotter Spaziergang danach tut gut und macht den Kopf frei.",
       "sec": 14,
       "lime": true
     },
@@ -160,7 +159,7 @@
       "bis": "2026-12-08",
       "kicker": "Türchen 8",
       "title": "Schlaf ist Erholung",
-      "text": "Im Schlaf repariert dein Körper Muskeln und Gewebe. Sieben bis acht Stunden helfen mehr, als viele denken.",
+      "text": "Im Schlaf repariert Ihr Körper Muskeln und Gewebe. Sieben bis acht Stunden helfen mehr, als viele denken.",
       "sec": 14,
       "lime": false
     },
@@ -178,7 +177,7 @@
       "bis": "2026-12-10",
       "kicker": "Türchen 10",
       "title": "Plätzchen mit Köpfchen",
-      "text": "Ein paar Plätzchen sind kein Drama. Mit einer Portion Eiweiß vorher bist du länger satt.",
+      "text": "Ein paar Plätzchen sind kein Drama. Mit einer Portion Eiweiß vorher bleiben Sie länger satt.",
       "sec": 14,
       "lime": false
     },
@@ -186,7 +185,7 @@
       "von": "2026-12-11",
       "bis": "2026-12-11",
       "kicker": "Türchen 11",
-      "title": "Atme tief durch",
+      "title": "Tief durchatmen",
       "text": "Fünf ruhige Atemzüge in den Bauch senken den Puls und bringen Ruhe in stressige Adventstage.",
       "sec": 14,
       "lime": false
@@ -205,7 +204,7 @@
       "bis": "2026-12-13",
       "kicker": "Türchen 13",
       "title": "Kraft hält jung",
-      "text": "Zweimal pro Woche Krafttraining erhält Muskeln und Knochen bis ins hohe Alter. Wir zeigen dir, wie du anfängst.",
+      "text": "Zweimal pro Woche Krafttraining erhält Muskeln und Knochen bis ins hohe Alter. Wir zeigen Ihnen, wie Sie anfangen.",
       "sec": 14,
       "lime": false
     },
@@ -223,7 +222,7 @@
       "bis": "2026-12-15",
       "kicker": "Türchen 15",
       "title": "Pausen gehören zum Plan",
-      "text": "Muskeln wachsen in der Pause, nicht beim Training. Plane Ruhetage bewusst ein.",
+      "text": "Muskeln wachsen in der Pause, nicht beim Training. Planen Sie Ruhetage bewusst ein.",
       "sec": 14,
       "lime": false
     },
@@ -232,7 +231,7 @@
       "bis": "2026-12-16",
       "kicker": "Türchen 16",
       "title": "Haltung checken",
-      "text": "Aufrecht sitzen, Füße flach, Bildschirm auf Augenhöhe: Dein Nacken wird es dir danken.",
+      "text": "Aufrecht sitzen, Füße flach, Bildschirm auf Augenhöhe: Ihr Nacken wird es Ihnen danken.",
       "sec": 14,
       "lime": false
     },
@@ -259,7 +258,7 @@
       "bis": "2026-12-19",
       "kicker": "Türchen 19",
       "title": "Jede Stunde kurz strecken",
-      "text": "Steh einmal pro Stunde auf und streck dich. Dein Rücken freut sich über jede Unterbrechung.",
+      "text": "Stehen Sie einmal pro Stunde auf und strecken Sie sich. Ihr Rücken freut sich über jede Unterbrechung.",
       "sec": 14,
       "lime": false
     },
@@ -268,7 +267,7 @@
       "bis": "2026-12-20",
       "kicker": "Türchen 20",
       "title": "Geschenktipp: Bewegung",
-      "text": "Wie wäre ein Gutschein für Training oder Physiotherapie? Schenke Wohlbefinden. Frag uns an der Rezeption.",
+      "text": "Wie wäre ein Gutschein für Training oder Physiotherapie? Verschenken Sie Wohlbefinden. Fragen Sie uns an der Rezeption.",
       "sec": 14,
       "lime": false
     },
@@ -277,7 +276,7 @@
       "bis": "2026-12-21",
       "kicker": "Türchen 21",
       "title": "Wintersonnenwende",
-      "text": "Heute ist der kürzeste Tag. Ab jetzt wird es täglich ein bisschen heller. Nutze das Licht für einen Spaziergang.",
+      "text": "Heute ist der kürzeste Tag. Ab jetzt wird es täglich ein bisschen heller. Nutzen Sie das Licht für einen Spaziergang.",
       "sec": 14,
       "lime": false
     },
@@ -304,7 +303,7 @@
       "bis": "2026-12-24",
       "kicker": "Türchen 24",
       "title": "Frohe Weihnachten!",
-      "text": "Das ganze BonaVITA-Team wünscht dir und deiner Familie ein friedliches und gesundes Fest.",
+      "text": "Das ganze BonaVITA-Team wünscht Ihnen und Ihrer Familie ein friedliches und gesundes Fest.",
       "sec": 14,
       "lime": true
     },
