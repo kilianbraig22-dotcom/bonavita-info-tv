@@ -492,8 +492,6 @@ tr.today td.closed{color:var(--d1)}
 .hwdeco .spd svg{left:0;top:890px;width:60px;height:60px;transform-origin:30px 0;animation:hwsw 1.6s ease-in-out infinite alternate}
 @keyframes hwspd{0%{transform:translateY(-980px)}22%{transform:translateY(calc(var(--d)*1px - 980px))}36%{transform:translateY(calc(var(--d)*1px - 955px))}50%{transform:translateY(calc(var(--d)*1px - 985px))}64%{transform:translateY(calc(var(--d)*1px - 960px))}74%{transform:translateY(calc(var(--d)*1px - 980px))}100%{transform:translateY(-980px)}}
 @keyframes hwsw{from{transform:rotate(-9deg)}to{transform:rotate(9deg)}}
-.dr{position:absolute;top:-6px;background:#7ddc3a;border-radius:0 0 50% 50%/0 0 30px 30px;transform-origin:50% 0;transform:scaleY(0);animation:hwdr 5s ease-in forwards;box-shadow:0 0 18px rgba(125,220,58,.45)}
-@keyframes hwdr{0%{transform:scaleY(0);opacity:.95}35%{transform:scaleY(1)}62%{transform:scaleY(1) translateY(0);opacity:.95}100%{transform:scaleY(1) translateY(1250px);opacity:0}}
 .pump .eyeL{transform-box:fill-box;transform-origin:center;animation:hwwink 7s infinite}
 @keyframes hwwink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
 .hwcount{display:none;position:absolute;right:130px;bottom:46px;padding:12px 30px;border:2px solid rgba(var(--lime-rgb),.55);border-radius:999px;background:rgba(0,0,0,.28);color:var(--lime);font-weight:700;font-size:34px;letter-spacing:.01em}
@@ -811,6 +809,7 @@ tr.today td.closed{color:var(--d1)}
 @keyframes tdw{0%,88%{opacity:1}100%{opacity:0;visibility:hidden}}
 .sdcand{position:absolute;left:860px;bottom:8px;width:200px;height:109px}
 .sdground{position:absolute;left:0;bottom:10px;width:1920px;height:70px}
+#stage.bodenfrei .sdcand,#stage.bodenfrei .sdground{display:none}
 .sdfrost{position:absolute;inset:0;box-shadow:inset 0 0 220px 40px rgba(190,225,255,.17)}
 .sdf.n{background:radial-gradient(circle,#fff 28%,rgba(255,255,255,0) 72%);box-shadow:none}
 .sdcr{position:absolute;top:0;left:var(--x);width:var(--s);height:var(--s);opacity:var(--o);animation:sdleaf var(--t) linear var(--dl) infinite}
@@ -873,7 +872,7 @@ tr.today td.closed{color:var(--d1)}
   </section>
 
   <!-- 3 Trainingsteam -->
-  <section class="slide" data-sec="13" data-nofx="1">
+  <section data-bodenfrei="1" class="slide" data-sec="13" data-nofx="1">
     <p class="kicker rv">Ihr Trainingsteam</p>
     <h2 class="rv">Wir begleiten Ihr Training.</h2>
     <div class="big3">
@@ -925,7 +924,7 @@ tr.today td.closed{color:var(--d1)}
   </section>
 
   <!-- 5 Oeffnungszeiten Woche -->
-  <section class="slide" data-sec="14">
+  <section data-bodenfrei="1" class="slide" data-sec="14">
     <p class="kicker rv">Unsere Öffnungszeiten</p>
     <table id="week" class="rv"><thead><tr><th></th><th>Physiotherapie</th><th>Trainingsbereich</th><th>Rezeption</th></tr></thead><tbody></tbody></table>
     <p class="fine rv">Kurzfristige Änderungen aufgrund von Urlaub oder Krankheit vorbehalten.</p>
@@ -952,7 +951,7 @@ tr.today td.closed{color:var(--d1)}
   </section>
 
   <!-- 8 Hausregeln -->
-  <section class="slide" data-sec="14">
+  <section data-bodenfrei="1" class="slide" data-sec="14">
     <p class="kicker rv">Gut zu wissen</p>
     <h2 class="rv">Hausregeln</h2>
     <div class="rules">
@@ -1051,7 +1050,7 @@ tr.today td.closed{color:var(--d1)}
   </section>
 
   <!-- 14 Technogym App -->
-  <section class="slide app" data-sec="14">
+  <section data-bodenfrei="1" class="slide app" data-sec="14">
     <div class="row">
       <div class="col">
         <p class="kicker rv">Digital trainieren</p>
@@ -1199,7 +1198,7 @@ tr.today td.closed{color:var(--d1)}
 
   <!-- 18 Weiterempfehlen -->
   <!-- Preisanpassung ab 01.01.2027: sichtbar 05.11.2026 bis 31.01.2027 -->
-  <section class="slide" data-sec="20" data-show-from="2026-11-05" data-hide-from="2027-02-01" id="s-preis">
+  <section class="slide" data-sec="20" data-show-from="2026-11-05" data-hide-from="2027-02-01" id="s-preis" data-bodenfrei="1">
     <p class="kicker rv">Preisanpassung zum 01.01.2027</p>
     <h2 class="rv" style="font-size:84px;line-height:1.06">Gemeinsam gesund bleiben &ndash; auch 2027!</h2>
     <p class="lead rv" style="font-size:40px;margin-top:24px;max-width:1500px">Zum 01.01.2027 passen wir unsere Mitgliedsbeitr&auml;ge erstmals seit unserer Er&ouml;ffnung an.</p>
@@ -1421,6 +1420,7 @@ function show(i){
   slides.forEach(function(x){x.classList.remove('active')});s.classList.add('active');
   stage.classList.toggle('lime',s.classList.contains('lime'));
   stage.classList.toggle('nohead',!!s.dataset.nohead);
+  stage.classList.toggle('bodenfrei',!!s.dataset.bodenfrei);
   if(s.dataset.count)countUp(s);
   if(s.dataset.confetti&&!reduce)confettiBurst();
   var sec=+s.dataset.sec||12;

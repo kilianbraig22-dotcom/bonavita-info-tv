@@ -97,6 +97,25 @@ with sync_playwright() as p:
         except Exception as e:
             errs.append(f'Titelfolie {season}: {e}')
         ctx.close()
+    # Jede Folie (auch alle rotierenden Tipp-Folien): kein Text per CSS auf Höhe oder Breite null zusammengedrückt (unsichtbar)
+    ctx = b.new_context(viewport={'width':1920,'height':1080}); pg = ctx.new_page()
+    pg.route(re.compile(r'https://fonts\.(googleapis|gstatic)\.com/.*'), lambda r: r.fulfill(status=200, content_type='text/css', body=''))
+    pg.route(re.compile(r'https://api\.open-meteo\.com/.*'), lambda r: r.fulfill(status=200, content_type='application/json', body='{"current":{"weather_code":3,"cloud_cover":50,"wind_speed_10m":5,"is_day":1}}'))
+    for season, day in (('au', '11-19'), ('xm', '12-06')):
+        for per in range(12):
+            try:
+                pg.goto(f'{base}?sday={day}&season={season}&per={per}&hw=0&hold=1&manual=1', wait_until='load')
+                pg.wait_for_timeout(500)
+                # Ruhezustand prüfen: was ohne laufende Animation null groß ist, bleibt nach der Einblendung unsichtbar
+                pg.add_style_tag(content='*{animation:none!important;transition:none!important}')
+                weg = pg.evaluate("""()=>{const o=[];document.querySelectorAll('.slide').forEach((s,i)=>{s.querySelectorAll('h1,h2,h3,p,li,b').forEach(e=>{const r=e.getBoundingClientRect();if(e.textContent.trim()&&e.offsetHeight&&e.offsetWidth&&(r.height<1||r.width<1))o.push(e.textContent.trim().slice(0,40))})});return o}""")
+                for x in weg: errs.append(f'Folie {season}: Text unsichtbar (zusammengedrückt) – {x}')
+                # Adventskranz darf bei der gerade sichtbaren Folie keinen Text verdecken
+                verdeckt = pg.evaluate("""()=>{const o=[],k=document.querySelector('.sdcand');if(!k)return o;const n=document.querySelectorAll('.slide').length;for(let i=0;i<n;i++){show(i);const q=k.getBoundingClientRect();if(!q.width)continue;const w=document.createTreeWalker(document.querySelector('.slide.active'),NodeFilter.SHOW_TEXT);let t;while(t=w.nextNode()){if(!t.textContent.trim())continue;const g=document.createRange();g.selectNodeContents(t);for(const r of g.getClientRects())if(r.width&&r.height<300&&r.right>q.left&&r.left<q.right&&r.bottom>q.top&&r.top<q.bottom)o.push(t.textContent.trim().slice(0,40))}}return o}""")
+                for x in verdeckt: errs.append(f'Folie {season}: Adventskranz verdeckt Text – {x}')
+            except Exception as e:
+                errs.append(f'Sichtbarkeit {season} per={per}: {e}')
+    ctx.close()
     b.close()
 srv.shutdown()
 errs = list(dict.fromkeys(errs))
