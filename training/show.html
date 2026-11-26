@@ -1386,6 +1386,9 @@ slides.forEach(function(s){
 var cf=document.getElementById('confetti'),cx=cf.getContext('2d'),parts=[],cfOn=0;
 function confettiBurst(){
   parts=[];var cols=document.documentElement.classList.contains('hw')?['#ff7a1a','#ffb066','#ffffff','#8d63f2','#f4f6ee']:['#b0cb00','#e5f26a','#ffffff','#1f8a6a','#f4f6ee'];
+  /* Herbst/Weihnachten: Konfetti in den Farben des aktuellen Looks */
+  var de=document.documentElement,au=de.classList.contains('au');
+  if(au||de.classList.contains('xm')){var cs=getComputedStyle(de);cols=[cs.getPropertyValue('--lime').trim(),cs.getPropertyValue('--teal').trim(),'#f4efe3',au?'#a83a22':'#c8323c','#ffffff']}
   for(var i=0;i<170;i++)parts.push({x:960+(Math.random()-.5)*300,y:620,vx:(Math.random()-.5)*34,vy:-18-Math.random()*26,r:8+Math.random()*10,a:Math.random()*6.28,va:(Math.random()-.5)*.4,c:cols[i%cols.length],w:1+Math.random()});
   cfOn=7;
 }
