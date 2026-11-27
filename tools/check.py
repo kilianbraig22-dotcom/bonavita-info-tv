@@ -67,6 +67,9 @@ with sync_playwright() as p:
                 # jede Folie: Text darf nicht aus der Bühne laufen
                 bad = pg.evaluate("""()=>{const o=[];document.querySelectorAll('.slide').forEach((s,i)=>{s.classList.add('on');s.querySelectorAll('h1,h2,h3,p,li').forEach(e=>{const r=e.getBoundingClientRect();if(r.width&&(r.right>1925||r.bottom>1085))o.push((s.id||('#'+i))+': '+(e.textContent||'').slice(0,40))});s.classList.remove('on')});return o}""")
                 for x in bad[:3]: errs.append(f'{day}{" TV" if tv else ""}: Text ragt raus – {x}')
+                # Zeitstrahl: Bereichsname darf nicht in den Balken laufen (mindestens 8px Abstand)
+                eng = pg.evaluate("""()=>[...document.querySelectorAll('#tl .tl-row')].filter(r=>{const g=document.createRange();g.selectNode(r.querySelector('.tl-name').firstChild);return g.getBoundingClientRect().right>r.querySelector('.tl-track').getBoundingClientRect().left-8}).map(r=>r.querySelector('.tl-name').firstChild.textContent)""")
+                for x in eng: errs.append(f'{day}{" TV" if tv else ""}: Text stößt an den Zeitbalken – {x}')
                 # 15-Sekunden-Takt darf keine Folie neu einhängen (sonst verschwindet ihr Inhalt kurz und blendet neu ein)
                 neu = pg.evaluate("()=>{const m=new MutationObserver(()=>{});m.observe(document.body,{childList:true,subtree:true});tick();const n=m.takeRecords().reduce((a,r)=>a+[...r.removedNodes].filter(e=>e.classList&&e.classList.contains('slide')).length,0);m.disconnect();return n}")
                 if neu: errs.append(f'{day}{" TV" if tv else ""}: tick() hängt {neu} Folie(n) neu ein – sichtbare Folie wird kurz leer')
