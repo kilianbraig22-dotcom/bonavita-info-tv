@@ -110,6 +110,9 @@ with sync_playwright() as p:
                 pg.add_style_tag(content='*{animation:none!important;transition:none!important}')
                 weg = pg.evaluate("""()=>{const o=[];document.querySelectorAll('.slide').forEach((s,i)=>{s.querySelectorAll('h1,h2,h3,p,li,b').forEach(e=>{const r=e.getBoundingClientRect();if(e.textContent.trim()&&e.offsetHeight&&e.offsetWidth&&(r.height<1||r.width<1))o.push(e.textContent.trim().slice(0,40))})});return o}""")
                 for x in weg: errs.append(f'Folie {season}: Text unsichtbar (zusammengedrückt) – {x}')
+                # Atem-Beschriftung: die Box darf nicht auf Breite null fallen, sonst steht das Wort neben dem Kreis
+                schief = pg.evaluate("[...document.querySelectorAll('.slide .blabel span')].filter(e=>e.offsetParent&&e.offsetParent.offsetHeight&&!e.offsetWidth).map(e=>e.textContent)")
+                for x in schief: errs.append(f'Folie {season}: Beschriftung nicht unter dem Kreis zentriert (Breite null) – {x}')
                 # Adventskranz darf bei der gerade sichtbaren Folie keinen Text verdecken
                 verdeckt = pg.evaluate("""()=>{const o=[],k=document.querySelector('.sdcand');if(!k)return o;const n=document.querySelectorAll('.slide').length;for(let i=0;i<n;i++){show(i);const q=k.getBoundingClientRect();if(!q.width)continue;const w=document.createTreeWalker(document.querySelector('.slide.active'),NodeFilter.SHOW_TEXT);let t;while(t=w.nextNode()){if(!t.textContent.trim())continue;const g=document.createRange();g.selectNodeContents(t);for(const r of g.getClientRects())if(r.width&&r.height<300&&r.right>q.left&&r.left<q.right&&r.bottom>q.top&&r.top<q.bottom)o.push(t.textContent.trim().slice(0,40))}}return o}""")
                 for x in verdeckt: errs.append(f'Folie {season}: Adventskranz verdeckt Text – {x}')
