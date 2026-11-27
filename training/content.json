@@ -333,10 +333,10 @@
     },
     {
       "von": "2026-12-20",
-      "bis": "2026-12-24",
+      "bis": "2026-12-23",
       "kicker": "Ferien",
       "title": "Weihnachtsferien",
-      "text": "Schulferien: in Baden-Württemberg vom 23. Dezember bis 9. Januar, im Kanton Schaffhausen vom 24. Dezember bis 3. Januar. Wir wünschen eine schöne Zeit.",
+      "text": "In Baden-Württemberg sind vom 23. Dezember bis 9. Januar Schulferien. Wir wünschen Ihnen eine schöne Zeit.",
       "sec": 12,
       "lime": false
     },
@@ -345,7 +345,7 @@
       "bis": "2026-12-26",
       "kicker": "Feiertag",
       "title": "Schöne Weihnachtsfeiertage!",
-      "text": "Der 25. und 26. Dezember sind Feiertage in Baden-Württemberg und im Kanton Schaffhausen. Genießen Sie die festlichen Tage.",
+      "text": "Der 25. und 26. Dezember sind Feiertage in Baden-Württemberg. Genießen Sie die festlichen Tage.",
       "sec": 12,
       "lime": false
     }

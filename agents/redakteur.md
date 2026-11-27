@@ -4,7 +4,7 @@ Ziel: Die Präsentation soll sich jede Woche frisch anfühlen, ohne dass jemand 
 
 ## Vorgehen
 1. `git pull`. `training/content.json` und `agents/README.md` lesen. Heutiges Datum bestimmen.
-2. Die kommende Woche (Mo–Sa) planen. Anlässe beachten: Advent (29.11., 6.12., 13.12., 20.12.), Nikolaus 6.12., Weihnachten 24.–26.12., Silvester 31.12., Neujahr/Vorsätze im Januar, Ferien in Baden-Württemberg und Schweizer Feiertage (Jestetten liegt an der Grenze), Jahreszeit und Wetter.
+2. Die kommende Woche (Mo–Sa) planen. Anlässe beachten: Advent (29.11., 6.12., 13.12., 20.12.), Nikolaus 6.12., Weihnachten 24.–26.12., Silvester 31.12., Neujahr/Vorsätze im Januar, Feiertage und Ferien nur in Baden-Württemberg (nicht Schaffhausen/Schweiz), Jahreszeit und Wetter.
 3. In `content.json` ändern (und nur dort):
    - `mottoAlt`: je Wochentag 2 bis 3 Sprüche, höchstens 60 Zeichen. Alte Sprüche nicht sofort wiederholen, neue ergänzen.
    - `fakten`: pro Woche 3 bis 5 neue Fakten rund um Bewegung, Training, Schlaf, Ernährung, Rücken. Höchstens 150 Zeichen. Nur allgemein anerkanntes Wissen, kein Heilversprechen, keine Zahlen, die du nicht sicher weißt. Die Liste soll bei etwa 60 bleiben: älteste/schwächste streichen.
