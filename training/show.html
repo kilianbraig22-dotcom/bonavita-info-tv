@@ -729,6 +729,13 @@ tr.today td.closed{color:var(--d1)}
 .xm [fill="#53cdd0"]{fill:#8fd0f0}
 .xm .slide.lime{background:linear-gradient(160deg,#f3d27a,#d4a931)}
 .xm .breath .core{background:radial-gradient(circle at 50% 38%,#fff0b8,#e8c25a 55%,#8a6a10)}
+/* Weihnachten/Winter: zweiter Look «Eisblau» im täglichen Wechsel mit Gold (nur Farben, statisch; Test: ?season=xm&look=1) */
+:root.xm[data-look="1"],:root.xm[data-look="3"]{--ink:#08121f;--panel:#11233a;--line:#2c4c72;--mute:#adc6e0;--lime:#78c6ef;--lime-rgb:120,198,239;--lime-ink:#04182a;--teal:#e8c25a;--d1:#0c3857;--d2:#06263e;--bar:#55abd9}
+:root.xm[data-look="1"] .aurora i:nth-child(1),:root.xm[data-look="3"] .aurora i:nth-child(1){background:radial-gradient(circle,rgba(120,198,239,.3),rgba(120,198,239,0) 68%)}
+:root.xm[data-look="1"] .slide.lime,:root.xm[data-look="3"] .slide.lime{background:linear-gradient(160deg,#b4e2fa,#68b8e6)}
+:root.xm[data-look="1"] .breath .core,:root.xm[data-look="3"] .breath .core{background:radial-gradient(circle at 50% 38%,#e4f6ff,#78c6ef 55%,#1f6490)}
+:root.xm[data-look="1"] [fill="#53cdd0"],:root.xm[data-look="3"] [fill="#53cdd0"]{fill:#e8c25a}
+:root.xm[data-look="1"] img[src*="logo"],:root.xm[data-look="3"] img[src*="logo"]{filter:hue-rotate(142deg) saturate(1.1)}
 .au .hwcount.on,.xm .hwcount.on{display:block}
 .sdbox{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden}
 .sdbox svg{display:block}
