@@ -9,3 +9,4 @@
 - 2026-11-27 Wetter-Tipp aktualisiert: "Frost und Glätte: Sicher unterwegs" (27.–29.11.). Quelle: Websuche (wetter.com, wetterdach, donnerwetter: -3 bis 3 °C, Frost- und Glättewarnung, Schneeregen am 29.11.), Open-Meteo nicht abrufbar.
 - 2026-11-27 Prüf-Agent: Atem-Folie, „Einatmen/Ausatmen“ stand rechts neben statt mittig unter dem Kreis (Box hatte Breite null). In show.html korrigiert, Check um diese Prüfung erweitert, grün.
 - 2026-11-27 Auf Kilians Wunsch: nur Baden-Württemberg, nicht Schaffhausen. Ferien-Folie (jetzt 20.–23.12.) und Feiertags-Folie angepasst, feiertag.md und redakteur.md geändert. Check grün.
+- 2026-11-27 Prüf-Agent (Abend): Tipp-Folien wurden alle 15 s kurz leer, weil tick() sie jedes Mal neu mischte und neu einhängte. Jetzt wird in show.html nur einmal je Seitenaufruf gemischt, Check um diese Prüfung erweitert, grün.
