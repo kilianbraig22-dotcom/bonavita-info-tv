@@ -11,3 +11,4 @@
 - 2026-11-27 Auf Kilians Wunsch: nur Baden-Württemberg, nicht Schaffhausen. Ferien-Folie (jetzt 20.–23.12.) und Feiertags-Folie angepasst, feiertag.md und redakteur.md geändert. Check grün.
 - 2026-11-27 Prüf-Agent (Abend): Tipp-Folien wurden alle 15 s kurz leer, weil tick() sie jedes Mal neu mischte und neu einhängte. Jetzt wird in show.html nur einmal je Seitenaufruf gemischt, Check um diese Prüfung erweitert, grün.
 - 2026-11-27 Prüf-Agent (Nacht): Folie „Heute“: der Bereichsname „Trainingsbereich“ stieß in den Zeitbalken. Schrift der Namen in show.html von 46 auf 42 px verkleinert, Check um diese Prüfung erweitert, grün.
+- 2026-11-28 Wetter-Tipp aktualisiert: "Frost und Glätte: Sicher unterwegs" (28.–30.11.). Quelle: wetterdach und donnerwetter, Prognose 29.11. (Tiefstwert um -5 °C laut wetterdach, amtliche Frost- und Glättewarnung laut donnerwetter), Open-Meteo nicht abrufbar. Check grün.
